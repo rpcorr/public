@@ -1,0 +1,62 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (if you use build tools)
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Environment files
+.env
+.env.local
+
+# WordPress core
+/wp-admin/
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
+
+# WordPress config
+wp-config.php
+wp-activate.php
+wp-blog-header.php
+wp-comments-post.php
+wp-config-sample.php
+wp-cron.php
+wp-links-opml.php
+wp-load.php
+wp-login.php
+wp-mail.php
+wp-settings.php
+wp-signup.php
+wp-trackback.php
+wp-config.php
+
+# Uploads (media library)
+wp-content/uploads/
+
+# Cache
+wp-content/cache/
+wp-content/upgrade/
+
+# Plugins (ignore all except custom ones if needed)
+wp-content/plugins/*
+!wp-content/plugins/your-custom-plugin/
+
+# Themes (ignore all except your theme)
+wp-content/themes/*
+!wp-content/themes/nlsa/
+
+# Local by Flywheel specific
+/app/public/wp-content/uploads/
+/app/sql/
+/app/logs/
+
+# Logs
+*.log
