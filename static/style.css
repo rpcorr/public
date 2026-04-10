@@ -179,9 +179,9 @@ nav ul li a.active::after {
 }
 
 /* ================== Layout ================== */
-section > div.four-grid {
+.layout-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: var(--space-lg);
   padding: 0;
   margin: 0 var(--space-lg);
@@ -362,14 +362,39 @@ h2,
   padding: 1.25rem 1.5rem;
 }
 
-/* ================== Four Grid ================== */
-.four-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg);
+/* ================== Layout Grid System ================== */
+
+/* 100 % width */
+.layout-grid__item--12 {
+  grid-column: span 12;
 }
 
-.four-grid__item {
+/* 67% width (8/12 columns) */
+.layout-grid__item--8 {
+  grid-column: span 8;
+}
+
+/* 60% width (7/12 columns) */
+.layout-grid__item--7 {
+  grid-column: span 7;
+}
+
+/* 50% width (6/12 columns) */
+.layout-grid__item--6 {
+  grid-column: span 6;
+}
+
+/* 40% width (5/12 columns) */
+.layout-grid__item--5 {
+  grid-column: span 5;
+}
+
+/* 33% width (4/12 columns) */
+.layout-grid__item--4 {
+  grid-column: span 4;
+}
+
+.layout-grid__item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -380,19 +405,19 @@ h2,
   box-shadow: var(--shadow);
 }
 
-.four-grid__item:hover {
+.layout-grid__item:hover {
   box-shadow: var(--shadow-lg);
 }
 
-.four-grid__item img {
+.layout-grid__item img {
   width: 300px;
   height: auto;
 }
 
-.four-grid__item h2 {
+.layout-grid__item h2 {
   text-align: center;
 }
-.four-grid__item p {
+.layout-grid__item p {
   flex-grow: 1;
   line-height: 1.6;
 }
