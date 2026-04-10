@@ -21,43 +21,49 @@
     <a href="#primary" class="skip-link" tabindex="0">Skip to content</a>
     <div class="wrapper">
       <!-- ===== Navbar ===== -->
-      <nav>
-        <!-- Tagline -->
-        <div class="nav-tagline"></div>
+      <header>
+        <nav aria-label="Main naivation">
+          <!-- Tagline -->
+          <div class="nav-tagline"></div>
 
-        <!-- Hamburger Menu -->
-        <input type="checkbox" id="nav-toggle" />
-        <label for="nav-toggle" class="hamburger">
-          <i class="fas fa-bars"></i>
-        </label>
-        <!-- Navigation Links -->
-        <ul>
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/research">Research</a></li>
-          <li><a href="/news">News</a></li>
-          <li>
-            <a
-              href="https://somestutterluh.hcommons.org/"
-              target="_blank"
-              rel="noopener"
-              >Podcast</a
-            >
-          </li>
-          <li><a href="/contact">Contact</a></li>
-          <li>
-            <a
-              href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
-              class="cta-btn"
-              target="_blank"
-              rel="noopener"
-              >Donate</a
-            >
-          </li>
-        </ul>
-      </nav>
+          <!-- Hamburger Menu -->
+          <input type="checkbox" id="nav-toggle" />
+          <label for="nav-toggle" class="hamburger">
+            <i class="fas fa-bars"></i>
+          </label>
+          <!-- Navigation Links -->
+          <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/research">Research</a></li>
+            <li><a href="/news">News</a></li>
+            <li>
+              <a
+                href="https://somestutterluh.hcommons.org/"
+                target="_blank"
+                rel="noopener"
+                >Podcast</a
+              >
+            </li>
+            <li><a href="/contact">Contact</a></li>
+            <li>
+              <a
+                href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
+                class="cta-btn"
+                target="_blank"
+                rel="noopener"
+                >Donate</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-      <main id="primary">
+      <main
+        id="primary"
+        aria-label="Main content"
+        aria-labelledby="hero-heading"
+      >
         <!-- ===== Hero Section ===== -->
 
         <section class="split-panel split-panel--media-67">
@@ -66,7 +72,7 @@
           </div>
 
           <div class="split-panel__content">
-            <h2>Empowering People Who Stutter</h2>
+            <h2 id="hero-heading">Empowering People Who Stutter</h2>
 
             <p class="font-weight-medium">
               The NLSA advocates for people who stutter, fostering inclusion
@@ -85,9 +91,14 @@
         </section>
 
         <!-- ===== Get Involved Banner ===== -->
-        <section class="announcement announcement--primary">
+        <section
+          class="announcement announcement--primary"
+          aria-labelledby="announcement-heading"
+        >
           <div class="announcement__icon">
             <svg
+              aria-hidden="true"
+              focusable="false"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
@@ -104,7 +115,9 @@
           </div>
 
           <div class="announcement__content">
-            <h2>Be Part of Research That Makes a Difference</h2>
+            <h2 id="announcement-heading">
+              Be Part of Research That Makes a Difference
+            </h2>
             <p class="font-weight-medium">
               Help improve access and support for people who stutter in
               Newfoundland and Labrador. Your participation matters!
@@ -122,9 +135,12 @@
           </div>
         </section>
 
-        <section class="split-panel split-panel--content-67">
+        <section
+          class="split-panel split-panel--content-67"
+          aria-labelledby="conference-heading"
+        >
           <div class="split-panel__content">
-            <h2>
+            <h2 id="conference-heading">
               Joint Canadian Stuttering Association & Newfoundland and Labrador
               Stuttering Association Conference.
             </h2>
@@ -136,7 +152,6 @@
               target="_blank"
               rel="noopener"
               class="nlsa-btn u-lift"
-              aria-label="Learn more about the 2026 Joint Canadian Stuttering Association conference"
             >
               Learn more about the 2026 CSA Conference
             </a>
@@ -150,7 +165,10 @@
           </div>
         </section>
 
-        <section>
+        <section aria-labelledby="programs-heading">
+          <h2 id="programs-heading" class="visually-hidden">
+            Programs and Initiatives
+          </h2>
           <div class="layout-grid">
             <div class="layout-grid__item layout-grid__item--7">
               <!--60% -->
@@ -252,16 +270,17 @@
       </main>
 
       <!-- ================== Footer Section ================== -->
-      <footer>
+      <footer aria-label="Site footer">
         <!-- Newsletter Subscription -->
         <div>
           <h2>Subscribe to Our Newsletter</h2>
           <form action="https://formspree.io/f/mabcdxyz" method="POST">
+            <label for="email" class="visually-hidden">Email address</label>
             <input
+              id="email"
               type="email"
               placeholder="Enter your email"
               required
-              aria-label="Subscribe to our newsletter"
             />
             <button
               class="nlsa-btn"
