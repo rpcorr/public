@@ -179,26 +179,12 @@ nav ul li a.active::after {
 }
 
 /* ================== Layout ================== */
-.container,
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--space-lg) var(--space-lg) 0 var(--space-lg);
-}
-
-section > div {
-  width: 100%;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: var(--space-lg);
-}
 section > div.four-grid {
-  display: grid !important;
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
   padding: 0;
+  margin: 0 var(--space-lg);
   background: transparent;
   box-shadow: none;
   align-items: stretch;
@@ -209,25 +195,6 @@ section:last-of-type {
 }
 
 /* ================== Hero ================== */
-.nlsa-hero__logo-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.nlsa-hero__logo {
-  width: 100%;
-  max-width: 600px;
-  max-width: 415px;
-}
-
-.nlsa-hero__info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
 h2 {
   font-size: 1.1rem;
   font-weight: 700;
@@ -236,20 +203,11 @@ h2 {
 }
 
 h2,
-.nlsa-hero-cta,
-.nlsa-banner__button,
 .nlsa-btn {
   line-height: 1.5;
 }
 
-.nlsa-hero__info p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-}
-
-.nlsa-hero-cta {
+.nlsa-btn {
   padding: 10px 16px;
   border-radius: var(--radius-sm);
   background: var(--primary);
@@ -259,67 +217,149 @@ h2,
   font-weight: 600;
 }
 
-/* ================== Banner ================== */
-
-.nlsa-banner__container {
-  display: flex;
+/* ================== Split Panel ================== */
+.split-panel {
+  display: grid;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg);
-
-  background: var(--primary);
-  color: var(--white);
-
-  padding: 2rem 2.5rem;
-  border-radius: var(--radius);
-}
-
-.nlsa-banner__icon svg {
-  width: 48px;
-  height: 48px;
-}
-
-.nlsa-banner__content {
-  flex: 1;
-}
-
-.nlsa-banner__content p {
-  line-height: 1.6;
-}
-
-.nlsa-banner__title {
-  color: var(--white);
-}
-
-.nlsa-banner__button {
-  padding: 10px 16px;
-  border-radius: var(--radius-sm);
-  background: var(--white);
-  color: var(--primary);
-  text-align: center;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* ================== Conference ================== */
-.nlsa-conference__branding {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 
   background: var(--white);
+  margin: var(--space-lg);
   padding: 2rem 3rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
-.nlsa-conference__branding div {
+.split-panel--media-67 {
+  grid-template-columns: 2fr 1fr;
+}
+
+.split-panel--content-67 {
+  grid-template-columns: 2fr 1fr;
+}
+
+/* Explicit placement (this is the key difference) */
+.split-panel--content-67 .split-panel__content {
+  grid-column: 1;
+}
+
+.split-panel--content-67 .split-panel__media {
+  grid-column: 2;
+}
+
+/* Content block */
+.split-panel__content {
+  display: flex;
+  flex-direction: column;
+  max-width: 35em;
+}
+
+/* Media (image/logo) */
+.split-panel__media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Image inside media */
+.split-panel__media img {
+  width: 92%;
+}
+
+/* Optional: reverse layout */
+.split-panel--reverse {
+  flex-direction: row-reverse;
+}
+
+/* Optional: center text */
+.split-panel--center {
   text-align: center;
 }
 
-.nlsa-conference__content {
-  max-width: 35em;
+/* ================== Announcement ================== */
+.announcement {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+
+  background: var(--primary);
+  color: var(--white);
+
+  margin: var(--space-lg);
+  padding: 2rem 3rem;
+
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.announcement__icon {
+  flex-shrink: 0;
+}
+
+.announcement__icon svg {
+  width: 40px;
+  height: 40px;
+  stroke: currentColor;
+}
+
+/* Content grows (like split-panel content) */
+.announcement__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.announcement__content [class^='font-weight-'] {
+  color: var(--white);
+}
+
+.announcement__content p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* CTA */
+.announcement__actions {
+  flex-shrink: 0;
+}
+
+.announcement__content > h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+
+.announcement__actions > .nlsa-btn {
+  background: var(--white);
+  color: var(--primary);
+}
+
+.announcement--primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.announcement--accent {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.announcement--light {
+  background: var(--bg-light);
+  color: var(--primary);
+}
+
+/* Centered version */
+.announcement--center {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Compact version */
+.announcement--compact {
+  padding: 1.25rem 1.5rem;
 }
 
 /* ================== Four Grid ================== */
@@ -357,41 +397,24 @@ h2,
   line-height: 1.6;
 }
 
-/* ================== Buttons ================== */
-.nlsa-btn {
-  display: inline-block;
-  padding: 12px 18px;
-  border-radius: var(--radius-sm);
-  background: var(--primary);
-  color: var(--white);
-  text-decoration: none;
-  font-weight: 600;
-}
-
 /* ================== Footer ================== */
-.footer-section {
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
   background: linear-gradient(to top, #e8eef9 0%, #fff 100%);
   border-top: 3px solid var(--primary);
   padding: var(--space-md) 0;
-}
-
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  gap: var(--space-md); /* tighter spacing */
 }
 
-/* ===== Newsletter ===== */
-.newsletter-box h4 {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--primary);
+footer h2 {
+  font-size: 0.9rem;
 }
 
-.newsletter-box form {
+footer form {
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
@@ -399,7 +422,7 @@ h2,
   margin-top: 4px;
 }
 
-.newsletter-box input {
+footer input {
   padding: 0.5rem 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -408,32 +431,10 @@ h2,
   text-align: center;
 }
 
-.newsletter-box button {
-  padding: 0.5rem 0.9rem;
-  background: var(--primary);
-  color: var(--white);
-  border: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.newsletter-box button:hover {
-  background: var(--primary-dark);
-}
-
-/* ===== Social / Contact ===== */
-.get-in-touch h4 {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 700;
+footer p {
   color: var(--primary);
-}
-
-.get-in-touch p {
-  margin: 0;
   font-size: 0.85rem;
-  color: var(--primary);
+  margin: 0.5rem 0 0 0;
 }
 
 /* ===== Social Icons ===== */
@@ -446,9 +447,6 @@ h2,
 }
 
 .social-icons a {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
   font-size: 0.9rem;
   color: var(--primary);
   text-decoration: none;
@@ -457,133 +455,5 @@ h2,
 
 .social-icons a:hover {
   color: var(--primary-dark);
-}
-
-/* ================== Responsive ================== */
-@media (max-width: 1024px) {
-  /* Laptops / small desktops */
-  nav ul {
-    gap: 20px;
-  }
-
-  .nav-tagline {
-    font-size: 1rem;
-  }
-
-  .nlsa-banner__title {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  /* Tablets */
-  nav {
-    flex-direction: column;
-    position: relative;
-    padding: 15px 10px;
-  }
-
-  .nav-tagline {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  nav ul {
-    flex-direction: column;
-    max-height: 0;
-    overflow: hidden;
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--white);
-    transition: max-height 0.3s ease;
-  }
-
-  #nav-toggle:checked ~ ul {
-    max-height: 500px;
-  }
-
-  section > div,
-  .nlsa-banner__container,
-  .nlsa-conference__branding {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-    gap: var(--space-md);
-  }
-
-  .nlsa-banner__button,
-  .nlsa-btn {
-    width: 100%;
-    max-width: 280px;
-    margin: 0 auto;
-  }
-
-  .four-grid,
-  section > div.four-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  /* Large phones */
-}
-
-@media (max-width: 480px) {
-  /* Small phones */
-
-  .four-grid__item {
-    padding: var(--space-md);
-  }
-
-  .four-grid__item img {
-    width: 70%;
-    height: auto;
-  }
-
-  .social-icons {
-    gap: var(--space-md);
-  }
-}
-
-@media (max-width: 320px) {
-  /* Extra Small phones */
-  .nlsa-hero__logo {
-    width: 110%;
-  }
-
-  .nlsa-hero__logo-wrapper > img {
-    max-width: 100%;
-  }
-
-  .nlsa-banner__button,
-  .nlsa-btn {
-    width: 90%;
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  .four-grid__item img {
-    width: 100%;
-    height: auto;
-  }
-
-  .footer-inner {
-    gap: var(--space-lg);
-  }
-
-  .social-icons {
-    gap: var(--space-sm);
-  }
-
-  .get-in-touch p,
-  .social-icons a {
-    margin: 0.5rem 0.75rem;
-  }
+  text-decoration: underline;
 }
