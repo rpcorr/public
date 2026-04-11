@@ -235,10 +235,33 @@ nav ul li a.active::after {
   height: 3px; /* controls thickness */
   background: var(--primary);
   border-radius: 2px;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+  transform-origin: center;
 }
 
 .hamburger span + span {
   margin-top: 6px;
+}
+
+.hamburger.is-open span {
+  background: var(--accent);
+}
+
+/* Top bar */
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+/* Middle bar disappears */
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+/* Bottom bar */
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 .hamburger:focus {

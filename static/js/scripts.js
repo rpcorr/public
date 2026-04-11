@@ -4,6 +4,8 @@ const menu = document.querySelector('#primary-menu');
 button.addEventListener('click', () => {
   const isOpen = menu.classList.toggle('is-open');
   button.setAttribute('aria-expanded', isOpen);
+
+  button.classList.toggle('is-open', isOpen);
 });
 
 // Close on Escape key
