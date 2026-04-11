@@ -159,11 +159,11 @@ nav {
 }
 
 nav ul {
-  list-style: none;
   display: flex;
-  gap: 30px;
-  padding: 0;
   align-items: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
 }
 
 nav ul li a {
@@ -215,14 +215,40 @@ nav ul li a.active::after {
 
 /* ================== Mobile Nav ================== */
 .hamburger {
-  display: none;
-  font-size: 26px;
-  color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  background: none;
   cursor: pointer;
 }
 
-#nav-toggle {
+.hamburger span {
   display: none;
+  width: 28px; /* controls length */
+  height: 3px; /* controls thickness */
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.hamburger span + span {
+  margin-top: 6px;
+}
+
+.hamburger:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.hamburger:hover span,
+.hamburger:focus span {
+  background: var(--accent);
 }
 
 /* ================== Layout ================== */

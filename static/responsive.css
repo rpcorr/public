@@ -17,24 +17,45 @@
     margin-bottom: 8px;
   }
 
-  .hamburger {
+  .hamburger,
+  .hamburger span {
     display: block;
   }
 
   nav ul {
-    flex-direction: column;
-    max-height: 0;
-    overflow: hidden;
-    width: 100%;
     position: absolute;
     top: 100%;
     left: 0;
+    width: 100%;
+
+    flex-direction: column;
+    gap: 10px;
     background: var(--white);
-    transition: max-height 0.3s ease;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transform: translateY(-10px);
+
+    transition:
+      transform 0.25s ease,
+      opacity 0.2s ease;
+
+    pointer-events: none;
   }
 
-  #nav-toggle:checked ~ ul {
-    max-height: 500px;
+  nav ul li {
+    margin-bottom: 6px;
+    padding: 6px 0;
+  }
+
+  nav ul.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--primary-dark);
   }
 }
 
