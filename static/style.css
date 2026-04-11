@@ -105,6 +105,7 @@ h6 {
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+  --space-xlg: 4rem;
 }
 
 html {
@@ -125,8 +126,6 @@ body {
   top: 0;
   z-index: 2000;
   background: var(--white);
-  border-bottom: 2px solid var(--primary);
-  box-shadow: var(--shadow-sm);
 }
 
 .wrapper {
@@ -227,9 +226,6 @@ nav {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* gap: var(--space-md); */
-
-  padding: 0 var(--space-md);
   background: var(--white);
 }
 
@@ -241,6 +237,10 @@ nav {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 var(--space-md);
+  min-height: var(--space-xlg);
+
+  border-bottom: 2px solid var(--primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-content {
@@ -561,15 +561,6 @@ nav ul li a.active::after {
   align-items: stretch;
 }
 
-section:first-of-type {
-  margin-top: 0;
-}
-
-section:last-of-type {
-  margin-bottom: var(--space-lg);
-}
-
-/* ================== Hero ================== */
 h2 {
   font-size: 1.1rem;
   font-weight: 700;
@@ -599,7 +590,7 @@ h2,
   gap: var(--space-md);
 
   background: var(--white);
-  margin: var(--space-lg);
+  margin: 0 var(--space-lg);
   padding: 2rem 3rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -798,16 +789,18 @@ h2,
 }
 
 /* ================== Footer ================== */
-footer {
+.footer-inner {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: var(--space-md);
-  background: linear-gradient(to top, #e8eef9 0%, #fff 100%);
-  border-top: 3px solid var(--primary);
+
   padding: var(--space-md) 0;
   text-align: center;
+
+  background: linear-gradient(to top, #e8eef9 0%, #fff 100%);
+  border-top: 3px solid var(--primary);
 }
 
 footer h2 {
