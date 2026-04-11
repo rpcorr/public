@@ -2,63 +2,6 @@
   /* Laptops / small desktops */
 }
 
-@media (max-width: 768px) {
-  /* Tablets */
-
-  nav {
-    flex-direction: column;
-    position: relative;
-    padding: 15px 10px;
-  }
-
-  .nav-tagline {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .hamburger,
-  .hamburger span {
-    display: block;
-  }
-
-  nav ul {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-
-    flex-direction: column;
-    gap: 10px;
-    background: var(--white);
-
-    visibility: hidden;
-    opacity: 0;
-
-    transform: translateY(-10px);
-
-    transition:
-      transform 0.25s ease,
-      opacity 0.2s ease;
-
-    pointer-events: none;
-  }
-
-  nav ul li {
-    margin-bottom: 6px;
-    padding: 6px 0;
-  }
-
-  nav ul.is-open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--primary-dark);
-  }
-}
-
 @media (max-width: 640px) {
   /* Large phones */
 }

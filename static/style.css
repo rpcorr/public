@@ -125,13 +125,15 @@ nav {
   opacity: 1;
 }
 
-/* ================== Navbar ================== */
+/* ================== Navigation ================== */
+
 nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between; /* 🔥 important */
   flex-wrap: wrap;
   gap: var(--space-md);
+
   padding: 0 var(--space-md);
 
   border-bottom: 2px solid var(--primary);
@@ -139,8 +141,12 @@ nav {
   top: 0;
   z-index: 1000;
   box-shadow: var(--shadow-sm);
+
+  background: var(--white);
+  min-height: 4rem;
 }
 
+/* Tagline (left side) */
 .nav-tagline {
   margin-right: auto;
   max-width: 380px;
@@ -158,31 +164,38 @@ nav {
   transform: scale(1.03);
 }
 
+/* Navigation list (desktop) */
 nav ul {
   display: flex;
   align-items: center;
   gap: 30px;
+
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
+/* Links */
 nav ul li a {
   text-decoration: none;
   color: #003366;
   font-weight: 500;
   position: relative;
   white-space: nowrap;
+
   transition: color 0.3s ease;
 }
 
-/* underline animation */
+/* Underline animation */
 nav ul li a::after {
   content: '';
   position: absolute;
   left: 0;
   bottom: -4px;
+
   width: 0;
   height: 2px;
+
   background: var(--primary);
   transition: width 0.3s ease;
 }
@@ -195,6 +208,181 @@ nav ul li a.active {
 nav ul li a:hover::after,
 nav ul li a.active::after {
   width: 100%;
+}
+
+/* ================== Mobile Nav ================== */
+.hamburger {
+  display: none;
+  position: relative;
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  align-items: center;
+  /* gap: 6px; */
+  margin-left: auto; /* 🔥 pushes to right */
+  z-index: 1002; /* above drawer */
+
+  width: 44px;
+  height: 44px;
+
+  overflow: visible;
+  padding: 12px;
+  min-width: 50px;
+  min-height: 50px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 28px; /* controls length */
+  height: 3px; /* controls thickness */
+  background: var(--primary);
+  border-radius: 2px;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Position the 3 bars */
+.hamburger span:nth-child(1) {
+  top: 12px;
+  transform: translateX(-50%);
+}
+
+.hamburger span:nth-child(2) {
+  top: 20px;
+  transform: translateX(-50%);
+}
+
+.hamburger span:nth-child(3) {
+  top: 28px;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  /* Tablets */
+
+  /* ===== Nav layout ===== */
+  nav {
+    position: relative;
+  }
+
+  .nav-tagline {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  /* ===== Hamburger ===== */
+  .hamburger {
+    display: flex;
+    position: relative;
+    z-index: 1002;
+  }
+
+  .hamburger.is-open {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 1100; /* higher than drawer */
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hamburger.is-open span {
+    background: var(--accent);
+  }
+
+  /* Top bar */
+  .hamburger.is-open span:nth-child(1) {
+    top: 20px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* Middle bar disappears */
+  .hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  /* Bottom bar */
+  .hamburger.is-open span:nth-child(3) {
+    top: 20px;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  .hamburger:focus {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .hamburger:hover span,
+  .hamburger:focus span {
+    background: var(--accent);
+  }
+
+  /* ===== Drawer Menu ===== */
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    height: 100vh;
+    width: 280px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 2rem 1.5rem;
+
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+
+    z-index: 1000;
+  }
+
+  nav ul li {
+    margin-bottom: 6px;
+    padding: 6px 0;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  /* Open state */
+  nav ul.is-open {
+    transform: translateX(0);
+  }
+
+  /* ===== Backdrop ===== */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.25s ease;
+
+    z-index: 1000;
+  }
+
+  .nav-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 /* CTA */
@@ -211,67 +399,6 @@ nav ul li a.active::after {
   background: var(--accent);
   color: var(--black);
   transform: translateY(-2px);
-}
-
-/* ================== Mobile Nav ================== */
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-
-  padding: 10px;
-  min-width: 44px;
-  min-height: 44px;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.hamburger span {
-  display: none;
-  width: 28px; /* controls length */
-  height: 3px; /* controls thickness */
-  background: var(--primary);
-  border-radius: 2px;
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.2s ease;
-  transform-origin: center;
-}
-
-.hamburger span + span {
-  margin-top: 6px;
-}
-
-.hamburger.is-open span {
-  background: var(--accent);
-}
-
-/* Top bar */
-.hamburger.is-open span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-/* Middle bar disappears */
-.hamburger.is-open span:nth-child(2) {
-  opacity: 0;
-}
-
-/* Bottom bar */
-.hamburger.is-open span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-.hamburger:focus {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.hamburger:hover span,
-.hamburger:focus span {
-  background: var(--accent);
 }
 
 /* ================== Layout ================== */
