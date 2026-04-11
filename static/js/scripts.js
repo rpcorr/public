@@ -2,6 +2,20 @@ const button = document.querySelector('.hamburger');
 const menu = document.querySelector('#primary-menu');
 const backdrop = document.querySelector('.nav-backdrop');
 
+const focusableSelectors =
+  'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+
+let focusables = [];
+let firstFocusable;
+let lastFocusable;
+
+function setFocusableElements() {
+  focusables = menu.querySelectorAll(focusableSelectors);
+
+  firstFocusable = focusables[0];
+  lastFocusable = focusables[focusables.length - 1];
+}
+
 function openMenu() {
   menu.classList.add('is-open');
   button.classList.add('is-open');
@@ -9,6 +23,9 @@ function openMenu() {
 
   button.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
+
+  setFocusableElements();
+  button.focus();
 }
 
 function closeMenu() {
@@ -18,6 +35,8 @@ function closeMenu() {
 
   button.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
+
+  button.focus();
 }
 
 function toggleMenu() {
@@ -28,7 +47,7 @@ function toggleMenu() {
 button.addEventListener('click', toggleMenu);
 backdrop.addEventListener('click', closeMenu);
 
-// Escape key closes EVERYTHING
+/* ================== ESC KEY ================== */
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeMenu();
@@ -36,7 +55,46 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Close when clicking links
+/* ================== FOCUS TRAP ================== */
+menu.addEventListener('keydown', (e) => {
+  if (!menu.classList.contains('is-open')) return;
+  if (e.key !== 'Tab') return;
+
+  const focusables = [button, ...menu.querySelectorAll(focusableSelectors)];
+
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+
+  // SHIFT + TAB (going backwards)
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  }
+
+  // TAB (going forwards)
+  if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+});
+
+/* ================== CLOSE ON LINK CLICK ================== */
 menu.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', closeMenu);
+});
+
+/* ================== SWIPE TO CLOSE (mobile feel) ================== */
+let startX = 0;
+
+menu.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+menu.addEventListener('touchmove', (e) => {
+  const diff = e.touches[0].clientX - startX;
+
+  // swipe right closes menu
+  if (diff > 80) {
+    closeMenu();
+  }
 });
