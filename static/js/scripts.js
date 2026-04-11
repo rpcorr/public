@@ -1,25 +1,42 @@
 const button = document.querySelector('.hamburger');
 const menu = document.querySelector('#primary-menu');
+const backdrop = document.querySelector('.nav-backdrop');
 
-button.addEventListener('click', () => {
-  const isOpen = menu.classList.toggle('is-open');
-  button.setAttribute('aria-expanded', isOpen);
+function openMenu() {
+  menu.classList.add('is-open');
+  button.classList.add('is-open');
+  backdrop.classList.add('is-open');
 
-  button.classList.toggle('is-open', isOpen);
-});
+  button.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
 
-// Close on Escape key
+function closeMenu() {
+  menu.classList.remove('is-open');
+  button.classList.remove('is-open');
+  backdrop.classList.remove('is-open');
+
+  button.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+function toggleMenu() {
+  const isOpen = menu.classList.contains('is-open');
+  isOpen ? closeMenu() : openMenu();
+}
+
+button.addEventListener('click', toggleMenu);
+backdrop.addEventListener('click', closeMenu);
+
+// Escape key closes EVERYTHING
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    menu.classList.remove('is-open');
-    button.setAttribute('aria-expanded', 'false');
+    closeMenu();
     button.focus();
   }
 });
 
+// Close when clicking links
 menu.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    menu.classList.remove('is-open');
-    button.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', closeMenu);
 });
