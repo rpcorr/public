@@ -88,16 +88,29 @@ menu.querySelectorAll('a').forEach((link) => {
 
 /* ================== SWIPE TO CLOSE (mobile feel) ================== */
 let startX = 0;
+let isSwiping = false;
 
 menu.addEventListener('touchstart', (e) => {
   startX = e.touches[0].clientX;
+  isSwiping = true;
 });
 
 menu.addEventListener('touchmove', (e) => {
+  if (!isSwiping) return;
+
   const diff = e.touches[0].clientX - startX;
 
   // swipe right closes menu
-  if (diff > 80) {
+  if (diff > 100) {
+    isSwiping = false;
     closeMenu();
   }
+});
+
+menu.addEventListener('touchend', () => {
+  isSwiping = false;
+});
+
+menu.addEventListener('touchcancel', () => {
+  isSwiping = false;
 });
