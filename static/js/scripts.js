@@ -25,6 +25,8 @@ function openMenu() {
   document.body.style.overflow = 'hidden';
 
   setFocusableElements();
+  menu.style.transform = '';
+  menu.style.transition = '';
   button.focus();
 }
 
@@ -39,6 +41,7 @@ function closeMenu() {
     document.body.style.overflow = '';
   }, 300);
 
+  menu.style.transform = '';
   button.focus();
 }
 
@@ -87,17 +90,55 @@ menu.querySelectorAll('a').forEach((link) => {
 });
 
 /* ================== SWIPE TO CLOSE (mobile feel) ================== */
+let isDragging = false;
 let startX = 0;
+let currentX = 0;
+let menuWidth = 0;
 
+/* hepler */
+function setMenuTranslate(x) {
+  menu.style.transform = `translateX(${x}px)`;
+}
+
+/* start drag */
 menu.addEventListener('touchstart', (e) => {
+  if (!menu.classList.contains('is-open')) return;
+
+  isDragging = true;
   startX = e.touches[0].clientX;
+  menuWidth = menu.offsetWidth;
+
+  menu.style.transition = 'none';
 });
 
+/* move drag */
 menu.addEventListener('touchmove', (e) => {
-  const diff = e.touches[0].clientX - startX;
+  if (!isDragging) return;
 
-  // swipe right closes menu
-  if (diff > 80) {
+  currentX = e.touches[0].clientX;
+  const diff = currentX - startX;
+
+  // only allow dragging to the right (closing direction)
+  if (diff > 0) {
+    setMenuTranslate(diff);
+  }
+});
+
+/* end drag (snap logic) */
+menu.addEventListener('touchend', () => {
+  if (!isDragging) return;
+
+  isDragging = false;
+
+  const diff = currentX - startX;
+
+  menu.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
+
+  // threshold to close
+  if (diff > menuWidth * 0.25) {
+    setMenuTranslate(menuWidth);
     closeMenu();
+  } else {
+    setMenuTranslate(0);
   }
 });
