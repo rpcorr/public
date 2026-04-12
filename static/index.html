@@ -23,10 +23,10 @@
 
     <!-- ===== Navbar ===== -->
     <header class="site-header">
-      <nav aria-label="Main navigation">
-        <div class="nav-inner wrapper">
+      <nav class="site-nav" aria-label="Main navigation">
+        <div class="site-nav__inner">
           <!-- Tagline -->
-          <div class="nav-tagline"></div>
+          <div class="site-nav__tagline"></div>
 
           <!-- Hamburger Menu -->
           <button
@@ -41,24 +41,25 @@
           </button>
 
           <!-- Navigation Links -->
-          <ul id="primary-menu">
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/research">Research</a></li>
-            <li><a href="/news">News</a></li>
+          <ul id="primary-menu" class="site-nav__list">
+            <li><a href="/" class="site-nav__link active">Home</a></li>
+            <li><a href="/about" class="site-nav__link">About</a></li>
+            <li><a href="/research" class="site-nav__link">Research</a></li>
+            <li><a href="/news" class="site-nav__link">News</a></li>
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
+                class="site-nav__link"
                 target="_blank"
                 rel="noopener"
                 >Podcast</a
               >
             </li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/contact" class="site-nav__link">Contact</a></li>
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
-                class="cta-btn"
+                class="btn btn--cta"
                 target="_blank"
                 rel="noopener"
                 >Donate</a
@@ -90,7 +91,7 @@
 
           <a
             href="#"
-            class="nlsa-btn u-lift"
+            class="btn btn--nlsa u-lift"
             aria-label="Learn more about Newfoundland and Labrador Stuttering Association"
             >Learn More About NLSA
           </a>
@@ -134,7 +135,7 @@
         <div class="announcement__actions">
           <a
             href="#"
-            class="nlsa-btn u-lift"
+            class="btn btn--nlsa u-lift"
             aria-label="Get involved today and make a difference"
           >
             Get Involved Today
@@ -158,7 +159,7 @@
             href="https://stutter.ca/events/conference/2026"
             target="_blank"
             rel="noopener"
-            class="nlsa-btn u-lift"
+            class="btn btn--nlsa u-lift"
           >
             Learn more about the 2026 CSA Conference
           </a>
@@ -190,7 +191,7 @@
               href="https://nlstuttering.ca/research"
               target="_blank"
               rel="noopener"
-              class="nlsa-btn u-lift"
+              class="btn btn--nlsa u-lift"
               aria-label="Learn more about researching communication barriers"
             >
               Learn More
@@ -211,7 +212,7 @@
             </p>
             <a
               href="https://nlstuttering.ca/kitchenparty/"
-              class="nlsa-btn u-lift"
+              class="btn btn--nlsa u-lift"
               aria-label="Get details about the kitchen party where everyone is welcomed"
               >Get Details</a
             >
@@ -239,7 +240,7 @@
               href="https://somestutterluh.hcommons.org/"
               target="_blank"
               rel="noopener"
-              class="nlsa-btn u-lift"
+              class="btn btn--nlsa u-lift"
               aria-label="Listen to Some Stutter Luh podcast now"
             >
               Listen Now
@@ -263,7 +264,7 @@
             </p>
             <a
               href="https://nlstuttering.ca/walk-run-roll/"
-              class="nlsa-btn u-lift"
+              class="btn btn--nlsa u-lift"
               aria-label="Get details on the annual walk, run, and roll raising awareness event"
               >Get Details</a
             >
@@ -287,7 +288,7 @@
               required
             />
             <button
-              class="nlsa-btn"
+              class="btn--nlsa"
               type="submit"
               aria-label="Subscribe to our newsletter"
             >
