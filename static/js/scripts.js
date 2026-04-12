@@ -34,7 +34,10 @@ function closeMenu() {
   backdrop.classList.remove('is-open');
 
   button.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
+
+  setTimeout(() => {
+    document.body.style.overflow = '';
+  }, 300);
 
   button.focus();
 }
