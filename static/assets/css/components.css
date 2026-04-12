@@ -1,0 +1,260 @@
+/* ============== 5. Components (reusable blocks) =============== */
+
+/* --- Announcement --- */
+.announcement {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+
+  background: var(--primary);
+  color: var(--white);
+
+  margin: var(--space-lg);
+  padding: 2rem 3rem;
+
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.announcement__icon {
+  flex-shrink: 0;
+}
+
+.announcement__icon svg {
+  width: 40px;
+  height: 40px;
+  stroke: currentColor;
+}
+
+/* Content grows (like split-panel content) */
+.announcement__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.announcement__content [class^='font-weight-'] {
+  color: var(--white);
+}
+
+.announcement__content p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* CTA */
+.announcement__actions {
+  flex-shrink: 0;
+}
+
+.announcement__content > h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+
+.announcement__actions > .btn--nlsa {
+  background: var(--white);
+  color: var(--primary);
+}
+
+.announcement--primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.announcement--accent {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.announcement--light {
+  background: var(--bg-light);
+  color: var(--primary);
+}
+
+/* Centered version */
+.announcement--center {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Compact version */
+.announcement--compact {
+  padding: 1.25rem 1.5rem;
+}
+
+/* --- Buttons --- */
+
+.btn {
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.6;
+  transition: 0.3s ease;
+}
+
+.btn--cta:hover {
+  background: var(--accent);
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+.btn--cta,
+.btn--nlsa {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* --- footer --- */
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+
+  padding: var(--space-md) 0;
+  text-align: center;
+
+  background: linear-gradient(to top, #e8eef9 0%, #fff 100%);
+  border-top: 3px solid var(--primary);
+}
+
+footer h2 {
+  font-size: 0.9rem;
+}
+
+footer form {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+footer input {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+footer p {
+  color: var(--primary);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.nav-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: var(--drawer-width); /* same as drawer width */
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s ease;
+  z-index: 800;
+
+  pointer-events: none;
+}
+
+.nav-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* --- Social Icons --- */
+.social-icons {
+  display: flex;
+  gap: var(--space-sm);
+  margin: 4px 0;
+}
+
+.social-icons a {
+  font-size: 0.9rem;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.social-icons--center {
+  justify-content: center;
+  align-items: center;
+}
+
+/* -------- Split Panel ----- */
+.split-panel {
+  display: grid;
+  align-items: center;
+  gap: var(--space-md);
+
+  background: var(--white);
+  margin: 0 var(--space-lg);
+  padding: 2rem 3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.split-panel--media-67 {
+  grid-template-columns: 2fr 1fr;
+}
+
+.split-panel--content-67 {
+  grid-template-columns: 2fr 1fr;
+}
+
+/* Explicit placement (this is the key difference) */
+.split-panel--content-67 .split-panel__content {
+  grid-column: 1;
+}
+
+.split-panel--content-67 .split-panel__media {
+  grid-column: 2;
+}
+
+/* Content block */
+.split-panel__content {
+  display: flex;
+  flex-direction: column;
+  max-width: 35em;
+}
+
+/* Media (image/logo) */
+.split-panel__media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Image inside media */
+.split-panel__media img {
+  width: 92%;
+}
+
+/* Optional: reverse layout */
+.split-panel--reverse {
+  flex-direction: row-reverse;
+}
+
+/* Optional: center text */
+.split-panel--center {
+  text-align: center;
+}

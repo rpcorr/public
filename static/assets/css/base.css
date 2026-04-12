@@ -1,0 +1,24 @@
+/* ================== 3. Base (HTML elements) =================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--white);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* --- Typography --- */
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1.6;
+}
