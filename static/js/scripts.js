@@ -22,8 +22,9 @@ function openMenu() {
   backdrop.classList.add('is-open');
 
   button.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-
+  requestAnimationFrame(() => {
+    document.body.style.overflow = 'hidden';
+  });
   setFocusableElements();
   button.focus();
 }
@@ -36,7 +37,9 @@ function closeMenu() {
   button.setAttribute('aria-expanded', 'false');
 
   setTimeout(() => {
-    document.body.style.overflow = '';
+    requestAnimationFrame(() => {
+      document.body.style.overflow = '';
+    });
   }, 300);
 
   button.focus();
