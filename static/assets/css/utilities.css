@@ -4,6 +4,10 @@
   text-align: center;
 }
 
+.u-mt {
+  margin-top: var(--space-lg);
+}
+
 .u-lift {
   display: inline-block;
   transition: transform 0.15s ease;

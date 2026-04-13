@@ -86,4 +86,50 @@ main {
 .layout-grid__item p {
   flex-grow: 1;
   line-height: 1.6;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .layout-grid__item img {
+    max-width: 210px;
+  }
+}
+
+@media (max-width: 375px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+    margin: 0 var(--space-md);
+  }
+
+  .layout-grid__item--12,
+  .layout-grid__item--11,
+  .layout-grid__item--10,
+  .layout-grid__item--9,
+  .layout-grid__item--8,
+  .layout-grid__item--7,
+  .layout-grid__item--6,
+  .layout-grid__item--5,
+  .layout-grid__item--4,
+  .layout-grid__item--3,
+  .layout-grid__item--2,
+  .layout-grid__item--1 {
+    grid-column: span 11;
+  }
+}
+
+@media (max-width: 320px) {
+  .layout-grid__item--12,
+  .layout-grid__item--11,
+  .layout-grid__item--10,
+  .layout-grid__item--9,
+  .layout-grid__item--8,
+  .layout-grid__item--7,
+  .layout-grid__item--6,
+  .layout-grid__item--5,
+  .layout-grid__item--4,
+  .layout-grid__item--3,
+  .layout-grid__item--2,
+  .layout-grid__item--1 {
+    grid-column: span 10;
+  }
 }
