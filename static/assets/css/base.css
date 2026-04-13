@@ -22,3 +22,21 @@ h2 {
   margin: 0;
   line-height: 1.6;
 }
+
+@media (max-width: 768px) {
+  h2 {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@media (max-width: 375px) {
+  h2 {
+    margin: 0 var(--space-lg) var(--space-md) var(--space-lg);
+  }
+}
+
+@media (max-width: 320px) {
+  h2 {
+    margin: var(--space-sm);
+  }
+}

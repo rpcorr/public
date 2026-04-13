@@ -112,10 +112,7 @@
 
 .nav-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: var(--drawer-width);
-  bottom: 0;
+  inset: 0;
 
   background: rgba(0, 0, 0, 0.45);
 
@@ -141,6 +138,7 @@
   transform: scale(1);
 
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); /* Safari */
 
   pointer-events: auto;
 
@@ -163,7 +161,6 @@
     top: 0;
     right: 0;
     bottom: 0;
-    margin: 0;
 
     width: var(--drawer-width);
     max-width: 85vw;
@@ -180,42 +177,16 @@
     box-shadow: var(--shadow-lg);
 
     transform: translateX(102%);
-    opacity: 0.98;
     transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
 
     z-index: 1000;
-
-    overflow-y: auto;
-
-    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
-  }
-
-  .site-nav__list > :last-child {
-    margin-bottom: 0;
   }
 
   .site-nav__list.is-open {
     transform: translateX(0);
-    opacity: 1;
-    margin: 0;
   }
 
-  .site-nav__list a {
-    opacity: 0;
-    transform: translateX(12px);
-    transition:
-      opacity 280ms ease,
-      transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* .site-nav__list > * {
-    opacity: 0;
-    transform: translateX(20px);
-    transition: all 0.4s ease;
-  } */
-
-  /* Initial state */
+  /* reset items */
   .site-nav__list > li {
     opacity: 0;
     transform: translateX(20px);
@@ -224,34 +195,13 @@
       transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* When open */
+  /* open state */
   .site-nav__list.is-open > li {
     opacity: 1;
     transform: translateX(0);
   }
 
-  .site-nav__list.is-open a {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* --- stagger timing--- */
-  /* .site-nav__list.is-open a:nth-child(1) {
-    transition-delay: 60ms;
-  }
-  .site-nav__list.is-open a:nth-child(2) {
-    transition-delay: 90ms;
-  }
-  .site-nav__list.is-open a:nth-child(3) {
-    transition-delay: 120ms;
-  }
-  .site-nav__list.is-open a:nth-child(4) {
-    transition-delay: 150ms;
-  }
-  .site-nav__list.is-open a:nth-child(5) {
-    transition-delay: 180ms;
-  } */
-
+  /* stagger */
   .site-nav__list.is-open > li:nth-child(1) {
     transition-delay: 60ms;
   }
@@ -269,15 +219,6 @@
   }
   .site-nav__list.is-open > li:nth-child(6) {
     transition-delay: 210ms;
-  }
-  .site-nav__list.is-open > li:nth-child(7) {
-    transition-delay: 240ms;
-  }
-
-  .site-nav__tagline {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 8px;
   }
 }
 
