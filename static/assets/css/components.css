@@ -282,8 +282,7 @@ footer p {
     justify-content: center;
     align-items: center;
 
-    max-width: 740px;
-    margin: 0 auto;
+    margin: var(--space-md);
 
     padding: 1.5rem; /* slightly tighter for mobile */
   }
@@ -313,8 +312,7 @@ footer p {
 
 @media (max-width: 375px) {
   .announcement {
-    max-width: 345px;
-    gap: 0;
+    gap: var(--space-sm);
   }
 
   .announcement__icon {
@@ -341,9 +339,6 @@ footer p {
 }
 
 @media (max-width: 320px) {
-  .announcement {
-    max-width: 290px;
-  }
   .split-panel__media img {
     width: 100%;
     height: auto;
