@@ -98,7 +98,7 @@
 }
 
 .site-nav__link:hover {
-  transform: translateY(-1px);
+  /* transform: translateY(-1px); */
 }
 
 .site-nav__link:focus-visible {

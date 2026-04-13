@@ -77,12 +77,17 @@
 
     <div class="nav-backdrop"></div>
 
-    <main id="primary" aria-label="Main content" aria-labelledby="hero-heading">
+    <main
+      id="primary"
+      class="wrapper"
+      aria-label="Main content"
+      aria-labelledby="hero-heading"
+    >
       <!-- ===== Hero Section ===== -->
 
       <section class="split-panel split-panel--media-67">
         <div class="split-panel__media">
-          <img src="imgs/NLSA-logo.png" alt="NLSA Logo" />
+          <img loading="lazy" src="imgs/NLSA-logo.png" alt="NLSA Logo" />
         </div>
 
         <div class="split-panel__content">
@@ -97,7 +102,7 @@
 
           <a
             href="#"
-            class="btn btn--nlsa u-lift"
+            class="btn btn--primary u-lift"
             aria-label="Learn more about Newfoundland and Labrador Stuttering Association"
             >Learn More About NLSA
           </a>
@@ -141,7 +146,7 @@
         <div class="announcement__actions">
           <a
             href="#"
-            class="btn btn--nlsa u-lift"
+            class="btn btn--secondary u-lift"
             aria-label="Get involved today and make a difference"
           >
             Get Involved Today
@@ -165,7 +170,7 @@
             href="https://stutter.ca/events/conference/2026"
             target="_blank"
             rel="noopener"
-            class="btn btn--nlsa u-lift"
+            class="btn btn--primary u-lift"
           >
             Learn more about the 2026 CSA Conference
           </a>
@@ -173,6 +178,7 @@
 
         <div class="split-panel__media">
           <img
+            loading="lazy"
             src="imgs/at-home-with-stuttering.jpg"
             alt="Joint Conference with the Canadian Stuttering Association"
           />
@@ -183,10 +189,16 @@
         <h2 id="programs-heading" class="visually-hidden">
           Programs and Initiatives
         </h2>
+
         <div class="layout-grid">
-          <div class="layout-grid__item layout-grid__item--7">
+          <div class="layout-grid__item col-7">
             <!--60% -->
-            <img src="imgs/researching-barriers.jpg" alt="NLSA Research Logo" />
+            <img
+              loading="lazy"
+              src="imgs/researching-barriers.jpg"
+              loading="lazy"
+              alt="NLSA Research Logo"
+            />
             <h2>Researching Communication Barriers</h2>
             <p class="font-weight-medium">
               We're exploring ways to improve access and support for people who
@@ -197,16 +209,20 @@
               href="https://nlstuttering.ca/research"
               target="_blank"
               rel="noopener"
-              class="btn btn--nlsa u-lift"
+              class="btn btn--primary u-lift"
               aria-label="Learn more about researching communication barriers"
             >
               Learn More
             </a>
           </div>
 
-          <div class="layout-grid__item layout-grid__item--5">
+          <div class="layout-grid__item col-5">
             <!--40%-->
-            <img src="imgs/kitchen-party.jpg" alt="Kitchen Party Logo" />
+            <img
+              loading="lazy"
+              src="imgs/kitchen-party.jpg"
+              alt="Kitchen Party Logo"
+            />
             <h2>
               Kitchen Party <br />
               <span>Where Every Voice Belongs</span>
@@ -218,15 +234,19 @@
             </p>
             <a
               href="https://nlstuttering.ca/kitchenparty/"
-              class="btn btn--nlsa u-lift"
+              class="btn btn--primary u-lift"
               aria-label="Get details about the kitchen party where everyone is welcomed"
               >Get Details</a
             >
           </div>
 
-          <div class="layout-grid__item layout-grid__item--7">
+          <div class="layout-grid__item col-7">
             <!--60%-->
-            <img src="imgs/ssl.jpg" alt="Some Stutter Luh! Logo" />
+            <img
+              loading="lazy"
+              src="imgs/ssl.jpg"
+              alt="Some Stutter Luh! Logo"
+            />
             <h2>
               Some Stutter Luh! &mdash; Newfoundland and Labrador's First
               Podcast About Communicating Differently
@@ -246,16 +266,20 @@
               href="https://somestutterluh.hcommons.org/"
               target="_blank"
               rel="noopener"
-              class="btn btn--nlsa u-lift"
+              class="btn btn--primary u-lift"
               aria-label="Listen to Some Stutter Luh podcast now"
             >
               Listen Now
             </a>
           </div>
 
-          <div class="layout-grid__item layout-grid__item--5">
+          <div class="layout-grid__item col-5">
             <!--40%-->
-            <img src="imgs/walk-run-roll.jpg" alt="Walk, Run, Roll Logo" />
+            <img
+              loading="lazy"
+              src="imgs/walk-run-roll.jpg"
+              alt="Walk, Run, Roll Logo"
+            />
             <h2>
               Walk, Run, and Roll<br />
               <span>Moving Forward Together</span>
@@ -270,7 +294,7 @@
             </p>
             <a
               href="https://nlstuttering.ca/walk-run-roll/"
-              class="btn btn--nlsa u-lift"
+              class="btn btn--primary u-lift"
               aria-label="Get details on the annual walk, run, and roll raising awareness event"
               >Get Details</a
             >
@@ -289,12 +313,13 @@
             <label for="email" class="visually-hidden">Email address</label>
             <input
               id="email"
+              name="email"
               type="email"
               placeholder="Enter your email"
               required
             />
             <button
-              class="btn--nlsa"
+              class="btn--primary"
               type="submit"
               aria-label="Subscribe to our newsletter"
             >

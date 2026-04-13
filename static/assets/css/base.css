@@ -1,42 +1,53 @@
 /* ================== 3. Base (HTML elements) =================== */
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   background: var(--white);
   color: var(--text);
   font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  font-size: var(--text-base);
 }
 
-body.menu-open {
-  overflow: hidden;
+section {
+  margin: 0 var(--space-lg);
 }
 
 /* --- Typography --- */
 
 h2 {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
   color: var(--primary);
+  line-height: 1.4;
+}
+
+p {
   margin: 0;
-  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
-  h2 {
-    margin-bottom: var(--space-sm);
+  body.menu-open {
+    overflow: hidden;
   }
 }
 
 @media (max-width: 375px) {
-  h2 {
-    margin: 0 var(--space-lg) var(--space-md) var(--space-lg);
-  }
-}
-
-@media (max-width: 320px) {
-  h2 {
-    margin: var(--space-sm);
+  section {
+    margin: 0;
   }
 }

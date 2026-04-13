@@ -1,5 +1,6 @@
 /* ================== 2. Variables ================== */
 :root {
+  /*-------------------Colours ------------------------ */
   --primary: #0b3072;
   --primary-dark: #092a63;
   --accent: #029fd4;
@@ -7,6 +8,12 @@
   --bg-light: #f8fbff;
   --white: #fff;
   --black: #000;
+
+  /*--------------------Font Sizes --------------------*/
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
 
   /* -------------------Font Weights ------------------ */
   --fw-regular: 400;

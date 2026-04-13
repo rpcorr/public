@@ -9,8 +9,8 @@
   background: var(--primary);
   color: var(--white);
 
-  margin: var(--space-lg);
-  padding: 2rem 3rem;
+  /* margin: var(--space-lg); */
+  padding: var(--space-md) var(--space-lg);
 
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -47,12 +47,6 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--white);
-  margin: 0;
-}
-
-.announcement__actions > .btn--nlsa {
-  background: var(--white);
-  color: var(--primary);
 }
 
 .announcement--primary {
@@ -92,6 +86,16 @@
   transition: 0.3s ease;
 }
 
+.btn--primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn--secondary {
+  background: var(--white);
+  color: var(--primary);
+}
+
 .btn--cta:hover {
   background: var(--accent);
   color: var(--black);
@@ -129,7 +133,7 @@ footer form {
   gap: var(--space-sm);
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 4px;
+  margin-top: var(--space-sm);
 }
 
 footer input {
@@ -144,7 +148,7 @@ footer input {
 footer p {
   color: var(--primary);
   font-size: 0.85rem;
-  margin: 0.5rem 0 0 0;
+  margin-top: var(--space-sm);
 }
 
 /* --- Social Icons --- */
@@ -178,8 +182,7 @@ footer p {
   gap: var(--space-md);
 
   background: var(--white);
-  margin: 0 var(--space-lg);
-  padding: 2rem 3rem;
+  padding: var(--space-md) var(--space-lg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
@@ -222,7 +225,7 @@ footer p {
 
 /* Optional: reverse layout */
 .split-panel--reverse {
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
 }
 
 /* Optional: center text */
@@ -235,7 +238,7 @@ footer p {
   .split-panel {
     grid-template-columns: 1fr;
     padding: 1.5rem;
-    margin: var(--space-md);
+    /* margin: var(--space-md); */
     text-align: center;
 
     gap: 0;
@@ -277,12 +280,14 @@ footer p {
   .announcement {
     display: grid;
     grid-template-columns: auto 1fr;
+    /* flex-direction: column; */
+    text-align: center;
     gap: var(--space-md);
 
     justify-content: center;
     align-items: center;
 
-    margin: var(--space-md);
+    /* margin: var(--space-md); */
 
     padding: 1.5rem; /* slightly tighter for mobile */
   }
@@ -302,11 +307,7 @@ footer p {
   .announcement__actions {
     grid-column: 1 / -1;
     text-align: center;
-    /* grid-row: 2; */
-  }
-
-  footer h2 {
-    margin-bottom: var(--space-xs);
+    /* width: 100%; */
   }
 }
 
@@ -329,7 +330,6 @@ footer p {
 
   footer p {
     max-width: 290px;
-    margin: 0 auto;
   }
 
   footer .btn--nlsa,
