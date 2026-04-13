@@ -1,5 +1,9 @@
 /* ============== 6. Utilities (helpers/overrides) ============== */
 
+.text-center {
+  text-align: center;
+}
+
 .u-lift {
   display: inline-block;
   transition: transform 0.15s ease;
@@ -74,4 +78,16 @@
 
 .font-weight-bold {
   font-weight: var(--fw-bold);
+}
+
+@media (max-width: 768px) {
+  .announcement [class^='font-weight-'] {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .announcement [class^='font-weight-'] {
+    margin-bottom: 1.5rem;
+  }
 }
