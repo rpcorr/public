@@ -305,6 +305,10 @@ footer p {
     text-align: center;
     /* grid-row: 2; */
   }
+
+  footer h2 {
+    margin-bottom: var(--space-xs);
+  }
 }
 
 @media (max-width: 375px) {
@@ -323,6 +327,16 @@ footer p {
 
   .split-panel__content p {
     text-align: left;
+  }
+
+  footer p {
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  footer .btn--nlsa,
+  footer input {
+    font-size: 0.8rem;
   }
 }
 
