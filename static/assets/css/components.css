@@ -44,8 +44,7 @@
 }
 
 .announcement__content > h2 {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: var(--text-lg);
   color: var(--white);
 }
 
