@@ -1,11 +1,8 @@
-/* ================ 4. Layout (page structure) ================== */
-
 /* --- main --- */
 main {
   display: block;
   background-color: var(--bg-light);
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
+  padding: var(--space-lg) 0;
 }
 
 /* --- wrapper --- */
@@ -13,60 +10,48 @@ main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
-  background: var(--bg-light);
 }
 
 /* --- layout grid system --- */
-
 .layout-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--space-lg);
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
   align-items: stretch;
 }
 
-/* 100 % width */
-.col-12 {
+/* --- columns --- */
+.layout-grid > .col-12 {
   grid-column: span 12;
 }
-
-/* 67% width (8/12 columns) */
-.col-8 {
+.layout-grid > .col-8 {
   grid-column: span 8;
 }
-
-/* 60% width (7/12 columns) */
-.col-7 {
+.layout-grid > .col-7 {
   grid-column: span 7;
 }
-
-/* 50% width (6/12 columns) */
-.col-6 {
+.layout-grid > .col-6 {
   grid-column: span 6;
 }
-
-/* 40% width (5/12 columns) */
-.col-5 {
+.layout-grid > .col-5 {
   grid-column: span 5;
 }
-
-/* 33% width (4/12 columns) */
-.col-4 {
+.layout-grid > .col-4 {
   grid-column: span 4;
 }
 
+/* --- cards --- */
 .layout-grid__item {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   text-align: center;
   background: var(--white);
   padding: var(--space-md);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+
   transition:
     box-shadow 0.3s ease,
     transform 0.3s ease;
@@ -86,13 +71,28 @@ main {
 .layout-grid__item h2 {
   text-align: center;
 }
+
 .layout-grid__item p {
-  flex-grow: 1;
   line-height: 1.6;
-  text-align: left;
+  text-align: center; /* unified with card design */
+  flex-grow: 1;
 }
 
+/* --- tablet --- */
 @media (max-width: 768px) {
+  .layout-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .layout-grid__item {
+    grid-column: auto;
+  }
+
+  .layout-grid > .col-5,
+  .layout-grid > .col-7 {
+    grid-column: span 1;
+  }
+
   .layout-grid__item img {
     max-width: 210px;
   }
@@ -102,10 +102,10 @@ main {
   }
 }
 
+/* --- mobile --- */
 @media (max-width: 375px) {
   .layout-grid {
     grid-template-columns: 1fr;
-    /* margin: 0 var(--space-md); */
   }
 
   .layout-grid__item {
@@ -113,6 +113,6 @@ main {
   }
 
   .wrapper {
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-md);
   }
 }

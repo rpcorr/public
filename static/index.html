@@ -85,12 +85,12 @@
     >
       <!-- ===== Hero Section ===== -->
 
-      <section class="split-panel split-panel--media-67">
+      <section class="split-panel split-panel--ratio-67-33">
         <div class="split-panel__media">
           <img loading="lazy" src="imgs/NLSA-logo.png" alt="NLSA Logo" />
         </div>
 
-        <div class="split-panel__content">
+        <div>
           <h2 id="hero-heading">Empowering People Who Stutter</h2>
 
           <p class="font-weight-medium">
@@ -155,10 +155,10 @@
       </section>
 
       <section
-        class="split-panel split-panel--content-67 split-panel--stack-image-first"
+        class="split-panel split-panel--ratio-67-33 split-panel--stack-image-first"
         aria-labelledby="conference-heading"
       >
-        <div class="split-panel__content">
+        <div>
           <h2 id="conference-heading" class="text-center">
             Joint Canadian Stuttering Association & Newfoundland and Labrador
             Stuttering Association Conference.
@@ -308,10 +308,15 @@
       <div class="wrapper footer-inner">
         <!-- Newsletter -->
         <div>
-          <h2>Subscribe to Our Newsletter</h2>
-          <form action="https://formspree.io/f/mabcdxyz" method="POST">
+          <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+          <form
+            class="footer__form"
+            action="https://formspree.io/f/mabcdxyz"
+            method="POST"
+          >
             <label for="email" class="visually-hidden">Email address</label>
             <input
+              class="footer__input"
               id="email"
               name="email"
               type="email"
@@ -330,7 +335,7 @@
 
         <!-- Socials -->
         <div>
-          <h2>Get in Touch</h2>
+          <h2 class="footer__title">Get in Touch</h2>
           <div class="social-icons">
             <a
               href="https://www.facebook.com/groups/535643736920153/"
@@ -345,7 +350,9 @@
           </div>
         </div>
 
-        <p>&copy; 2026 Newfoundland &amp; Labrador Stuttering Association</p>
+        <p class="footer__text">
+          &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
+        </p>
       </div>
     </footer>
 
