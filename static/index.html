@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <a href="#primary" class="skip-link" tabindex="0">Skip to content</a>
+    <a href="#primary" class="skip-link">Skip to content</a>
 
     <!-- ===== Navbar ===== -->
     <header class="site-header">
@@ -36,6 +36,7 @@
           <!-- Hamburger Menu -->
           <button
             class="hamburger"
+            type="button"
             aria-label="Toggle navigation menu"
             aria-expanded="false"
             aria-controls="primary-menu"
@@ -56,7 +57,7 @@
                 href="https://somestutterluh.hcommons.org/"
                 class="site-nav__link"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 >Podcast</a
               >
             </li>
@@ -66,7 +67,7 @@
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
                 class="btn btn--cta"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 >Donate</a
               >
             </li>
@@ -77,21 +78,19 @@
 
     <div class="nav-backdrop"></div>
 
-    <main
-      id="primary"
-      class="wrapper"
-      aria-label="Main content"
-      aria-labelledby="hero-heading"
-    >
+    <main id="primary" class="wrapper">
       <!-- ===== Hero Section ===== -->
 
-      <section class="split-panel split-panel--ratio-67-33">
+      <section
+        class="split-panel split-panel--ratio-67-33"
+        aria-labelledby="hero-heading"
+      >
         <div class="split-panel__media">
           <img loading="lazy" src="imgs/NLSA-logo.png" alt="NLSA Logo" />
         </div>
 
         <div>
-          <h2 id="hero-heading">Empowering People Who Stutter</h2>
+          <h1 id="hero-heading">Empowering People Who Stutter</h1>
 
           <p class="font-weight-medium">
             The NLSA advocates for people who stutter, fostering inclusion
@@ -100,11 +99,11 @@
             voice is heard and valued.
           </p>
 
-          <a
-            href="#"
-            class="btn btn--primary u-lift"
-            aria-label="Learn more about Newfoundland and Labrador Stuttering Association"
-            >Learn More About NLSA
+          <a href="#" class="btn btn--primary u-lift">
+            Learn more about
+            <abbr title="Newfoundland and Labrador Stuttering Association"
+              >NLSA</abbr
+            >
           </a>
         </div>
       </section>
@@ -169,7 +168,7 @@
           <a
             href="https://stutter.ca/events/conference/2026"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             class="btn btn--primary u-lift"
           >
             Learn more about the 2026 CSA Conference
@@ -196,10 +195,9 @@
             <img
               loading="lazy"
               src="imgs/researching-barriers.jpg"
-              loading="lazy"
               alt="NLSA Research Logo"
             />
-            <h2>Researching Communication Barriers</h2>
+            <h3>Researching Communication Barriers</h3>
             <p class="font-weight-medium">
               We're exploring ways to improve access and support for people who
               stutter. We need your voice to help make a difference in our
@@ -207,8 +205,6 @@
             </p>
             <a
               href="https://nlstuttering.ca/research"
-              target="_blank"
-              rel="noopener"
               class="btn btn--primary u-lift"
               aria-label="Learn more about researching communication barriers"
             >
@@ -223,10 +219,10 @@
               src="imgs/kitchen-party.jpg"
               alt="Kitchen Party Logo"
             />
-            <h2>
+            <h3>
               Kitchen Party <br />
               <span>Where Every Voice Belongs</span>
-            </h2>
+            </h3>
 
             <p class="font-weight-medium">
               Celebrate connection, storytelling, and community at our NLSA
@@ -247,10 +243,10 @@
               src="imgs/ssl.jpg"
               alt="Some Stutter Luh! Logo"
             />
-            <h2>
+            <h3>
               Some Stutter Luh! &mdash; Newfoundland and Labrador's First
               Podcast About Communicating Differently
-            </h2>
+            </h3>
             <p class="font-weight-medium">
               Some Stutter Luh! celebrates the many ways people communicate. As
               Newfoundland and Labrador's first podcast focused on speech and
@@ -265,7 +261,7 @@
             <a
               href="https://somestutterluh.hcommons.org/"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               class="btn btn--primary u-lift"
               aria-label="Listen to Some Stutter Luh podcast now"
             >
@@ -280,10 +276,10 @@
               src="imgs/walk-run-roll.jpg"
               alt="Walk, Run, Roll Logo"
             />
-            <h2>
+            <h3>
               Walk, Run, and Roll<br />
               <span>Moving Forward Together</span>
-            </h2>
+            </h3>
             <p class="font-weight-medium">
               Join us for Walk, Run, and Roll—a fun, inclusive event that brings
               people together to support and celebrate people who stutter in
@@ -324,7 +320,7 @@
               required
             />
             <button
-              class="btn--primary"
+              class="btn btn--primary"
               type="submit"
               aria-label="Subscribe to our newsletter"
             >
@@ -349,10 +345,11 @@
             >
           </div>
         </div>
-
-        <p class="footer__text">
-          &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
-        </p>
+        <div class="footer__bottom">
+          <p class="footer__text">
+            &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
+          </p>
+        </div>
       </div>
     </footer>
 
