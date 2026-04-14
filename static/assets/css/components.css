@@ -196,7 +196,8 @@
   max-width: 35em;
 }
 .split-panel__media img {
-  width: min(330px, 90%);
+  width: min(600px, 90%);
+  margin: 0 auto;
   height: auto;
 }
 
