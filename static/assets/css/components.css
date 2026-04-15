@@ -144,6 +144,7 @@ blockquote cite {
 /* --- Buttons --- */
 
 .btn {
+  display: inline-block;
   padding: 10px 20px;
   border-radius: var(--radius-sm);
   font-weight: 600;
@@ -174,6 +175,34 @@ blockquote cite {
   color: var(--white);
 }
 
+/* --- callouts ---*/
+.callout {
+  margin: 2rem 0;
+
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--primary-dark);
+  background-color: var(--bg-light);
+  border-radius: var(--radius-sm);
+
+  color: var(--primary-dark);
+  font-style: italic;
+  font-weight: var(--fw-medium);
+
+  box-shadow: var(--shadow-quote);
+}
+
+.callout ul {
+  list-style: disc;
+  padding-left: 1.75rem;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .callout ul {
+    padding-left: 1.25rem;
+  }
+}
+
 /* --- footer --- */
 
 .footer-inner {
@@ -194,15 +223,15 @@ blockquote cite {
   font-size: 0.9rem;
 }
 
-.footer__form {
+.form-inline {
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   margin-top: var(--space-sm);
 }
 
-.footer__input {
+.form-input {
   padding: 0.5rem 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -222,8 +251,8 @@ blockquote cite {
     max-width: 290px;
   }
 
-  .footer__form .btn--nlsa,
-  .footer__input {
+  .form-inline .btn--nlsa,
+  .form-input {
     font-size: var(--text-sm);
   }
 }
@@ -273,6 +302,22 @@ blockquote cite {
   grid-template-columns: 1fr;
 }
 
+.split-panel--hero h1 {
+  text-align: center;
+}
+
+.split-panel--hero .btn,
+.split-panel--center .btn {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto 0;
+}
+
+.split-panel--center h2,
+.split-panel--center p {
+  text-align: center;
+}
+
 .split-panel--text p {
   max-width: none;
 }
@@ -293,7 +338,7 @@ blockquote cite {
   .split-panel {
     grid-template-columns: 1fr;
     padding: var(--space-md);
-    text-align: center;
+    /* text-align: center; */
 
     gap: var(--space-sm);
   }
@@ -336,6 +381,12 @@ blockquote cite {
 /* Remove default top margin on first paragraph */
 .text-image__content p:first-child {
   margin-top: 0;
+}
+
+.text-image__content ul {
+  list-style: disc;
+  padding-left: 1.75rem;
+  margin: 1rem 0;
 }
 
 /* -------------------------
