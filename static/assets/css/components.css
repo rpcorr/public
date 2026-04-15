@@ -197,6 +197,14 @@ blockquote cite {
   margin-top: 0.75rem;
 }
 
+.callout a:not(.btn) {
+  text-decoration: underline;
+}
+
+.callout a:not(.btn):hover {
+  text-decoration-thickness: 2px;
+}
+
 @media (max-width: 768px) {
   .callout ul {
     padding-left: 1.25rem;
