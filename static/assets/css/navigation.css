@@ -132,6 +132,13 @@
   background: var(--white);
 }
 
+.site-nav ul,
+.site-nav ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 /* --- Inner container --- */
 .site-nav__inner {
   display: flex;
