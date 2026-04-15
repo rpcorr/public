@@ -12,6 +12,12 @@ main {
   padding-inline: var(--space-lg);
 }
 
+@media (max-width: 768px) {
+  .wrapper p {
+    text-align: left;
+  }
+}
+
 /* --- layout grid system --- */
 .layout-grid {
   display: grid;
