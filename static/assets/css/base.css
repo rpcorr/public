@@ -81,6 +81,7 @@ p {
   font-size: var(--text-base);
   line-height: 1.75;
   max-width: 68ch;
+  margin-bottom: var(--space-md);
 }
 
 strong {
@@ -100,5 +101,10 @@ a {
 @media (max-width: 768px) {
   body.menu-open {
     overflow: hidden;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
   }
 }
