@@ -10,10 +10,14 @@
   --black: #000;
 
   /*--------------------Font Sizes --------------------*/
+  --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
-  --text-lg: 1.2rem;
-  --text-xl: 1.5rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.375rem;
+  --text-3xl: 1.625rem;
 
   /* -------------------Font Weights ------------------ */
   --fw-regular: 400;
