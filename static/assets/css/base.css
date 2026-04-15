@@ -19,6 +19,14 @@ body {
   font-size: var(--text-base);
 }
 
+section {
+  margin-bottom: var(--space-lg);
+}
+
+section:last-of-type {
+  margin-bottom: 0;
+}
+
 /* --- Typography --- */
 
 /* ================== Headings ================== */
@@ -88,11 +96,5 @@ a {
 @media (max-width: 768px) {
   body.menu-open {
     overflow: hidden;
-  }
-}
-
-@media (max-width: 375px) {
-  section {
-    margin: 0;
   }
 }
