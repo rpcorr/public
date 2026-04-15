@@ -9,7 +9,7 @@ main {
 .wrapper {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding-inline: var(--space-lg);
 }
 
 /* --- layout grid system --- */
@@ -96,10 +96,6 @@ main {
   .layout-grid__item img {
     max-width: 210px;
   }
-
-  .wrapper {
-    padding: 0 var(--space-md);
-  }
 }
 
 /* --- mobile --- */
@@ -110,9 +106,5 @@ main {
 
   .layout-grid__item {
     grid-column: 1 / -1;
-  }
-
-  .wrapper {
-    padding: 0 var(--space-md);
   }
 }
