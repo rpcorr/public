@@ -373,6 +373,12 @@ blockquote cite {
   display: block;
 }
 
+.text-image__media .btn {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto 0;
+}
+
 /* Ensure text behaves nicely in grid */
 .text-image__content {
   min-width: 0;
