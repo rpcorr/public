@@ -32,7 +32,13 @@
   /* ---------------- Shadows ------------------------- */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  /* semantic aliases */
+  --shadow-card: var(--shadow);
+  --shadow-quote: var(--shadow-md);
+  --shadow-elevated: var(--shadow-lg);
 
   /* ----------------------- Spaces ----------------- */
   --space-xs: 0.25rem;

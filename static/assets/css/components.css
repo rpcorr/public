@@ -9,7 +9,6 @@
   background: var(--primary);
   color: var(--white);
 
-  /* margin: var(--space-lg); */
   padding: var(--space-md) var(--space-lg);
 
   border-radius: var(--radius);
@@ -71,6 +70,67 @@
 /* Compact version */
 .announcement--compact {
   padding: 1.25rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  /* --- announcement ---*/
+  .announcement {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    text-align: center;
+    gap: var(--space-md);
+
+    justify-content: center;
+    align-items: center;
+
+    padding: var(--space-lg); /* slightly tighter for mobile */
+  }
+
+  .announcement__icon {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .announcement__content {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .announcement__actions {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .announcement {
+    gap: var(--space-sm);
+  }
+
+  .announcement__icon {
+    display: none;
+  }
+
+  .announcement__content {
+    text-align: center;
+  }
+}
+
+/* --- Blockquote --- */
+blockquote {
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--primary-dark);
+  background-color: var(--bg-light);
+  border-radius: var(--radius-sm);
+
+  color: var(--primary-dark);
+  font-style: italic;
+  font-weight: var(--fw-medium);
+
+  box-shadow: var(--shadow-quote);
 }
 
 /* --- Buttons --- */
@@ -149,6 +209,17 @@
   margin-top: var(--space-sm);
 }
 
+@media (max-width: 375px) {
+  .footer__text {
+    max-width: 290px;
+  }
+
+  .footer__form .btn--nlsa,
+  .footer__input {
+    font-size: var(--text-sm);
+  }
+}
+
 /* --- Social Icons --- */
 .social-icons {
   display: flex;
@@ -189,6 +260,15 @@
   grid-template-columns: 2fr 1fr;
 }
 
+/* Text-only variant */
+.split-panel--text {
+  grid-template-columns: 1fr;
+}
+
+.split-panel--text p {
+  max-width: none;
+}
+
 /* --- Image inside split-panel --- */
 /* Content block */
 .split-panel__content {
@@ -215,58 +295,68 @@
     margin: 0 auto;
     height: auto;
   }
-
-  /* --- announcement ---*/
-  .announcement {
-    display: grid;
-    grid-template-columns: auto 1fr;
-
-    text-align: center;
-    gap: var(--space-md);
-
-    justify-content: center;
-    align-items: center;
-
-    padding: var(--space-lg); /* slightly tighter for mobile */
-  }
-
-  .announcement__icon {
-    grid-column: 1;
-    grid-row: 1;
-    align-self: center;
-  }
-
-  .announcement__content {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: center;
-  }
-
-  .announcement__actions {
-    grid-column: 1 / -1;
-    text-align: center;
-  }
 }
 
-@media (max-width: 375px) {
-  .announcement {
-    gap: var(--space-sm);
+/* =========================
+   Text + Image Layout
+   ========================= */
+
+.text-image {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 300px);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* -------------------------
+   Image styling (shared)
+-------------------------- */
+.text-image__media img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: block;
+}
+
+/* Ensure text behaves nicely in grid */
+.text-image__content {
+  min-width: 0;
+}
+
+/* Remove default top margin on first paragraph */
+.text-image__content p:first-child {
+  margin-top: 0;
+}
+
+/* -------------------------
+   Reverse layout
+   (image left, text right)
+-------------------------- */
+.text-image--reverse {
+  direction: rtl;
+}
+
+.text-image--reverse > * {
+  direction: ltr;
+}
+
+/* -------------------------
+   Responsive (mobile)
+-------------------------- */
+@media (max-width: 768px) {
+  .text-image {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
 
-  .announcement__icon {
-    display: none;
+  .text-image__media {
+    justify-self: center;
+    margin-block: var(--space-lg);
   }
 
-  .announcement__content {
-    text-align: center;
-  }
-
-  .footer__text {
-    max-width: 290px;
-  }
-
-  .footer__form .btn--nlsa,
-  .footer__input {
-    font-size: var(--text-sm);
+  .text-image__media img {
+    max-width: 300px;
   }
 }

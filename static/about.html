@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Load Font Awesome & Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Load Custom CSS -->
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/layouts.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <link rel="stylesheet" href="assets/css/utilities.css" />
+    <title>About - Newfoundland and Labrador Stuttering Association</title>
+  </head>
+
+  <body>
+    <a href="#primary" class="skip-link">Skip to content</a>
+
+    <!-- ===== Navbar ===== -->
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation">
+        <div class="site-nav__inner">
+          <!-- Tagline -->
+          <div class="site-nav__tagline"></div>
+
+          <!-- Hamburger Menu -->
+          <button
+            class="hamburger"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="primary-menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <!-- Navigation Links -->
+          <ul id="primary-menu" class="site-nav__list">
+            <li><a href="index.html" class="site-nav__link">Home</a></li>
+            <li>
+              <a href="about.html" class="site-nav__link active">About</a>
+            </li>
+            <li><a href="/research" class="site-nav__link">Research</a></li>
+            <li><a href="/news" class="site-nav__link">News</a></li>
+            <li>
+              <a
+                href="https://somestutterluh.hcommons.org/"
+                class="site-nav__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Podcast</a
+              >
+            </li>
+            <li><a href="/contact" class="site-nav__link">Contact</a></li>
+            <li>
+              <a
+                href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
+                class="btn btn--cta"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Donate</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="nav-backdrop"></div>
+
+    <main id="primary" class="wrapper">
+      <section
+        class="split-panel split-panel--text"
+        aria-labelledby="page-heading"
+      >
+        <h1 id="page-heading">
+          Newfoundland and Labrador Stuttering Association (NLSA)
+        </h1>
+        <div class="text-image">
+          <div class="text-image__content">
+            <p>
+              The
+              <strong
+                >Newfoundland and Labrador Stuttering Association (NLSA)</strong
+              >
+              is a non-profit organization dedicated to supporting, educating,
+              and empowering people who stutter, along with their families and
+              communities across our province. Founded in Newfoundland and
+              Labrador, the NLSA provides a welcoming space for connection,
+              awareness, and advocacy to help ensure that every voice — no
+              matter how it sounds — is heard and valued.
+            </p>
+
+            <h2 class="u-mt-md u-mb-md">Our Mission</h2>
+            <p>
+              Our mission is to
+              <strong>create a supportive environment</strong> that fosters
+              confidence and understanding for individuals who stutter. Through
+              community events, educational programs, and partnerships across
+              Newfoundland and Labrador, we work to break down stigma, promote
+              inclusion, and amplify the voices of people who stutter.
+            </p>
+          </div>
+
+          <div class="text-image__media">
+            <img src="imgs/SignalHill.jpg" alt="Signal Hill" />
+          </div>
+        </div>
+
+        <blockquote>
+          “From the shores of Newfoundland to the coastlines of Labrador, we
+          believe every story deserves to be told — in its own time and its own
+          way.”
+        </blockquote>
+      </section>
+    </main>
+
+    <footer aria-label="Site footer">
+      <!-- Newsletter Subscription -->
+      <div class="wrapper footer-inner">
+        <!-- Newsletter -->
+        <div>
+          <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+          <form
+            class="footer__form"
+            action="https://formspree.io/f/mabcdxyz"
+            method="POST"
+          >
+            <label for="email" class="visually-hidden">Email address</label>
+            <input
+              class="footer__input"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button
+              class="btn btn--primary"
+              type="submit"
+              aria-label="Subscribe to our newsletter"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        <!-- Socials -->
+        <div>
+          <h2 class="footer__title">Get in Touch</h2>
+          <div class="social-icons">
+            <a
+              href="https://www.facebook.com/groups/535643736920153/"
+              aria-label="Get in touch with us through Facebook"
+              ><i class="fab fa-facebook-f"></i> Facebook</a
+            >
+            <a
+              href="https://www.instagram.com/nlstuttering/"
+              aria-label="Get in touch with us through Instagram"
+              ><i class="fab fa-instagram"></i> Instagram</a
+            >
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__text">
+            &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
