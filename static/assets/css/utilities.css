@@ -4,8 +4,40 @@
   text-align: center;
 }
 
-.u-mt {
+/* ================== Spacing Utilities ================== */
+
+/* Margin top */
+.u-mt-xs {
+  margin-top: var(--space-xs);
+}
+.u-mt-sm {
+  margin-top: var(--space-sm);
+}
+.u-mt-md {
+  margin-top: var(--space-md);
+}
+.u-mt-lg {
   margin-top: var(--space-lg);
+}
+.u-mt-xl {
+  margin-top: var(--space-xlg);
+}
+
+/* Margin bottom */
+.u-mb-xs {
+  margin-bottom: var(--space-xs);
+}
+.u-mb-sm {
+  margin-bottom: var(--space-sm);
+}
+.u-mb-md {
+  margin-bottom: var(--space-md);
+}
+.u-mb-lg {
+  margin-bottom: var(--space-lg);
+}
+.u-mb-xl {
+  margin-bottom: var(--space-xlg);
 }
 
 .u-lift {
