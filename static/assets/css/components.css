@@ -175,6 +175,11 @@ blockquote cite {
   color: var(--white);
 }
 
+button,
+.btn {
+  cursor: pointer;
+}
+
 /* --- callouts ---*/
 .callout {
   margin: 2rem 0;
