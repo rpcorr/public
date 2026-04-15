@@ -25,8 +25,7 @@
 
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
-  min-height: var(--space-xlg);
+  padding: 0 var(--space-md) var(--space-sm);
 
   border-bottom: 2px solid var(--primary);
   box-shadow: var(--shadow-sm);
@@ -37,17 +36,21 @@
   margin-right: auto;
   max-width: 380px;
 
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--primary);
-  line-height: 1.6;
-
-  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-.site-nav__tagline:hover {
-  color: #062157;
-  /* transform: scale(1.03); */
+.site-nav__tagline img {
+  height: clamp(56px, 8vw, 90px);
+  width: auto;
+  display: block;
+  margin-bottom: var(--mb);
+
+  transition: transform 0.2s ease;
+}
+
+.site-nav__tagline:hover img {
+  transform: scale(1.05);
 }
 
 /* --- Nav list --- */
