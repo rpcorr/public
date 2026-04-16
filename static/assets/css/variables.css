@@ -5,9 +5,11 @@
   --primary-dark: #092a63;
   --accent: #029fd4;
   --text: #333;
+  --text-muted: #666;
   --bg-light: #f8fbff;
   --white: #fff;
   --black: #000;
+  --border: #ccc;
 
   /*--------------------Font Sizes --------------------*/
   --text-xs: 0.8125rem;
@@ -29,6 +31,9 @@
   --radius: 1rem;
   --radius-sm: 8px;
 
+  /* --------------Border thickness ------------------- */
+  --border-thick: 0.25rem;
+
   /* ---------------- Shadows ------------------------- */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -43,10 +48,21 @@
   /* ----------------------- Spaces ----------------- */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
+  --space-sm-md: 0.75rem;
   --space-md: 1rem;
+  --space-md-lg: 1.5rem;
   --space-lg: 2rem;
   --space-xlg: 4rem;
 
+  /*------------------Icons Sizes --------------------*/
+  --icon-sm: 1rem;
+  --icon-md: 1.5rem;
+  --icon-lg: 2.5rem;
+
+  /*--------------------Content-----------------------*/
+  --content-narrow: 37.5rem;
+
+  /* -------------------Others -----------------------*/
   --drawer-width: 280px;
   --float-speed: 2s;
 }
