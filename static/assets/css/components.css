@@ -69,7 +69,7 @@
 
 /* Compact version */
 .announcement--compact {
-  padding: var(--space-md) var(--space-md-lg);
+  padding: var(--space-md) var(--space-md-plus);
 }
 
 @media (max-width: 768px) {
@@ -149,8 +149,8 @@ blockquote cite {
   border-radius: var(--radius-sm);
   font-weight: var(--fw-semibold);
   text-align: center;
-  line-height: 1.6;
-  transition: 0.3s ease;
+  line-height: var(--lh-base);
+  transition: var(--transition-base);
 }
 
 .btn--primary {
@@ -303,7 +303,7 @@ button,
   font-size: var(--text-sm);
   color: var(--primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--transition-base);
 }
 
 .social-icons a:hover {

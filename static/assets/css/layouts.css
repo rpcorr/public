@@ -59,8 +59,8 @@ main {
   box-shadow: var(--shadow);
 
   transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
 }
 
 .layout-grid__item:hover {
@@ -79,7 +79,7 @@ main {
 }
 
 .layout-grid__item p {
-  line-height: 1.6;
+  line-height: var(--lh-base);
   text-align: center; /* unified with card design */
   flex-grow: 1;
 }

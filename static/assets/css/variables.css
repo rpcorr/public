@@ -27,12 +27,20 @@
   --fw-semibold: 600;
   --fw-bold: 700;
 
+  /*--------------------Line Height ------------------ */
+  --lh-tight: 1.25;
+  --lh-snug: 1.3;
+  --lh-normal: 1.4;
+  --lh-base: 1.6;
+  --lh-relaxed: 1.75;
+
   /* --------------- Border Radius ------------------- */
   --radius: 1rem;
   --radius-sm: 8px;
 
-  /* --------------Border thickness ------------------- */
+  /* -----------------------Borders ------------------- */
   --border-thick: 0.25rem;
+  --border-dotted: 1px dotted var(--border);
 
   /* ---------------- Shadows ------------------------- */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -48,9 +56,9 @@
   /* ----------------------- Spaces ----------------- */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
-  --space-sm-md: 0.75rem;
+  --space-small-plus: 0.75rem;
   --space-md: 1rem;
-  --space-md-lg: 1.5rem;
+  --space-md-plus: 1.5rem;
   --space-lg: 2rem;
   --space-xlg: 4rem;
 
@@ -62,7 +70,22 @@
   /*--------------------Content-----------------------*/
   --content-narrow: 37.5rem;
 
+  /*--------------------Z-Index-----------------------*/
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-overlay: 1000;
+  --z-modal: 2000;
+
+  /*------------------Motion---------------------*/
+  --ease-standard: ease;
+  --ease-in-out: ease-in-out;
+
+  --transition-fast: 0.15s var(--ease-standard);
+  --transition-base: 0.25s var(--ease-standard);
+  --transition-slow: 0.35s var(--ease-standard);
+  --transition-slower: 0.42s var(--ease-standard);
+  --float-speed: 2s;
+
   /* -------------------Others -----------------------*/
   --drawer-width: 280px;
-  --float-speed: 2s;
 }
