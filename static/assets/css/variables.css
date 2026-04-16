@@ -84,6 +84,9 @@
   --transition-base: 0.25s var(--ease-standard);
   --transition-slow: 0.35s var(--ease-standard);
   --transition-slower: 0.42s var(--ease-standard);
+
+  --motion-smooth: 420ms cubic-bezier(0.16, 1, 0.3, 1);
+
   --float-speed: 2s;
 
   /* -------------------Others -----------------------*/
