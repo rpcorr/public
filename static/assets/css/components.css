@@ -219,7 +219,7 @@ button,
 /* --- figure  --- */
 
 .figure {
-  margin: 2rem auto;
+  margin: var(--space-lg) auto;
   text-align: center;
   max-width: 600px;
 }
