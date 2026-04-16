@@ -246,7 +246,7 @@
 
 @media (max-width: 768px) {
   body.menu-open .site-nav__tagline {
-    transform: translateX(-65%);
+    transform: translateX(-60%);
   }
 
   .site-nav__inner {
