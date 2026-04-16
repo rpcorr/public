@@ -74,7 +74,7 @@
   border-radius: 2px;
   transition:
     opacity var(--transition-slower),
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform var(--motion-smooth);
   transform-origin: center;
   will-change: transform;
 }
@@ -163,7 +163,7 @@
   display: flex;
   align-items: center;
 
-  transition: transform var(--motion-smooth);
+  transition: transform 520ms cubic-bezier(0.2, 0.9, 0.25, 1.1);
 }
 
 .site-nav__tagline img {
@@ -299,7 +299,7 @@
     transform: translateX(20px);
     transition:
       opacity var(--transition-slower),
-      transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform var(--motion-smooth);
   }
 
   /* --- open state --- */
