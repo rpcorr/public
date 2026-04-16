@@ -20,6 +20,7 @@ function openMenu() {
   menu.classList.add('is-open');
   button.classList.add('is-open');
   backdrop.classList.add('is-open');
+  document.body.classList.add('menu-open');
 
   button.setAttribute('aria-expanded', 'true');
   requestAnimationFrame(() => {
@@ -33,6 +34,7 @@ function closeMenu() {
   menu.classList.remove('is-open');
   button.classList.remove('is-open');
   backdrop.classList.remove('is-open');
+  document.body.classList.remove('menu-open');
 
   button.setAttribute('aria-expanded', 'false');
 

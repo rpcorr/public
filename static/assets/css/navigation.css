@@ -170,7 +170,9 @@
   display: block;
   margin-bottom: var(--mb);
 
-  transition: transform var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    opacity var(--transition-base);
 }
 
 .site-nav__tagline:hover img {
@@ -232,6 +234,11 @@
 
 .site-nav__link:active {
   transform: translateY(0);
+}
+
+body.menu-open .site-nav__tagline img {
+  transform: scale(0.95);
+  opacity: 0.85;
 }
 
 @media (min-width: 769px) {
