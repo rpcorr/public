@@ -163,7 +163,8 @@
   display: flex;
   align-items: center;
 
-  transition: transform 220ms ease 120ms;
+  transition: transform 200ms ease 60ms;
+  will-change: transform;
 }
 
 .site-nav__tagline img {
@@ -337,3 +338,15 @@
     transition: none !important;
   }
 }
+
+/* @keyframes logo-settle {
+  0% {
+    transform: translateX(-50%);
+  }
+  70% {
+    transform: translateX(-62%);
+  }
+  100% {
+    transform: translateX(-60%);
+  }
+} */
