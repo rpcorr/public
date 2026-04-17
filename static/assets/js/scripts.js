@@ -26,7 +26,11 @@ function openMenu() {
   requestAnimationFrame(() => {
     document.body.style.overflow = 'hidden';
   });
+
   setFocusableElements();
+
+  menu.removeAttribute('inert');
+  menu.removeAttribute('aria-hidden');
   button.focus();
 }
 
@@ -43,6 +47,9 @@ function closeMenu() {
       document.body.style.overflow = '';
     });
   }, 300);
+
+  menu.setAttribute('inert', '');
+  menu.setAttribute('aria-hidden', 'true');
 
   button.focus();
 }
