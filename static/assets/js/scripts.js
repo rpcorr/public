@@ -28,16 +28,20 @@ function openMenu() {
 
   button.setAttribute('aria-expanded', 'true');
 
+  // make menu interactive
+  menu.removeAttribute('inert');
+  menu.removeAttribute('aria-hidden');
+
   requestAnimationFrame(() => {
     document.body.style.overflow = 'hidden';
   });
 
   setFocusableElements();
 
-  menu.removeAttribute('inert');
-  menu.removeAttribute('aria-hidden');
-
-  button.focus();
+  // move focus into menu
+  if (firstFocusable && typeof firstFocusable.focus === 'function') {
+    firstFocusable.focus();
+  }
 }
 
 function closeMenu() {
