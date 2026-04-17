@@ -9,6 +9,8 @@ let focusables = [];
 let firstFocusable;
 let lastFocusable;
 
+let lastTrigger = null;
+
 function setFocusableElements() {
   focusables = menu.querySelectorAll(focusableSelectors);
 
@@ -17,12 +19,15 @@ function setFocusableElements() {
 }
 
 function openMenu() {
+  lastTrigger = document.activeElement;
+
   menu.classList.add('is-open');
   button.classList.add('is-open');
   backdrop.classList.add('is-open');
   document.body.classList.add('menu-open');
 
   button.setAttribute('aria-expanded', 'true');
+
   requestAnimationFrame(() => {
     document.body.style.overflow = 'hidden';
   });
@@ -31,6 +36,7 @@ function openMenu() {
 
   menu.removeAttribute('inert');
   menu.removeAttribute('aria-hidden');
+
   button.focus();
 }
 
@@ -38,7 +44,6 @@ function closeMenu() {
   menu.classList.remove('is-open');
   button.classList.remove('is-open');
   backdrop.classList.remove('is-open');
-  document.body.classList.remove('menu-open');
 
   button.setAttribute('aria-expanded', 'false');
 
@@ -48,10 +53,17 @@ function closeMenu() {
     });
   }, 300);
 
+  document.body.classList.remove('menu-open');
+
   menu.setAttribute('inert', '');
   menu.setAttribute('aria-hidden', 'true');
 
-  button.focus();
+  // restore focus
+  if (lastTrigger && document.contains(lastTrigger)) {
+    lastTrigger.focus();
+  } else {
+    button.focus();
+  }
 }
 
 function toggleMenu() {
