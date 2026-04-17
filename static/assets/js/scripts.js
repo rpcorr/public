@@ -11,6 +11,20 @@ let lastFocusable;
 
 let lastTrigger = null;
 
+function syncMenuAccessibility() {
+  if (isMobile()) {
+    // Mobile: closed menu should NOT be focusable
+    if (!menu.classList.contains('is-open')) {
+      menu.setAttribute('inert', '');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+  } else {
+    // Desktop: menu is always accessible
+    menu.removeAttribute('inert');
+    menu.removeAttribute('aria-hidden');
+  }
+}
+
 function setFocusableElements() {
   focusables = menu.querySelectorAll(focusableSelectors);
 
@@ -28,9 +42,10 @@ function openMenu() {
 
   button.setAttribute('aria-expanded', 'true');
 
-  // make menu interactive
-  menu.removeAttribute('inert');
-  menu.removeAttribute('aria-hidden');
+  if (isMobile()) {
+    menu.removeAttribute('inert');
+    menu.removeAttribute('aria-hidden');
+  }
 
   requestAnimationFrame(() => {
     document.body.style.overflow = 'hidden';
@@ -59,8 +74,10 @@ function closeMenu() {
 
   document.body.classList.remove('menu-open');
 
-  menu.setAttribute('inert', '');
-  menu.setAttribute('aria-hidden', 'true');
+  if (isMobile()) {
+    menu.setAttribute('inert', '');
+    menu.setAttribute('aria-hidden', 'true');
+  }
 
   // restore focus
   if (lastTrigger && document.contains(lastTrigger)) {
@@ -73,6 +90,10 @@ function closeMenu() {
 function toggleMenu() {
   const isOpen = menu.classList.contains('is-open');
   isOpen ? closeMenu() : openMenu();
+}
+
+function isMobile() {
+  return window.matchMedia('(max-width: 768px)').matches;
 }
 
 button.addEventListener('click', toggleMenu);
@@ -142,3 +163,7 @@ menu.addEventListener('touchend', () => {
 menu.addEventListener('touchcancel', () => {
   isSwiping = false;
 });
+
+syncMenuAccessibility();
+
+window.addEventListener('resize', syncMenuAccessibility);
