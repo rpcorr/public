@@ -16,7 +16,7 @@
     opacity var(--motion-smooth) 60ms,
     transform var(--motion-smooth) 60ms,
     backdrop-filter var(--motion-smooth) 60ms,
-    visibility 0s linear var(--motion-smooth) + 60ms;
+    visibility 0s linear calc(var(--motion-smooth) + 60ms);
 
   z-index: 800;
   pointer-events: none;
