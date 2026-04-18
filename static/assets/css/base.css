@@ -19,6 +19,10 @@ body {
   font-size: var(--text-base);
 }
 
+body.menu-open {
+  overscroll-behavior: none;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -105,7 +109,7 @@ a {
 
 @media (max-width: 768px) {
   body.menu-open {
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .split-panel--center h1,

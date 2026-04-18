@@ -10,6 +10,7 @@ let firstFocusable;
 let lastFocusable;
 let resizeTimeout;
 
+let scrollY = 0;
 let lastTrigger = null;
 
 function setFocusableElements() {
@@ -31,9 +32,13 @@ function openMenu() {
 
   updateMenuAccessibility();
 
-  requestAnimationFrame(() => {
-    document.body.style.overflow = 'hidden';
-  });
+  scrollY = window.scrollY;
+
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
 
   setFocusableElements();
 
@@ -55,9 +60,13 @@ function closeMenu() {
   updateMenuAccessibility();
 
   setTimeout(() => {
-    requestAnimationFrame(() => {
-      document.body.style.overflow = '';
-    });
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+
+    window.scrollTo(0, scrollY);
   }, 300);
 
   // restore focus
@@ -172,8 +181,16 @@ window.addEventListener('resize', () => {
       button.classList.remove('is-open');
       backdrop.classList.remove('is-open');
 
-      document.body.style.overflow = '';
       document.body.classList.remove('menu-open');
+
+      // FULL reset of scroll lock
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+
+      window.scrollTo(0, scrollY);
     }
 
     updateMenuAccessibility();
