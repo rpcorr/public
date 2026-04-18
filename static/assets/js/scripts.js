@@ -26,6 +26,10 @@ if (!button || !menu || !backdrop) {
   }
 
   function openMenu() {
+    const currentUrl = window.location.pathname;
+
+    const activeLink = menu.querySelector('a.active');
+
     lastTrigger = document.activeElement;
 
     menu.classList.add('is-open');
@@ -47,8 +51,10 @@ if (!button || !menu || !backdrop) {
 
     setFocusableElements();
 
-    // move focus into menu
-    if (firstFocusable && typeof firstFocusable.focus === 'function') {
+    // move focus to current link else home into menu
+    if (activeLink && typeof activeLink.focus === 'function') {
+      activeLink.focus();
+    } else if (firstFocusable && typeof firstFocusable.focus === 'function') {
       firstFocusable.focus();
     }
   }
