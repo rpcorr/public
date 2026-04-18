@@ -42,10 +42,7 @@ function openMenu() {
 
   button.setAttribute('aria-expanded', 'true');
 
-  if (isMobile()) {
-    menu.removeAttribute('inert');
-    menu.removeAttribute('aria-hidden');
-  }
+  updateMenuAccessibility();
 
   requestAnimationFrame(() => {
     document.body.style.overflow = 'hidden';
@@ -66,18 +63,15 @@ function closeMenu() {
 
   button.setAttribute('aria-expanded', 'false');
 
+  document.body.classList.remove('menu-open');
+
+  updateMenuAccessibility();
+
   setTimeout(() => {
     requestAnimationFrame(() => {
       document.body.style.overflow = '';
     });
   }, 300);
-
-  document.body.classList.remove('menu-open');
-
-  if (isMobile()) {
-    menu.setAttribute('inert', '');
-    menu.setAttribute('aria-hidden', 'true');
-  }
 
   // restore focus
   if (lastTrigger && document.contains(lastTrigger)) {
@@ -94,6 +88,22 @@ function toggleMenu() {
 
 function isMobile() {
   return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function updateMenuAccessibility() {
+  if (isMobile()) {
+    if (menu.classList.contains('is-open')) {
+      menu.removeAttribute('inert');
+      menu.removeAttribute('aria-hidden');
+    } else {
+      menu.setAttribute('inert', '');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+  } else {
+    // Desktop: always accessible
+    menu.removeAttribute('inert');
+    menu.removeAttribute('aria-hidden');
+  }
 }
 
 button.addEventListener('click', toggleMenu);
@@ -167,3 +177,4 @@ menu.addEventListener('touchcancel', () => {
 syncMenuAccessibility();
 
 window.addEventListener('resize', syncMenuAccessibility);
+window.addEventListener('resize', updateMenuAccessibility);
