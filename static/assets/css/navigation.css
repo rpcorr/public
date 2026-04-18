@@ -20,6 +20,8 @@
 
   z-index: 800;
   pointer-events: none;
+
+  will-change: opacity, transform, backdrop-filter;
 }
 
 .nav-backdrop.is-open {
