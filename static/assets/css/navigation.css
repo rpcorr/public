@@ -31,12 +31,6 @@
   -webkit-backdrop-filter: blur(4px); /* Safari */
 
   pointer-events: auto;
-
-  transition:
-    opacity var(--motion-smooth),
-    transform var(--motion-smooth),
-    backdrop-filter var(--motion-smooth),
-    visibility 0s;
 }
 
 /* --- Hamburger --- */
