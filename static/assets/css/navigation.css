@@ -33,9 +33,9 @@
   pointer-events: auto;
 
   transition:
-    opacity var(--transition-slow),
-    transform var(--transition-slow),
-    backdrop-filter var(--transition-slow),
+    opacity var(--motion-smooth),
+    transform var(--motion-smooth),
+    backdrop-filter var(--motion-smooth),
     visibility 0s;
 }
 
