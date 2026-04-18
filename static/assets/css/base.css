@@ -20,6 +20,8 @@ body {
 }
 
 body.menu-open {
+  position: fixed;
+  width: 100%;
   overscroll-behavior: none;
 }
 
@@ -108,10 +110,6 @@ a {
 }
 
 @media (max-width: 768px) {
-  body.menu-open {
-    /* overflow: hidden; */
-  }
-
   .split-panel--center h1,
   .split-panel--center h2 {
     text-align: center;

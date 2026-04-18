@@ -190,6 +190,8 @@
   transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
   outline: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 /* --- Links --- */
