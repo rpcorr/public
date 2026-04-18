@@ -14,8 +14,8 @@ let lastTrigger = null;
 function setFocusableElements() {
   focusables = menu.querySelectorAll(focusableSelectors);
 
-  firstFocusable = focusables[0];
-  lastFocusable = focusables[focusables.length - 1];
+  firstFocusable = focusables.length ? focusables[0] : null;
+  lastFocusable = focusables.length ? focusables[focusables.length - 1] : null;
 }
 
 function openMenu() {
