@@ -11,20 +11,6 @@ let lastFocusable;
 
 let lastTrigger = null;
 
-function syncMenuAccessibility() {
-  if (isMobile()) {
-    // Mobile: closed menu should NOT be focusable
-    if (!menu.classList.contains('is-open')) {
-      menu.setAttribute('inert', '');
-      menu.setAttribute('aria-hidden', 'true');
-    }
-  } else {
-    // Desktop: menu is always accessible
-    menu.removeAttribute('inert');
-    menu.removeAttribute('aria-hidden');
-  }
-}
-
 function setFocusableElements() {
   focusables = menu.querySelectorAll(focusableSelectors);
 
@@ -174,7 +160,18 @@ menu.addEventListener('touchcancel', () => {
   isSwiping = false;
 });
 
-syncMenuAccessibility();
+updateMenuAccessibility();
 
-window.addEventListener('resize', syncMenuAccessibility);
-window.addEventListener('resize', updateMenuAccessibility);
+window.addEventListener('resize', () => {
+  if (!isMobile()) {
+    // Reset everything for desktop
+    menu.classList.remove('is-open');
+    button.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+
+    document.body.style.overflow = '';
+    document.body.classList.remove('menu-open');
+  }
+
+  updateMenuAccessibility();
+});
