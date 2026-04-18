@@ -13,10 +13,10 @@
   backdrop-filter: blur(0px);
 
   transition:
-    opacity var(--motion-smooth),
-    transform var(--motion-smooth),
-    backdrop-filter var(--motion-smooth),
-    visibility 0s linear var(--motion-smooth);
+    opacity var(--motion-smooth) 60ms,
+    transform var(--motion-smooth) 60ms,
+    backdrop-filter var(--motion-smooth) 60ms,
+    visibility 0s linear var(--motion-smooth) + 60ms;
 
   z-index: 800;
   pointer-events: none;
@@ -188,6 +188,10 @@
   outline: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+}
+
+.site-nav__list.is-closing {
+  transition: transform var(--motion-smooth) var(--ease-in-soft);
 }
 
 /* --- Links --- */
