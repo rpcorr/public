@@ -270,6 +270,10 @@
     margin-right: 0; /* override desktop behavior */
   }
 
+  .site-nav__link.active::after {
+    height: 3px;
+  }
+
   .site-nav__list {
     position: fixed;
     top: 0;
