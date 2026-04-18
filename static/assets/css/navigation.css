@@ -344,15 +344,3 @@
     transition: none !important;
   }
 }
-
-/* @keyframes logo-settle {
-  0% {
-    transform: translateX(-50%);
-  }
-  70% {
-    transform: translateX(-62%);
-  }
-  100% {
-    transform: translateX(-60%);
-  }
-} */
