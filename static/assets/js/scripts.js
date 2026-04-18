@@ -51,9 +51,15 @@ function openMenu() {
 }
 
 function closeMenu() {
-  menu.classList.remove('is-open');
-  button.classList.remove('is-open');
-  backdrop.classList.remove('is-open');
+  // 1. Apply closing state FIRST
+  menu.classList.add('is-closing');
+
+  // 2. Next frame, remove open
+  requestAnimationFrame(() => {
+    menu.classList.remove('is-open');
+    button.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+  });
 
   button.setAttribute('aria-expanded', 'false');
 
@@ -69,7 +75,12 @@ function closeMenu() {
     document.body.style.width = '';
 
     window.scrollTo(0, scrollY);
-  }, 300);
+  }, 420);
+
+  // cleanup
+  setTimeout(() => {
+    menu.classList.remove('is-closing');
+  }, 420);
 
   // restore focus
   if (lastTrigger && document.contains(lastTrigger)) {
