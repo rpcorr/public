@@ -80,15 +80,15 @@
   --ease-standard: ease;
   --ease-in-out: ease-in-out;
 
-  --transition-fast: 0.15s var(--ease-standard);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --motion-fast: 180ms;
+  --motion-smooth: 320ms;
+
+  --transition-fast: var(--motion-fast) var(--ease-standard);
   --transition-base: 0.25s var(--ease-standard);
   --transition-slow: 0.35s var(--ease-standard);
   --transition-slower: 0.42s var(--ease-standard);
-
-  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-smooth: 420ms;
-
-  --motion-smooth: var(--duration-smooth) var(--ease-smooth);
 
   --float-speed: 2s;
 
