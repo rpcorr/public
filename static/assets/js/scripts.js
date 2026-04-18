@@ -2,6 +2,8 @@ const button = document.querySelector('.hamburger');
 const menu = document.querySelector('#primary-menu');
 const backdrop = document.querySelector('.nav-backdrop');
 
+if (!button || !menu || !backdrop) return;
+
 const focusableSelectors =
   'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
 
