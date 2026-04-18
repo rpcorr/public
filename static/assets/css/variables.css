@@ -85,6 +85,7 @@
 
   --motion-fast: 180ms;
   --motion-smooth: 320ms;
+  --mootion-delay: 60ms;
 
   --transition-fast: var(--motion-fast) var(--ease-standard);
   --transition-base: 0.25s var(--ease-standard);
