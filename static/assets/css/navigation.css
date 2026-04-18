@@ -187,7 +187,9 @@
   display: flex;
   align-items: center;
   gap: clamp(16px, 3vw, 30px);
-  transition: transform var(--motion-smooth) var(--ease-smooth);
+
+  transition: transform var(--motion-smooth) var(--ease-out-soft);
+
   will-change: transform;
   outline: none;
   -webkit-overflow-scrolling: touch;
@@ -290,10 +292,12 @@
 
     z-index: 1000;
     overflow-y: auto;
+    opacity: 0.98;
   }
 
   .site-nav__list.is-open {
-    transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
   }
 
   /* --- reset items --- */
@@ -308,7 +312,7 @@
   /* --- open state --- */
   .site-nav__list.is-open > li {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) translateZ(0);
   }
 
   /* --- stagger --- */
