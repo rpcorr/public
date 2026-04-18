@@ -31,7 +31,10 @@
 
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px); /* Safari */
+}
 
+.nav-backdrop.is-open,
+.nav-backdrop.is-closing {
   pointer-events: auto;
 }
 
@@ -183,6 +186,8 @@
   display: flex;
   align-items: center;
   gap: clamp(16px, 3vw, 30px);
+
+  contain: layout paint;
 
   transition: transform var(--motion-smooth) var(--ease-out-soft);
 
