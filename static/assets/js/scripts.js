@@ -8,6 +8,7 @@ const focusableSelectors =
 let focusables = [];
 let firstFocusable;
 let lastFocusable;
+let resizeTimeout;
 
 let lastTrigger = null;
 
@@ -163,15 +164,18 @@ menu.addEventListener('touchcancel', () => {
 updateMenuAccessibility();
 
 window.addEventListener('resize', () => {
-  if (!isMobile()) {
-    // Reset everything for desktop
-    menu.classList.remove('is-open');
-    button.classList.remove('is-open');
-    backdrop.classList.remove('is-open');
+  clearTimeout(resizeTimeout);
 
-    document.body.style.overflow = '';
-    document.body.classList.remove('menu-open');
-  }
+  resizeTimeout = setTimeout(() => {
+    if (!isMobile()) {
+      menu.classList.remove('is-open');
+      button.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
 
-  updateMenuAccessibility();
+      document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
+    }
+
+    updateMenuAccessibility();
+  }, 150);
 });
