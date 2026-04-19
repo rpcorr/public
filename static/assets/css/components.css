@@ -372,8 +372,7 @@ button,
   /* --- split-panel --- */
   .split-panel {
     grid-template-columns: 1fr;
-    padding: var(--space-md);
-    /* text-align: center; */
+    padding: var(--space-lg);
 
     gap: var(--space-sm);
   }
