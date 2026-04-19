@@ -332,6 +332,10 @@ button,
   grid-template-columns: 2fr 1fr;
 }
 
+.split-panel--ratio-50-50 {
+  grid-template-columns: 1fr 1fr;
+}
+
 /* Text-only variant */
 .split-panel--text {
   grid-template-columns: 1fr;
