@@ -434,6 +434,10 @@ button,
   margin: var(--space-md) 0;
 }
 
+.text-image__content ul li {
+  margin-bottom: var(--space-small-plus);
+}
+
 /* -------------------------
    Reverse layout
    (image left, text right)
