@@ -110,8 +110,7 @@ a {
 }
 
 @media (max-width: 768px) {
-  .split-panel--center h1,
-  .split-panel--center h2 {
+  #page-heading {
     text-align: center;
   }
 }
