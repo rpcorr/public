@@ -320,6 +320,7 @@ button,
 .split-panel {
   display: grid;
   align-items: center;
+  grid-template-columns: var(--split-ratio, 1fr 1fr);
   gap: var(--space-md);
 
   background: var(--white);
@@ -328,12 +329,12 @@ button,
   box-shadow: var(--shadow);
 }
 
-.split-panel--ratio-67-33 {
-  grid-template-columns: 2fr 1fr;
+.split-panel--67-33 {
+  --split-ratio: 2fr 1fr;
 }
 
-.split-panel--ratio-50-50 {
-  grid-template-columns: 1fr 1fr;
+.split-panel--50-50 {
+  --split-ratio: 1fr 1fr;
 }
 
 /* Text-only variant */
