@@ -333,6 +333,12 @@ button,
   box-shadow: var(--shadow);
 }
 
+.split-panel__inner {
+  max-width: var(--content-width, 1200px);
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
 .split-panel--67-33 {
   --split-ratio: 2fr 1fr;
 }
