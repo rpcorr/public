@@ -186,14 +186,18 @@ button,
 
   padding: var(--space-md) var(--space-lg);
   border-left: 4px solid var(--primary-dark);
-  background-color: var(--bg-light);
+
   border-radius: var(--radius-sm);
 
-  color: var(--primary-dark);
   font-style: italic;
   font-weight: var(--fw-medium);
 
   box-shadow: var(--shadow-quote);
+}
+
+.callout--bg-white {
+  background-color: var(--white);
+  color: var(--primary-dark);
 }
 
 .callout ul {

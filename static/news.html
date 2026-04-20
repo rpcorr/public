@@ -65,13 +65,21 @@
                 >Get Involved</a
               >
             </li>
-            <li><a href="news.html" class="site-nav__link active" aria-current="page">News</a></li>
+            <li>
+              <a
+                href="news.html"
+                class="site-nav__link active"
+                aria-current="page"
+                >News</a
+              >
+            </li>
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
                 class="site-nav__link"
                 target="_blank"
-                rel="noopener noreferrer" aria-label="Podcast (opens in new tab)"
+                rel="noopener noreferrer"
+                aria-label="Podcast (opens in new tab)"
                 >Podcast</a
               >
             </li>
@@ -81,7 +89,8 @@
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
                 class="btn btn--cta"
                 target="_blank"
-                rel="noopener noreferrer" aria-label="Donate (opens in new tab)"
+                rel="noopener noreferrer"
+                aria-label="Donate (opens in new tab)"
                 >Donate</a
               >
             </li>
@@ -93,86 +102,107 @@
     <div class="nav-backdrop"></div>
 
     <main id="primary" class="wrapper">
-      <div
-        class="split-panel split-panel--text"
-        aria-labelledby="page-heading"
-      >
-        <h1 id="page-heading">Monthly Newsletter</h1>
-        <div class="text-image">
-          <div class="text-image__content">
-            <p>
-              Stay in the loop with what's happening across Newfoundland and
-              Labrador. Our monthly newsletter brings you updates, community
-              highlights, upcoming events, and helpful resources for those who
-              stutter and their families.
-            </p>
+      <section aria-labelledby="newsletter-intro">
+        <div class="split-panel split-panel--text">
+          <h1 id="newsletter-intro">Monthly Newsletter</h1>
+          <div class="text-image">
+            <div class="text-image__content">
+              <h2>Stay Connected</h2>
+              <p>
+                Stay in the loop with what's happening across Newfoundland and
+                Labrador. Our monthly newsletter brings you updates, community
+                highlights, upcoming events, and helpful resources for those who
+                stutter and their families.
+              </p>
 
-            <h2 class="u-mt-md u-mb-md">What's Inside</h2>
+              <h2 class="u-mt-md u-mb-md">What's Inside</h2>
 
-            <ul>
-              <li>Community stories and spotlights</li>
-              <li>Upcoming workshops & support group meetings</li>
-              <li>Helpful tips for speech confidence and communication</li>
-              <li>Updates on NLSA projects and initiatives</li>
-            </ul>
+              <ul>
+                <li>Community stories and spotlights</li>
+                <li>Upcoming workshops & support group meetings</li>
+                <li>Helpful tips for speech confidence and communication</li>
+                <li>Updates on NLSA projects and initiatives</li>
+              </ul>
 
-            <h2 class="u-mt-md u-mb-md">Subscribe</h2>
-            <p>
-              <em>Your Privacy Matters</em><br />
-              We only use your email address to share NLSA news, events, and
-              resources related to stuttering and communication differences.
-            </p>
+              <h2 class="u-mt-md u-mb-md">Subscribe</h2>
+              <p>
+                <em>Your Privacy Matters</em><br />
+                We only use your email address to share NLSA news, events, and
+                resources related to stuttering and communication differences.
+              </p>
 
-            <p>
-              All group emails are sent using <strong>BCC</strong>, so your
-              address is not visible to other recipients. You can unsubscribe or
-              update your information at any time by contacting
-              <strong>info@nlstuttering.ca</strong>.
-            </p>
+              <p>
+                All group emails are sent using <strong>BCC</strong>, so your
+                address is not visible to other recipients. You can unsubscribe
+                or update your information at any time by contacting
+                <strong>info@nlstuttering.ca</strong>.
+              </p>
 
-            <form
-              class="form-inline"
-              action="https://formspree.io/f/mabcdxyz"
-              method="POST"
-            >
-              <label for="newsletter-email" class="visually-hidden">
-                Email address
-              </label>
-              <input
-                class="form-input"
-                id="newsletter-email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                required
+              <form
+                class="form-inline"
+                action="https://formspree.io/f/mabcdxyz"
+                method="POST"
+              >
+                <label for="newsletter-email" class="visually-hidden">
+                  Email address
+                </label>
+                <input
+                  class="form-input"
+                  id="newsletter-email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <button class="btn btn--primary" type="submit">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            <div class="text-image__media">
+              <img
+                class="u-float"
+                loading="lazy"
+                src="assets/imgs/news-logo.png"
+                alt="NLSA News - Latest Newsletter"
               />
-              <button class="btn btn--primary" type="submit">Subscribe</button>
-            </form>
-          </div>
 
-          <div class="text-image__media">
-            <img
-              class="u-float"
-              loading="lazy"
-              src="assets/imgs/news-logo.png"
-              alt="NLSA News - Latest Newsletter"
-            />
-
-            <a href="assets/newsletters/NLSA-December-2025-January-Newsletter-2026.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--primary u-lift">
-            Read the latest newsletter
-          </a>
+              <a
+                href="assets/newsletters/NLSA-December-2025-January-Newsletter-2026.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--primary u-lift"
+              >
+                Read the latest newsletter
+              </a>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="callout">
-            <h3>Past Issues</h3>
-            <ul>
-                <li><a href="assets/newsletters/NLSA-December-2025-January-Newsletter-2026.pdf" target="_blank" rel="noopener noreferrer">October 2025 Newsletter (PDF)</a></li>
-                <li><a href="assets/newsletters/NLSA-December-2025-January-Newsletter-2026.pdf" target="_blank" rel="noopener noreferrer">November 2025 Newsletter (PDF)</a></li>
-            </ul>
-        </div>
-          
-        </div>
+      <section class="callout callout--bg-white" aria-labelledby="past-issues">
+        <h2 id="past-issues">Past Issues</h2>
+        <ul>
+          <li>
+            <a
+              href="assets/newsletters/NLSA-Monthly-Update-—-October-2025.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="October 2025 Newsletter PDF, opens in a new tab"
+              >October 2025 Newsletter (PDF)</a
+            >
+          </li>
+          <li>
+            <a
+              href="assets/newsletters/NLSA-Monthly-Update-—-November-2025.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="November 2025 Newsletter PDF, opens in a new tab"
+              >November 2025 Newsletter (PDF)</a
+            >
+          </li>
+        </ul>
       </section>
     </main>
 
