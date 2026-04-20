@@ -1,5 +1,11 @@
 /* ============== 6. Utilities (helpers/overrides) ============== */
 
+/* ====================== Alignments ===================== */
+
+.u-text-center {
+  text-align: center;
+}
+
 /* ================== Spacing Utilities ================== */
 
 /* Margin top */
