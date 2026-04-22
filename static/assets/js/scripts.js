@@ -176,8 +176,14 @@ if (!button || !menu || !backdrop) {
   });
 
   /* ================== CLOSE ON LINK CLICK ================== */
-  menu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
+  menu.addEventListener('click', (e) => {
+    const isTopLink = e.target.classList.contains('site-nav__link');
+
+    const isSubmenuToggle = e.target.classList.contains('submenu-toggle');
+
+    if (isTopLink && !isSubmenuToggle) {
+      closeMenu();
+    }
   });
 
   /* ================== SWIPE TO CLOSE (mobile feel) ================== */
@@ -236,3 +242,22 @@ if (!button || !menu || !backdrop) {
     }, 150);
   });
 }
+
+document.querySelectorAll('.submenu-toggle').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const parent = btn.closest('.has-submenu');
+
+    // close others
+    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+      if (item !== parent) {
+        item.classList.remove('is-open');
+        item
+          .querySelector('.submenu-toggle')
+          ?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const isOpen = parent.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', isOpen);
+  });
+});

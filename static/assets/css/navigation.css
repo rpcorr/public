@@ -121,12 +121,13 @@
   top: 0;
   z-index: 2000;
   background: var(--white);
+  overflow: visible;
 }
 
 /* --- site nav --- */
 .site-nav {
   position: relative;
-  z-index: 100;
+  z-index: auto;
   width: 100%;
   background: var(--white);
 }
@@ -187,8 +188,6 @@
   align-items: center;
   gap: clamp(16px, 3vw, 30px);
 
-  contain: layout paint;
-
   transition: transform var(--motion-smooth) var(--ease-out-soft);
 
   will-change: transform;
@@ -204,11 +203,14 @@
 /* --- Links --- */
 .site-nav__link {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   color: #003366;
   font-weight: 500;
   white-space: nowrap;
   padding: 0.5rem 0;
+
+  line-height: 1;
 
   transition:
     color var(--transition-base),
@@ -220,7 +222,7 @@
   content: '';
   position: absolute;
   left: 0;
-  bottom: 0.3em;
+  bottom: 0;
 
   width: 0;
   height: 2px;
@@ -369,6 +371,122 @@
   transition:
     opacity var(--transition-base),
     transform var(--motion-smooth);
+}
+
+/* ================== Submenu (Desktop base) ================== */
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  min-width: 200px;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+
+  list-style: none;
+  padding: var(--space-sm);
+  margin: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  pointer-events: none;
+
+  transition: all var(--transition-base);
+  z-index: 999;
+}
+
+.has-submenu.is-open .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* submenu links */
+.submenu__link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: #003366;
+  white-space: nowrap;
+}
+
+.submenu__link:hover {
+  color: var(--primary);
+}
+
+@media (min-width: 769px) {
+  .has-submenu:hover > .submenu,
+  .has-submenu:focus-within > .submenu,
+  .has-submenu.is-open > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    min-width: 200px;
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+
+    padding: var(--space-sm);
+    margin: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    pointer-events: none;
+
+    transition: all var(--transition-base);
+    z-index: 9999;
+  }
+}
+
+@media (max-width: 768px) {
+  .submenu {
+    position: static;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(-6px);
+
+    pointer-events: none;
+
+    transition:
+      max-height 0.3s ease,
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .has-submenu.is-open .submenu {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .has-submenu:hover .submenu {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -129,7 +129,7 @@
           <!-- Tagline -->
           <div class="site-nav__tagline" aria-hidden="true"></div>
 
-          <!-- Hamburger Menu -->
+          <!-- Hamburger -->
           <button
             class="hamburger"
             type="button"
@@ -142,17 +142,35 @@
             <span></span>
           </button>
 
-          <!-- Navigation Links -->
+          <!-- Navigation -->
           <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
             <li>
               <a
                 href="index.html"
                 class="site-nav__link active"
                 aria-current="page"
-                >Home</a
               >
+                Home
+              </a>
             </li>
-            <li><a href="about.html" class="site-nav__link">About</a></li>
+
+            <!-- DROPDOWN ITEM -->
+            <li class="site-nav__item has-submenu">
+              <a href="#" class="site-nav__link submenu-toggle">About</a>
+
+              <ul id="submenu-about" class="submenu" aria-label="About submenu">
+                <li>
+                  <a href="about.html" class="submenu__link">Overview</a>
+                </li>
+                <li>
+                  <a href="team.html" class="submenu__link">Our Team</a>
+                </li>
+                <li>
+                  <a href="history.html" class="submenu__link">History</a>
+                </li>
+              </ul>
+            </li>
+
             <li><a href="research.html" class="site-nav__link">Research</a></li>
             <li>
               <a href="get-involved.html" class="site-nav__link"
@@ -160,26 +178,29 @@
               >
             </li>
             <li><a href="news.html" class="site-nav__link">News</a></li>
+
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
                 class="site-nav__link"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Podcast (opens in new tab)"
-                >Podcast</a
               >
+                Podcast
+              </a>
             </li>
+
             <li><a href="contact.html" class="site-nav__link">Contact</a></li>
+
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
                 class="btn btn--cta"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Donate (opens in new tab)"
-                >Donate</a
               >
+                Donate
+              </a>
             </li>
           </ul>
         </div>
