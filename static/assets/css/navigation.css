@@ -272,6 +272,13 @@
     margin-right: 0; /* override desktop behavior */
   }
 
+  .site-nav__link {
+    display: inline-flex;
+    width: auto;
+    justify-content: center;
+    width: auto;
+  }
+
   .site-nav__link.active::after {
     height: 3px;
   }
@@ -313,6 +320,8 @@
 
   /* --- reset items --- */
   .site-nav__list > li {
+    width: 100%;
+    text-align: center;
     opacity: 0;
     transform: translateX(20px);
     transition:
@@ -458,6 +467,8 @@
   .submenu {
     position: static;
 
+    text-align: left;
+
     max-height: 0;
     overflow: hidden;
 
@@ -470,6 +481,10 @@
       max-height 0.3s ease,
       opacity 0.2s ease,
       transform 0.2s ease;
+  }
+
+  .submenu__link {
+    justify-content: flex-start;
   }
 
   .has-submenu.is-open .submenu {
