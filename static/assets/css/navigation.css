@@ -241,6 +241,13 @@
   width: 100%;
 }
 
+/* Keep underline when submenu is active */
+.has-submenu:hover > .site-nav__link::after,
+.has-submenu:focus-within > .site-nav__link::after,
+.has-submenu.is-open > .site-nav__link::after {
+  width: 100%;
+}
+
 .site-nav__link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
