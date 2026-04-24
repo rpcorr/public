@@ -218,34 +218,86 @@
 }
 
 /* --- Underline animation --- */
+.site-nav__link:hover,
+.site-nav__link.active {
+  color: var(--primary);
+}
+
 .site-nav__link::after {
   content: '';
   position: absolute;
   left: 0;
   bottom: 0;
 
-  width: 0;
+  width: 100%;
   height: 2px;
-
   background: var(--primary);
-  transition: width var(--transition-base);
+
+  transform: scaleX(0);
+  transform-origin: center;
+
+  transition: transform var(--transition-base);
 }
 
-.site-nav__link:hover,
-.site-nav__link.active {
-  color: var(--primary);
+@media (max-width: 768px) {
+  .site-nav__link::after {
+    display: none !important;
+  }
 }
 
 .site-nav__link:hover::after,
-.site-nav__link.active::after {
-  width: 100%;
-}
-
-/* Keep underline when submenu is active */
+.site-nav__link.active::after,
 .has-submenu:hover > .site-nav__link::after,
 .has-submenu:focus-within > .site-nav__link::after,
 .has-submenu.is-open > .site-nav__link::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+  .site-nav__link {
+    display: inline-flex; /* key: shrink to text */
+    width: auto; /* key: NOT full width */
+    justify-content: center;
+  }
+
+  .site-nav__link:hover::after,
+  .site-nav__link.active::after,
+  .has-submenu.is-open > .site-nav__link::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+/* caret icon */
+.has-submenu > .site-nav__link {
+  position: relative;
   width: 100%;
+  justify-content: center; /* keeps text centered */
+}
+
+.has-submenu > .site-nav__link::before {
+  content: '';
+  position: absolute;
+  right: 8px; /* pushes to far right */
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+
+  width: 6px;
+  height: 6px;
+
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+
+@media (min-width: 769px) {
+  .has-submenu > .site-nav__link::before {
+    right: -12px; /* moves caret outside link on desktop */
+  }
+}
+
+.has-submenu:hover > .site-nav__link::before,
+.has-submenu:focus-within > .site-nav__link::before,
+.has-submenu.is-open > .site-nav__link::before {
+  transform: translateY(-50%) rotate(-135deg);
 }
 
 .site-nav__link:focus-visible {
@@ -264,6 +316,52 @@
 }
 
 @media (max-width: 768px) {
+  .site-nav__link {
+    display: inline-flex;
+    width: auto;
+    justify-content: center;
+    position: relative;
+  }
+
+  .site-nav__list > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .link-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .link-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition-base);
+  }
+
+  .site-nav__link:hover .link-text::after,
+  .site-nav__link.active .link-text::after,
+  .site-nav__link:focus .link-text::after,
+  .site-nav__link:focus-visible .link-text::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav__link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
   body.menu-open .site-nav__tagline {
     transform: translateX(-60%);
   }
@@ -279,20 +377,13 @@
     margin-right: 0; /* override desktop behavior */
   }
 
-  .site-nav__link {
-    display: inline-flex;
-    width: auto;
-    justify-content: center;
-    width: auto;
-  }
-
   .site-nav__link.active::after {
     height: 3px;
   }
 
   .site-nav__list {
     position: fixed;
-    top: 0;
+    top: 3em;
     right: 0;
     bottom: 0;
 
@@ -305,7 +396,7 @@
     flex-direction: column;
     gap: var(--space-sm);
 
-    padding: var(--space-md);
+    padding: var(--space-md) !important;
 
     background: var(--white);
     box-shadow: var(--shadow-lg);
@@ -393,6 +484,7 @@
 
 .has-submenu {
   position: relative;
+  display: flex;
 }
 
 .submenu {
@@ -492,6 +584,10 @@
 
   .submenu__link {
     justify-content: flex-start;
+  }
+
+  .has-submenu {
+    display: block;
   }
 
   .has-submenu.is-open .submenu {
