@@ -336,3 +336,22 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+  document.querySelectorAll('.site-nav__link').forEach((link) => {
+    const linkPath = link.getAttribute('href');
+
+    // skip external links
+    if (!linkPath || linkPath.startsWith('http')) return;
+
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.classList.remove('active');
+      link.removeAttribute('aria-current');
+    }
+  });
+});

@@ -219,7 +219,7 @@
 
 /* --- Underline animation --- */
 .site-nav__link:hover,
-.site-nav__link.active {
+.site-nav__link[aria-current='page'] {
   color: var(--primary);
 }
 
@@ -250,12 +250,10 @@
 .site-nav__link:hover .link-text::after,
 .site-nav__link:focus .link-text::after,
 .site-nav__link:focus-visible .link-text::after,
-.site-nav__link.active .link-text::after,
 .site-nav__link[aria-current='page'] .link-text::after,
 .submenu__link:hover .link-text::after,
 .submenu__link:focus .link-text::after,
 .submenu__link:focus-visible .link-text::after,
-.submenu__link.active .link-text::after,
 .submenu__link[aria-current='page'] .link-text::after {
   transform: scaleX(1);
 }
