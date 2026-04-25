@@ -110,12 +110,13 @@ if (!button || !menu || !backdrop) {
   }
 
   function setFocusableElements() {
-    focusables = menu.querySelectorAll(focusableSelectors);
+    const navFocusables = menu.querySelectorAll(focusableSelectors);
+    const closeBtn = button; // hamburger acts as close button
 
-    firstFocusable = focusables.length ? focusables[0] : null;
-    lastFocusable = focusables.length
-      ? focusables[focusables.length - 1]
-      : null;
+    focusables = [closeBtn, ...navFocusables];
+
+    firstFocusable = focusables[0];
+    lastFocusable = focusables[focusables.length - 1];
   }
 
   function toggleMenu() {
@@ -189,7 +190,7 @@ if (!button || !menu || !backdrop) {
 
   /* ================== FOCUS TRAP ================== */
   menu.addEventListener('keydown', (e) => {
-    if (!menu.classList.contains('is-open')) return;
+    if (!document.body.classList.contains('menu-open')) return;
     if (e.key !== 'Tab') return;
 
     if (!firstFocusable || !lastFocusable) return;
