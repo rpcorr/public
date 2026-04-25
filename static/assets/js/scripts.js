@@ -377,16 +377,16 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     toggle.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  toggle.addEventListener('focus', () => {
-    // only open if user is navigating via keyboard (not touch)
-    if (
-      window.matchMedia('(max-width: 768px)').matches &&
-      !('ontouchstart' in window)
-    ) {
-      menuItem.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
-    }
-  });
+  // toggle.addEventListener('focus', () => {
+  //   // only open if user is navigating via keyboard (not touch)
+  //   if (
+  //     window.matchMedia('(max-width: 768px)').matches &&
+  //     !('ontouchstart' in window)
+  //   ) {
+  //     menuItem.classList.add('is-open');
+  //     toggle.setAttribute('aria-expanded', 'true');
+  //   }
+  // });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
