@@ -345,6 +345,14 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     });
   });
 
+  submenu?.addEventListener('focusout', () => {
+    setTimeout(() => {
+      if (!menuItem.contains(document.activeElement)) {
+        closeSubmenu();
+      }
+    }, 0);
+  });
+
   toggle.addEventListener('click', () => {
     const isOpen = menuItem.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', isOpen);
