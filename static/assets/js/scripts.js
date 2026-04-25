@@ -1,5 +1,5 @@
-const button = document.querySelector('.hamburger');
 const menu = document.querySelector('#primary-menu');
+const button = document.querySelector('.hamburger');
 const backdrop = document.querySelector('.nav-backdrop');
 
 if (!button || !menu || !backdrop) {
@@ -61,8 +61,6 @@ if (!button || !menu || !backdrop) {
   }
 
   function openMenu() {
-    const currentUrl = window.location.pathname;
-
     const activeLink = menu.querySelector('a.active');
 
     lastTrigger = document.activeElement;
@@ -125,6 +123,47 @@ if (!button || !menu || !backdrop) {
     isOpen ? closeMenu() : openMenu();
   }
 
+  function bindGlobalNavEvents() {
+    document.addEventListener('keydown', onGlobalKeyDown);
+    document.addEventListener('click', onGlobalClick);
+
+    backdrop.addEventListener('click', closeMenu);
+  }
+
+  function onGlobalKeyDown(e) {
+    if (e.key === 'Escape') {
+      closeMenu();
+      closeAllSubmenus();
+    }
+  }
+
+  function onGlobalClick(e) {
+    const clickedInsideNav = e.target.closest('.site-nav');
+    const clickedHamburger = e.target.closest('.hamburger');
+
+    if (!clickedInsideNav && !clickedHamburger) {
+      closeMenu();
+    }
+
+    closeAllSubmenusIfOutside(e);
+  }
+
+  function closeAllSubmenusIfOutside(e) {
+    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+      if (!item.contains(e.target)) {
+        closeSubmenu(item);
+      }
+    });
+  }
+
+  function closeSubmenu(item) {
+    item.classList.remove('is-open');
+
+    item
+      .querySelector('.submenu-toggle')
+      ?.setAttribute('aria-expanded', 'false');
+  }
+
   function updateMenuAccessibility() {
     if (isMobile()) {
       if (menu.classList.contains('is-open')) {
@@ -142,22 +181,13 @@ if (!button || !menu || !backdrop) {
   }
 
   button.addEventListener('click', toggleMenu);
-  backdrop.addEventListener('click', closeMenu);
-
-  /* ================== ESC KEY ================== */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeMenu();
-      button.focus();
-    }
-  });
 
   /* ================== FOCUS TRAP ================== */
   menu.addEventListener('keydown', (e) => {
     if (!menu.classList.contains('is-open')) return;
     if (e.key !== 'Tab') return;
 
-    const focusables = [button, ...menu.querySelectorAll(focusableSelectors)];
+    const focusables = menu.querySelectorAll(focusableSelectors);
 
     const first = focusables[0];
     const last = focusables[focusables.length - 1];
@@ -177,7 +207,7 @@ if (!button || !menu || !backdrop) {
 
   /* ================== CLOSE ON LINK CLICK ================== */
   menu.addEventListener('click', (e) => {
-    const isTopLink = e.target.classList.contains('site-nav__link');
+    const isTopLink = e.target.closest('.site-nav__link');
 
     const isSubmenuToggle = e.target.classList.contains('submenu-toggle');
 
@@ -217,6 +247,8 @@ if (!button || !menu || !backdrop) {
 
   updateMenuAccessibility();
 
+  bindGlobalNavEvents();
+
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
 
@@ -243,36 +275,17 @@ if (!button || !menu || !backdrop) {
   });
 }
 
-document.querySelectorAll('.submenu-toggle').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const parent = btn.closest('.has-submenu');
-
-    // close others
-    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
-      if (item !== parent) {
-        item.classList.remove('is-open');
-        item
-          .querySelector('.submenu-toggle')
-          ?.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    const isOpen = parent.classList.toggle('is-open');
-    btn.setAttribute('aria-expanded', isOpen);
-  });
-});
-
 document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   const toggle = menuItem.querySelector('.submenu-toggle');
   const submenu = menuItem.querySelector('.submenu');
-  const links = submenu.querySelectorAll('.submenu__link');
+  const links = submenu?.querySelectorAll('.submenu__link') || [];
 
   const openMenu = () => {
     menuItem.classList.add('is-open');
     toggle.setAttribute('aria-expanded', 'true');
   };
 
-  const closeMenu = () => {
+  const closeSubmenu = () => {
     menuItem.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
   };
@@ -302,7 +315,7 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
         break;
 
       case 'Escape':
-        closeMenu();
+        closeSubmenu();
         toggle.focus();
         break;
     }
@@ -322,18 +335,16 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
           break;
 
         case 'Escape':
-          closeMenu();
+          closeSubmenu();
           toggle.focus();
           break;
       }
     });
   });
 
-  // close if clicking outside
-  document.addEventListener('click', (e) => {
-    if (!menuItem.contains(e.target)) {
-      closeMenu();
-    }
+  toggle.addEventListener('click', () => {
+    const isOpen = menuItem.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen);
   });
 });
 
