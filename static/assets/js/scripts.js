@@ -137,12 +137,17 @@ if (!button || !menu || !backdrop) {
     }
   }
 
+  function closeAllSubmenus() {
+    document.querySelectorAll('.has-submenu.is-open').forEach(closeSubmenu);
+  }
+
   function onGlobalClick(e) {
     const clickedInsideNav = e.target.closest('.site-nav');
     const clickedHamburger = e.target.closest('.hamburger');
 
     if (!clickedInsideNav && !clickedHamburger) {
       closeMenu();
+      return;
     }
 
     closeAllSubmenusIfOutside(e);
@@ -187,21 +192,18 @@ if (!button || !menu || !backdrop) {
     if (!menu.classList.contains('is-open')) return;
     if (e.key !== 'Tab') return;
 
-    const focusables = menu.querySelectorAll(focusableSelectors);
+    if (!firstFocusable || !lastFocusable) return;
 
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-
-    // SHIFT + TAB (going backwards)
-    if (e.shiftKey && document.activeElement === first) {
+    // SHIFT + TAB (backwards)
+    if (e.shiftKey && document.activeElement === firstFocusable) {
       e.preventDefault();
-      last.focus();
+      lastFocusable.focus();
     }
 
-    // TAB (going forwards)
-    if (!e.shiftKey && document.activeElement === last) {
+    // TAB (forwards)
+    if (!e.shiftKey && document.activeElement === lastFocusable) {
       e.preventDefault();
-      first.focus();
+      firstFocusable.focus();
     }
   });
 
