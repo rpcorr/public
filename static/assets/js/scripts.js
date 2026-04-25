@@ -287,37 +287,54 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   const submenu = menuItem.querySelector('.submenu');
   const links = submenu?.querySelectorAll('.submenu__link') || [];
 
-  const openMenu = () => {
-    menuItem.classList.add('is-open');
-    toggle.setAttribute('aria-expanded', 'true');
-  };
+  function setSubmenuState(state) {
+    menuItem.classList.toggle('is-open', state);
+    toggle?.setAttribute('aria-expanded', String(state));
+  }
 
-  const closeSubmenu = () => {
-    menuItem.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-  };
+  function openSubmenu() {
+    setSubmenuState(true);
+  }
+
+  function closeSubmenu() {
+    setSubmenuState(false);
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isOpen = menuItem.classList.contains('is-open');
+
+    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+      if (item !== menuItem) {
+        item.classList.remove('is-open');
+        item
+          .querySelector('.submenu-toggle')
+          ?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    setSubmenuState(!isOpen);
+  });
 
   toggle.addEventListener('keydown', (e) => {
     switch (e.key) {
       case 'Enter':
       case ' ':
         e.preventDefault();
-        menuItem.classList.toggle('is-open');
-        toggle.setAttribute(
-          'aria-expanded',
-          menuItem.classList.contains('is-open'),
-        );
+        setSubmenuState(!menuItem.classList.contains('is-open'));
         break;
 
       case 'ArrowDown':
         e.preventDefault();
-        openMenu();
+        openSubmenu();
         links[0]?.focus();
         break;
 
       case 'ArrowUp':
         e.preventDefault();
-        openMenu();
+        openSubmenu();
         links[links.length - 1]?.focus();
         break;
 
@@ -328,65 +345,29 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     }
   });
 
-  links.forEach((link, index) => {
-    link.addEventListener('keydown', (e) => {
-      switch (e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          links[(index + 1) % links.length].focus();
-          break;
+  // submenu?.addEventListener('focusout', () => {
+  //   requestAnimationFrame(() => {
+  //     if (!menuItem.contains(document.activeElement)) {
+  //       closeSubmenu();
+  //     }
+  //   });
+  // });
 
-        case 'ArrowUp':
-          e.preventDefault();
-          links[(index - 1 + links.length) % links.length].focus();
-          break;
+  let closeTimer = null;
 
-        case 'Escape':
-          closeSubmenu();
-          toggle.focus();
-          break;
-      }
-    });
+  submenu?.addEventListener('focusin', () => {
+    clearTimeout(closeTimer);
   });
 
   submenu?.addEventListener('focusout', () => {
-    setTimeout(() => {
+    clearTimeout(closeTimer);
+
+    closeTimer = setTimeout(() => {
       if (!menuItem.contains(document.activeElement)) {
-        closeSubmenu();
+        setSubmenuState(false);
       }
     }, 0);
   });
-
-  toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const isOpen = menuItem.classList.contains('is-open');
-
-    // close others first (optional but stabilizes UX)
-    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
-      if (item !== menuItem) {
-        item.classList.remove('is-open');
-        item
-          .querySelector('.submenu-toggle')
-          ?.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    menuItem.classList.toggle('is-open', !isOpen);
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-  });
-
-  // toggle.addEventListener('focus', () => {
-  //   // only open if user is navigating via keyboard (not touch)
-  //   if (
-  //     window.matchMedia('(max-width: 768px)').matches &&
-  //     !('ontouchstart' in window)
-  //   ) {
-  //     menuItem.classList.add('is-open');
-  //     toggle.setAttribute('aria-expanded', 'true');
-  //   }
-  // });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
