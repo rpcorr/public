@@ -145,8 +145,9 @@ if (!button || !menu || !backdrop) {
   function onGlobalClick(e) {
     const clickedInsideNav = e.target.closest('.site-nav');
     const clickedHamburger = e.target.closest('.hamburger');
+    const clickedSubmenuToggle = e.target.closest('.submenu-toggle');
 
-    if (!clickedInsideNav && !clickedHamburger) {
+    if (!clickedInsideNav && !clickedHamburger && !clickedSubmenuToggle) {
       closeMenu();
       return;
     }
@@ -210,11 +211,14 @@ if (!button || !menu || !backdrop) {
 
   /* ================== CLOSE ON LINK CLICK ================== */
   menu.addEventListener('click', (e) => {
-    const isTopLink = e.target.closest('.site-nav__link');
+    const link = e.target.closest('.site-nav__link');
+    const submenuToggle = e.target.closest('.submenu-toggle');
 
-    const isSubmenuToggle = e.target.classList.contains('submenu-toggle');
+    // If it's a submenu toggle, DO NOTHING here
+    if (submenuToggle) return;
 
-    if (isTopLink && !isSubmenuToggle) {
+    // If it's a real navigation link (not a parent toggle), close menu
+    if (link && !submenuToggle) {
       closeMenu();
     }
   });
@@ -353,9 +357,35 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     }, 0);
   });
 
-  toggle.addEventListener('click', () => {
-    const isOpen = menuItem.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', isOpen);
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isOpen = menuItem.classList.contains('is-open');
+
+    // close others first (optional but stabilizes UX)
+    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+      if (item !== menuItem) {
+        item.classList.remove('is-open');
+        item
+          .querySelector('.submenu-toggle')
+          ?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    menuItem.classList.toggle('is-open', !isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  toggle.addEventListener('focus', () => {
+    // only open if user is navigating via keyboard (not touch)
+    if (
+      window.matchMedia('(max-width: 768px)').matches &&
+      !('ontouchstart' in window)
+    ) {
+      menuItem.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
   });
 });
 
