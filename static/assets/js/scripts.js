@@ -155,10 +155,21 @@ if (!button || !menu || !backdrop) {
     closeAllSubmenusIfOutside(e);
   }
 
+  // function closeAllSubmenusIfOutside(e) {
+  //   document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+  //     if (!item.contains(e.target)) {
+  //       closeSubmenu(item);
+  //     }
+  //   });
+  // }
+
   function closeAllSubmenusIfOutside(e) {
     document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
       if (!item.contains(e.target)) {
-        closeSubmenu(item);
+        item.classList.remove('is-open');
+        item
+          .querySelector('.submenu-toggle')
+          ?.setAttribute('aria-expanded', 'false');
       }
     });
   }
