@@ -418,28 +418,12 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     }
   });
 
-  // submenu?.addEventListener('focusout', () => {
-  //   requestAnimationFrame(() => {
-  //     if (!menuItem.contains(document.activeElement)) {
-  //       closeSubmenu();
-  //     }
-  //   });
-  // });
-
-  let closeTimer = null;
-
-  submenu?.addEventListener('focusin', () => {
-    clearTimeout(closeTimer);
-  });
-
-  submenu?.addEventListener('focusout', () => {
-    clearTimeout(closeTimer);
-
-    closeTimer = setTimeout(() => {
+  menuItem.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
       if (!menuItem.contains(document.activeElement)) {
         setSubmenuState(false);
       }
-    }, 0);
+    });
   });
 });
 
