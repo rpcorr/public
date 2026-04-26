@@ -614,6 +614,10 @@
     position: static;
     margin-left: 0;
   }
+
+  .submenu--nested .submenu__link {
+    padding-left: var(--space-md-plus);
+  }
 }
 
 .submenu .has-submenu {
