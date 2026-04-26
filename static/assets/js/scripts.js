@@ -294,7 +294,7 @@ if (!button || !menu || !backdrop) {
 }
 
 document.querySelectorAll('.has-submenu').forEach((menuItem) => {
-  const toggle = menuItem.querySelector('.submenu-toggle');
+  const toggle = menuItem.querySelector(':scope > .submenu-toggle');
   const submenu = menuItem.querySelector('.submenu');
   const links = submenu?.querySelectorAll('.submenu__link') || [];
 
@@ -318,7 +318,7 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     const isOpen = menuItem.classList.contains('is-open');
 
     document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
-      if (item !== menuItem) {
+      if (item !== menuItem && !item.contains(menuItem)) {
         item.classList.remove('is-open');
         item
           .querySelector('.submenu-toggle')

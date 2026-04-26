@@ -558,7 +558,8 @@
     display: block;
   }
 
-  .has-submenu.is-open .submenu {
+  /* ONLY direct child submenu opens */
+  .has-submenu.is-open > .submenu {
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
@@ -591,6 +592,18 @@
   left: 100%;
   margin-left: 6px;
   min-width: 180px;
+  padding-left: 12px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Only opens when ITS OWN parent is open */
+.submenu .has-submenu.is-open > .submenu--nested {
+  max-height: 500px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* mobile override */
