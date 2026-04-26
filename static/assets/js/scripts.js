@@ -37,6 +37,21 @@ if (!button || !menu || !backdrop) {
 
     updateMenuAccessibility();
 
+    // disable whole menu properly
+    menu.setAttribute('inert', '');
+    menu.setAttribute('aria-hidden', 'true');
+
+    document.querySelectorAll('.submenu, .submenu--nested').forEach((el) => {
+      el.inert = true;
+    });
+
+    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+      item.classList.remove('is-open');
+      item
+        .querySelector('.submenu-toggle')
+        ?.setAttribute('aria-expanded', 'false');
+    });
+
     setTimeout(() => {
       document.body.style.position = '';
       document.body.style.top = '';
@@ -73,6 +88,13 @@ if (!button || !menu || !backdrop) {
     button.setAttribute('aria-expanded', 'true');
 
     updateMenuAccessibility();
+
+    menu.removeAttribute('inert');
+    menu.removeAttribute('aria-hidden');
+
+    menu.querySelectorAll('.submenu, .submenu--nested').forEach((el) => {
+      el.inert = true; // default closed state
+    });
 
     scrollY = window.scrollY;
 
@@ -200,24 +222,55 @@ if (!button || !menu || !backdrop) {
 
   button.addEventListener('click', toggleMenu);
 
-  /* ================== FOCUS TRAP ================== */
+  /* ================== KEYBOARD NAVIGATION ================== */
   menu.addEventListener('keydown', (e) => {
     if (!document.body.classList.contains('menu-open')) return;
-    if (e.key !== 'Tab') return;
 
-    if (!firstFocusable || !lastFocusable) return;
+    /* ================== TAB (focus trap) ================== */
+    if (e.key === 'Tab') {
+      if (!firstFocusable || !lastFocusable) return;
 
-    // SHIFT + TAB (backwards)
-    if (e.shiftKey && document.activeElement === firstFocusable) {
-      e.preventDefault();
-      lastFocusable.focus();
+      // SHIFT + TAB (backwards)
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        e.preventDefault();
+        lastFocusable.focus();
+      }
+
+      // TAB (forwards)
+      if (!e.shiftKey && document.activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable.focus();
+      }
+
+      return; // IMPORTANT: stop here
     }
 
-    // TAB (forwards)
-    if (!e.shiftKey && document.activeElement === lastFocusable) {
-      e.preventDefault();
-      firstFocusable.focus();
+    /* ================== ARROW NAV ================== */
+    if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+
+    const items = Array.from(
+      menu.querySelectorAll('.site-nav__link, .submenu__link'),
+    ).filter((el) => {
+      const isNested = el.closest('.submenu--nested');
+      const parentOpen = el.closest('.has-submenu.is-open');
+
+      return !isNested || parentOpen;
+    });
+
+    const currentIndex = items.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+
+    e.preventDefault();
+
+    let nextIndex;
+
+    if (e.key === 'ArrowDown') {
+      nextIndex = Math.min(currentIndex + 1, items.length - 1);
+    } else {
+      nextIndex = Math.max(currentIndex - 1, 0);
     }
+
+    items[nextIndex]?.focus();
   });
 
   /* ================== CLOSE ON LINK CLICK ================== */
@@ -295,24 +348,21 @@ if (!button || !menu || !backdrop) {
 
 document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   const toggle = menuItem.querySelector(':scope > .submenu-toggle');
+  const parentLink = menuItem.querySelector(':scope > .site-nav__link');
   const submenu = menuItem.querySelector('.submenu');
   const links = submenu?.querySelectorAll('.submenu__link') || [];
+
+  parentLink?.addEventListener('focus', () => {
+    setSubmenuState(true);
+  });
 
   function setSubmenuState(state) {
     menuItem.classList.toggle('is-open', state);
     toggle?.setAttribute('aria-expanded', String(state));
-    updateNestedFocus(menuItem, state);
-  }
 
-  function updateNestedFocus(menuItem, isOpen) {
-    const nestedMenu = menuItem.querySelector(':scope > .submenu--nested');
-    if (!nestedMenu) return;
-
-    const nestedLinks = nestedMenu.querySelectorAll('a');
-
-    nestedLinks.forEach((link) => {
-      link.setAttribute('tabindex', isOpen ? '0' : '-1');
-    });
+    if (submenu) {
+      submenu.inert = !state;
+    }
   }
 
   function openSubmenu() {
@@ -409,10 +459,5 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.remove('active');
       link.removeAttribute('aria-current');
     }
-  });
-
-  // Initially set all nested submenu links to tabindex -1 (not focusable)
-  document.querySelectorAll('.submenu--nested a').forEach((link) => {
-    link.setAttribute('tabindex', '-1');
   });
 });
