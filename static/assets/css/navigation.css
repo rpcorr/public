@@ -597,6 +597,7 @@
   opacity: 0;
   overflow: hidden;
   pointer-events: none;
+  visibility: hidden;
 }
 
 /* Only opens when ITS OWN parent is open */
@@ -604,6 +605,7 @@
   max-height: 500px;
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
 }
 
 /* mobile override */

@@ -301,6 +301,18 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   function setSubmenuState(state) {
     menuItem.classList.toggle('is-open', state);
     toggle?.setAttribute('aria-expanded', String(state));
+    updateNestedFocus(menuItem, state);
+  }
+
+  function updateNestedFocus(menuItem, isOpen) {
+    const nestedMenu = menuItem.querySelector(':scope > .submenu--nested');
+    if (!nestedMenu) return;
+
+    const nestedLinks = nestedMenu.querySelectorAll('a');
+
+    nestedLinks.forEach((link) => {
+      link.setAttribute('tabindex', isOpen ? '0' : '-1');
+    });
   }
 
   function openSubmenu() {
@@ -397,5 +409,10 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.remove('active');
       link.removeAttribute('aria-current');
     }
+  });
+
+  // Initially set all nested submenu links to tabindex -1 (not focusable)
+  document.querySelectorAll('.submenu--nested a').forEach((link) => {
+    link.setAttribute('tabindex', '-1');
   });
 });
