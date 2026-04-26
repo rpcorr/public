@@ -348,13 +348,8 @@ if (!button || !menu || !backdrop) {
 
 document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   const toggle = menuItem.querySelector(':scope > .submenu-toggle');
-  const parentLink = menuItem.querySelector(':scope > .site-nav__link');
   const submenu = menuItem.querySelector('.submenu');
   const links = submenu?.querySelectorAll('.submenu__link') || [];
-
-  parentLink?.addEventListener('focus', () => {
-    setSubmenuState(true);
-  });
 
   function setSubmenuState(state) {
     menuItem.classList.toggle('is-open', state);
