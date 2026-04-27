@@ -1,0 +1,545 @@
+/* ============== 5. Components (reusable blocks) =============== */
+
+/* --- Announcement ---
+   Flexible banner component used for alerts, updates, or calls to action.
+   Supports icon + content + optional CTA layout.
+*/
+.announcement {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+
+  background: var(--primary);
+  color: var(--white);
+
+  padding: var(--space-md) var(--space-lg);
+
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Icon stays fixed size and does not shrink */
+.announcement__icon {
+  flex-shrink: 0;
+}
+
+/* SVG icon inherits text color */
+.announcement__icon svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+  stroke: currentColor;
+}
+
+/* Content expands to fill available space */
+.announcement__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Ensure readable contrast on dark backgrounds */
+.announcement__content p {
+  color: var(--white);
+}
+
+/* CTA container (e.g., button) stays compact */
+.announcement__actions {
+  flex-shrink: 0;
+}
+
+/* Headings inherit white for contrast */
+.announcement__content > h2 {
+  color: var(--white);
+}
+
+/* Theme variants */
+.announcement--primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.announcement--accent {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.announcement--light {
+  background: var(--bg-light);
+  color: var(--primary);
+}
+
+/* Centered layout (stacked) */
+.announcement--center {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Compact spacing variant */
+.announcement--compact {
+  padding: var(--space-md) var(--space-md-plus);
+}
+
+@media (max-width: 768px) {
+  /* Switch to grid for better alignment on small screens */
+  .announcement {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    text-align: center;
+    gap: var(--space-md);
+
+    justify-content: center;
+    align-items: center;
+
+    padding: var(--space-lg);
+  }
+
+  /* Icon and content aligned side-by-side */
+  .announcement__icon {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .announcement__content {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  /* CTA spans full width below */
+  .announcement__actions {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+}
+
+@media (max-width: 375px) {
+  /* Reduce spacing and hide icon for very small screens */
+  .announcement {
+    gap: var(--space-sm);
+  }
+
+  .announcement__icon {
+    display: none;
+  }
+
+  .announcement__content {
+    text-align: center;
+  }
+}
+
+/* --- Blockquote ---
+   Styled quote with emphasis and visual left border
+*/
+blockquote {
+  padding: var(--space-md) var(--space-lg);
+  border-left: var(--border-thick) solid var(--primary-dark);
+  background-color: var(--bg-light);
+  border-radius: var(--radius-sm);
+
+  color: var(--primary-dark);
+  font-style: italic;
+  font-weight: var(--fw-medium);
+
+  box-shadow: var(--shadow-quote);
+}
+
+/* Citation styling inside blockquote */
+blockquote cite {
+  display: inline-block;
+  font-style: normal;
+  color: var(--primary);
+  font-size: var(--text-base);
+  opacity: 0.8;
+}
+
+/* --- Buttons ---
+   Base button styles + variants
+*/
+.btn {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: var(--fw-semibold);
+  text-align: center;
+  line-height: var(--lh-base);
+  transition: var(--transition-base);
+}
+
+/* Primary button (default CTA look) */
+.btn--primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* Secondary button (inverted style) */
+.btn--secondary {
+  background: var(--white);
+  color: var(--primary);
+}
+
+/* CTA hover effect (lift + color change) */
+.btn--cta:hover {
+  background: var(--accent);
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+/* Shared CTA styles */
+.btn--cta,
+.btn--nlsa {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* Ensure all buttons show pointer cursor */
+button,
+.btn {
+  cursor: pointer;
+}
+
+/* --- Callouts ---
+   Highlighted content block for emphasis or notes
+*/
+.callout {
+  margin: var(--space-lg) 0;
+
+  padding: var(--space-md) var(--space-lg);
+  border-left: 4px solid var(--primary-dark);
+
+  border-radius: var(--radius-sm);
+
+  font-style: italic;
+  font-weight: var(--fw-medium);
+
+  box-shadow: var(--shadow-quote);
+}
+
+/* Light background variant */
+.callout--bg-white {
+  background-color: var(--white);
+  color: var(--primary-dark);
+}
+
+/* Lists inside callouts */
+.callout ul {
+  list-style: disc;
+  padding-left: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+/* Links inside callouts (except buttons) */
+.callout a:not(.btn) {
+  text-decoration: underline;
+}
+
+.callout a:not(.btn):hover {
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 768px) {
+  .callout ul {
+    padding-left: var(--space-md);
+  }
+}
+
+/* --- Figure ---
+   Image + caption block
+*/
+.figure {
+  margin: var(--space-lg) auto;
+  text-align: center;
+  max-width: var(--content-narrow);
+}
+
+/* Image styling */
+.figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Caption styling */
+.figure figcaption {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--text-muted, #666);
+  font-style: italic;
+}
+
+/* --- Footer ---
+   Centered footer with soft gradient background
+*/
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+
+  padding: var(--space-md) 0;
+  text-align: center;
+
+  background: linear-gradient(to top, #e8eef9 0%, #fff 100%);
+  border-top: 3px solid var(--primary);
+}
+
+.footer__title {
+  font-size: var(--text-sm);
+}
+
+/* Inline form (e.g., newsletter signup) */
+.form-inline {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-top: var(--space-sm);
+}
+
+/* Input field styling */
+.form-input {
+  padding: var(--space-sm) var(--space-sm);
+  border: 1px solid var(--border, #ccc);
+  border-radius: var(--radius-sm);
+  width: 12.5rem;
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+/* Footer text */
+.footer__text {
+  color: var(--primary);
+  font-size: var(--text-sm);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 375px) {
+  .footer__text {
+    max-width: 290px;
+  }
+
+  .form-inline .btn--nlsa,
+  .form-input {
+    font-size: var(--text-sm);
+  }
+}
+
+/* --- Social Icons ---
+   Inline list of social/media links
+*/
+.social-icons {
+  display: flex;
+  gap: var(--space-sm);
+  margin: var(--space-xs) 0;
+}
+
+.social-icons a {
+  font-size: var(--text-sm);
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.social-icons a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Centered variant */
+.social-icons--center {
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Split Panel ---
+   Two-column layout for content + media
+*/
+.split-panel {
+  display: grid;
+  align-items: center;
+  grid-template-columns: var(--split-ratio, 1fr 1fr);
+  gap: var(--space-md);
+
+  background: var(--white);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Inner wrapper for width control */
+.split-panel__inner {
+  max-width: var(--content-width, 1200px);
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+/* Layout ratio modifiers */
+.split-panel--67-33 {
+  --split-ratio: 2fr 1fr;
+}
+
+.split-panel--50-50 {
+  --split-ratio: 1fr 1fr;
+}
+
+/* Single-column (text-only) */
+.split-panel--text {
+  grid-template-columns: 1fr;
+}
+
+/* Hero variant (centered heading) */
+.split-panel--hero h1 {
+  text-align: center;
+}
+
+/* Center buttons in hero/center layouts */
+.split-panel--hero .btn,
+.split-panel--center .btn {
+  display: block;
+  width: fit-content;
+  margin: var(--space-md) auto 0;
+}
+
+/* Centered text variant */
+.split-panel--center h2,
+.split-panel--center p {
+  text-align: center;
+}
+
+/* Remove width constraint for text-only */
+.split-panel--text p {
+  max-width: none;
+}
+
+/* Content column width constraint */
+.split-panel__content {
+  max-width: 35em;
+}
+
+/* Image inside panel */
+.split-panel__media img {
+  width: min(600px, 90%);
+  margin: 0 auto;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  /* Collapse to single column */
+  .split-panel {
+    grid-template-columns: 1fr;
+    padding: var(--space-lg);
+
+    gap: var(--space-sm);
+  }
+
+  .split-panel__media img {
+    width: min(330px, 90%);
+    margin: 0 auto;
+    height: auto;
+  }
+}
+
+/* =========================
+   Text + Image Layout
+   ========================= */
+
+/* Two-column layout with fixed image column */
+.text-image {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 300px);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* Shared image styling */
+.text-image__media img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: block;
+}
+
+/* Optional button under image */
+.text-image__media .btn {
+  display: block;
+  width: fit-content;
+  margin: var(--space-md) auto 0;
+}
+
+/* Prevent overflow issues in grid */
+.text-image__content {
+  min-width: 0;
+}
+
+/* Remove top margin for first paragraph */
+.text-image__content p:first-child {
+  margin-top: 0;
+}
+
+/* List styling inside text */
+.text-image__content ul {
+  list-style: disc;
+  padding-left: var(--space-lg);
+  margin: var(--space-md) 0;
+}
+
+.text-image__content ul li {
+  margin-bottom: var(--space-small-plus);
+}
+
+/* Reverse layout (image left) using direction trick */
+.text-image--reverse {
+  direction: rtl;
+}
+
+.text-image--reverse > * {
+  direction: ltr;
+}
+
+/* Float-based wrap variant (desktop only) */
+.text-image--wrap::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 769px) {
+  .text-image--wrap {
+    display: block; /* override grid */
+  }
+
+  .text-image--wrap .text-image__media {
+    float: right;
+    margin: 0 0 var(--space-md) var(--space-lg);
+    max-width: 300px;
+  }
+
+  .text-image--wrap .text-image__media img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Stack layout vertically */
+  .text-image {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .text-image__media {
+    justify-self: center;
+    margin-block: var(--space-lg);
+  }
+
+  .text-image__media img {
+    max-width: 300px;
+  }
+}
