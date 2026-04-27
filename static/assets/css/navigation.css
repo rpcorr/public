@@ -568,7 +568,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .has-submenu:hover .submenu {
+  .has-submenu:hover > .submenu {
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
