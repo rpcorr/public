@@ -1,581 +1,372 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- ================== META & SEO ================== -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html <?php language_attributes(); ?>>
 
-    <!-- Core SEO (Home Page) -->
-    <meta
-      name="description"
-      content="The Newfoundland and Labrador Stuttering Association (NLSA) supports people who stutter through advocacy, research, community events, and education. Promoting inclusion and equal opportunities for all voices."
-    />
-    <meta
-      name="keywords"
-      content="stuttering, Newfoundland and Labrador, speech, communication, NLSA, stutter support, speech advocacy, Canada stuttering association"
-    />
-    <meta
-      name="author"
-      content="Newfoundland and Labrador Stuttering Association"
-    />
+<head>
+  <meta charset="<?php bloginfo('charset'); ?>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Control search engine indexing if needed -->
-    <!-- <meta name="robots" content="index, follow" /> -->
+  <!-- Basic SEO (temporary until SEO plugin) -->
+  <meta name="description" content="The Newfoundland and Labrador Stuttering Association (NLSA) supports people who stutter through advocacy, research, community events, and education." />
+  <meta name="author" content="Newfoundland and Labrador Stuttering Association" />
 
-    <!-- ================== SOCIAL SHARING (Open Graph) ================== -->
-    <meta
-      property="og:title"
-      content="Newfoundland and Labrador Stuttering Association"
-    />
-    <meta
-      property="og:description"
-      content="Supporting people who stutter through advocacy, research, and community. Every voice matters."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://localhost:10023/nlstuttering.ca/" />
-    <meta
-      property="og:image"
-      content="http://localhost:10023/static/assets/imgs/NLSA-logo.png"
-    />
+  <!-- Open Graph -->
+  <meta property="og:title" content="<?php bloginfo('name'); ?>" />
+  <meta property="og:description" content="<?php bloginfo('description'); ?>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>" />
 
-    <!-- ================== TWITTER (X) CARDS ================== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Newfoundland and Labrador Stuttering Association"
-    />
-    <meta
-      name="twitter:description"
-      content="Supporting people who stutter through advocacy, research, and community."
-    />
-    <meta
-      name="twitter:image"
-      content="http://localhost:10023/static/assets/imgs/NLSA-logo.png"
-    />
+  <!-- Theme color -->
+  <meta name="theme-color" content="#0b3072" />
 
-    <!-- ================== PWA / BRANDING ================== -->
-    <meta name="theme-color" content="#0b3072" />
-    <meta name="application-name" content="NLSA" />
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NonprofitOrganization",
+      "name": "Newfoundland and Labrador Stuttering Association",
+      "url": "https://nlstuttering.ca/",
+      "logo": "https://nlstuttering.ca/assets/imgs/NLSA-logo.png"
+    }
+  </script>
 
-    <!-- Canonical URL (avoid duplicate content issues) -->
-    <link rel="canonical" href="http://localhost:10023/static/index.html" />
+  <?php wp_head(); ?>
+</head>
 
-    <!-- ================== FONTS & ICONS ================== -->
-    <!-- Preconnect improves font loading performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<body>
+  <!-- Skip link improves keyboard accessibility -->
+  <a href="#primary" class="skip-link">Skip to content</a>
 
-    <!-- Font Awesome icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
+  <!-- ================== HEADER / NAVIGATION ================== -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <div class="site-nav__inner">
+        <!-- Decorative tagline (hidden from screen readers) -->
+        <div class="site-nav__tagline" aria-hidden="true"></div>
 
-    <!-- Google Font: Montserrat -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+        <!-- Mobile hamburger toggle -->
+        <button class="hamburger" type="button" aria-label="Toggle main menu" aria-expanded="false" aria-controls="primary-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-    <!-- ================== STYLESHEETS ================== -->
-    <!-- CSS is organized by responsibility (low → high specificity) -->
-    <link rel="stylesheet" href="assets/css/reset.css" />
-    <!-- Reset defaults -->
-    <link rel="stylesheet" href="assets/css/variables.css" />
-    <!-- Design tokens -->
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <!-- Base typography -->
-    <link rel="stylesheet" href="assets/css/layouts.css" />
-    <!-- Layout systems -->
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <!-- UI components -->
-    <link rel="stylesheet" href="assets/css/navigation.css" />
-    <!-- Navigation -->
-    <link rel="stylesheet" href="assets/css/utilities.css" />
-    <!-- Utility classes -->
+        <!-- Primary navigation (inert by default for accessibility) -->
+        <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
+          <!-- Top-level link -->
+          <li>
+            <a href="index.html" class="site-nav__link" aria-current="page">
+              <span class="link-text">Home</span>
+            </a>
+          </li>
 
-    <!-- ================== FAVICONS ================== -->
-    <!-- Standard favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/imgs/favicons/fav-icon-32.png"
-    />
+          <!-- Dropdown menu -->
+          <li class="site-nav__item has-submenu">
+            <a href="#" role="button" class="site-nav__link submenu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-about">
+              <span class="link-text">About</span>
+            </a>
 
-    <!-- Apple touch icons (iOS home screen) -->
-    <link
-      rel="apple-touch-icon"
-      sizes="57x57"
-      href="assets/imgs/favicons/fav-icon-57.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="72x72"
-      href="assets/imgs/favicons/fav-icon-72.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="114x114"
-      href="assets/imgs/favicons/fav-icon-114.png"
-    />
+            <!-- Submenu -->
+            <ul id="submenu-about" class="submenu" aria-label="About submenu">
+              <li>
+                <a href="about.html" class="submenu__link">
+                  <span class="link-text">Overview</span>
+                </a>
+              </li>
+              <li>
+                <a href="team.html" class="submenu__link">
+                  <span class="link-text">Our Team</span>
+                </a>
+              </li>
 
-    <!-- Fallback shortcut icon -->
-    <link rel="shortcut icon" href="assets/imgs/favicons/fav-icon-32.png" />
+              <!-- Nested submenu -->
+              <li class="has-submenu">
+                <a href="#" class="submenu__link submenu-toggle" aria-haspopup="true" aria-expanded="false">
+                  <span class="link-text">History</span>
+                </a>
 
-    <!-- ================== PAGE TITLE ================== -->
-    <title>Newfoundland and Labrador Stuttering Association</title>
+                <!-- Sub-sub menu -->
+                <ul class="submenu submenu--nested" aria-label="History submenu">
+                  <li>
+                    <a href="early.html" class="submenu__link">
+                      <span class="link-text">Early Years</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="modern.html" class="submenu__link">
+                      <span class="link-text">Modern Era</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
 
-    <!-- ================== STRUCTURED DATA (SEO) ================== -->
-    <!-- Helps search engines understand organization details -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "NonprofitOrganization",
-        "name": "Newfoundland and Labrador Stuttering Association",
-        "url": "https://nlstuttering.ca/",
-        "logo": "https://nlstuttering.ca/assets/imgs/NLSA-logo.png",
-        "description": "The NLSA supports people who stutter through advocacy, research, and community programs across Newfoundland and Labrador.",
-        "areaServed": "Newfoundland and Labrador, Canada"
-      }
-    </script>
-  </head>
+          <!-- Standard navigation links -->
+          <li>
+            <a href="research.html" class="site-nav__link">
+              <span class="link-text">Research</span>
+            </a>
+          </li>
+          <li>
+            <a href="get-involved.html" class="site-nav__link">
+              <span class="link-text">Get Involved</span>
+            </a>
+          </li>
+          <li>
+            <a href="news.html" class="site-nav__link">
+              <span class="link-text">News</span>
+            </a>
+          </li>
 
-  <body>
-    <!-- Skip link improves keyboard accessibility -->
-    <a href="#primary" class="skip-link">Skip to content</a>
+          <!-- External link (opens in new tab) -->
+          <li>
+            <a href="https://somestutterluh.hcommons.org/" class="site-nav__link" target="_blank" rel="noopener noreferrer">
+              <span class="link-text"> Podcast </span>
+            </a>
+          </li>
 
-    <!-- ================== HEADER / NAVIGATION ================== -->
-    <header class="site-header">
-      <nav class="site-nav" aria-label="Main navigation">
-        <div class="site-nav__inner">
-          <!-- Decorative tagline (hidden from screen readers) -->
-          <div class="site-nav__tagline" aria-hidden="true"></div>
+          <li>
+            <a href="contact.html" class="site-nav__link">
+              <span class="link-text">Contact</span>
+            </a>
+          </li>
 
-          <!-- Mobile hamburger toggle -->
-          <button
-            class="hamburger"
-            type="button"
-            aria-label="Toggle main menu"
-            aria-expanded="false"
-            aria-controls="primary-menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          <!-- Call-to-action -->
+          <li>
+            <a href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/" class="btn btn--cta" target="_blank" rel="noopener noreferrer" aria-label="Donate (opens in new tab)">
+              Donate
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-          <!-- Primary navigation (inert by default for accessibility) -->
-          <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
-            <!-- Top-level link -->
-            <li>
-              <a href="index.html" class="site-nav__link" aria-current="page">
-                <span class="link-text">Home</span>
-              </a>
-            </li>
+  <!-- Backdrop used for mobile menu overlay -->
+  <div class="nav-backdrop"></div>
 
-            <!-- Dropdown menu -->
-            <li class="site-nav__item has-submenu">
-              <a
-                href="#"
-                role="button"
-                class="site-nav__link submenu-toggle"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="submenu-about"
-              >
-                <span class="link-text">About</span>
-              </a>
+  <!-- ================== MAIN CONTENT ================== -->
+  <main id="primary" class="wrapper">
+    <!-- ===== Hero Section ===== -->
+    <section class="split-panel split-panel--50-50 split-panel--hero" aria-labelledby="hero-heading">
+      <!-- Visual/logo -->
+      <div class="split-panel__media">
+        <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/NLSA-logo.png'); ?>" alt="Newfoundland and Labrador Stuttering Association logo" />
+      </div>
 
-              <!-- Submenu -->
-              <ul id="submenu-about" class="submenu" aria-label="About submenu">
-                <li>
-                  <a href="about.html" class="submenu__link">
-                    <span class="link-text">Overview</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="team.html" class="submenu__link">
-                    <span class="link-text">Our Team</span>
-                  </a>
-                </li>
+      <!-- Hero content -->
+      <div>
+        <h1 id="hero-heading">
+          Supporting People Who Stutter in Newfoundland and Labrador
+        </h1>
 
-                <!-- Nested submenu -->
-                <li class="has-submenu">
-                  <a
-                    href="#"
-                    class="submenu__link submenu-toggle"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span class="link-text">History</span>
-                  </a>
+        <p class="font-weight-medium">
+          The NLSA advocates for people who stutter, fostering inclusion across health care, education, and public life. We promote understanding, support, and equal opportunities, ensuring every voice is heard and valued.
+        </p>
 
-                  <!-- Sub-sub menu -->
-                  <ul
-                    class="submenu submenu--nested"
-                    aria-label="History submenu"
-                  >
-                    <li>
-                      <a href="early.html" class="submenu__link">
-                        <span class="link-text">Early Years</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="modern.html" class="submenu__link">
-                        <span class="link-text">Modern Era</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+        <a href="about.html" class="btn btn--primary u-lift">
+          Learn more about
+          <abbr title="Newfoundland and Labrador Stuttering Association">
+            NLSA
+          </abbr>
+        </a>
+      </div>
+    </section>
 
-            <!-- Standard navigation links -->
-            <li>
-              <a href="research.html" class="site-nav__link">
-                <span class="link-text">Research</span>
-              </a>
-            </li>
-            <li>
-              <a href="get-involved.html" class="site-nav__link">
-                <span class="link-text">Get Involved</span>
-              </a>
-            </li>
-            <li>
-              <a href="news.html" class="site-nav__link">
-                <span class="link-text">News</span>
-              </a>
-            </li>
+    <!-- ===== Announcement / CTA Banner ===== -->
+    <section class="announcement announcement--primary" aria-labelledby="announcement-heading">
+      <!-- Icon (decorative SVG) -->
+      <div class="announcement__icon">
+        <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+      </div>
 
-            <!-- External link (opens in new tab) -->
-            <li>
-              <a
-                href="https://somestutterluh.hcommons.org/"
-                class="site-nav__link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="link-text"> Podcast </span>
-              </a>
-            </li>
+      <!-- Text content -->
+      <div class="announcement__content">
+        <h2 id="announcement-heading">
+          Be Part of Research That Makes a Difference
+        </h2>
+        <p class="font-weight-medium">Help improve access and support for people who stutter in Newfoundland and Labrador. Your participation matters!</p>
+      </div>
 
-            <li>
-              <a href="contact.html" class="site-nav__link">
-                <span class="link-text">Contact</span>
-              </a>
-            </li>
+      <!-- CTA -->
+      <div class="announcement__actions">
+        <a href="get-involved.html" class="btn btn--secondary u-lift" aria-label="Get involved today and make a difference">
+          Get Involved Today
+        </a>
+      </div>
+    </section>
 
-            <!-- Call-to-action -->
-            <li>
-              <a
-                href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
-                class="btn btn--cta"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Donate (opens in new tab)"
-              >
-                Donate
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <!-- ===== Programs / Initiatives Grid ===== -->
+    <section aria-labelledby="programs-heading">
+      <h2 id="programs-heading" class="visually-hidden">
+        Programs and Initiatives
+      </h2>
 
-    <!-- Backdrop used for mobile menu overlay -->
-    <div class="nav-backdrop"></div>
+      <!-- Grid layout (mixed 60/40 columns) -->
+      <div class="layout-grid">
+        <!-- Individual program cards follow same structure -->
+        <!-- Image → heading → description → CTA -->
 
-    <!-- ================== MAIN CONTENT ================== -->
-    <main id="primary" class="wrapper">
-      <!-- ===== Hero Section ===== -->
-      <section
-        class="split-panel split-panel--50-50 split-panel--hero"
-        aria-labelledby="hero-heading"
-      >
-        <!-- Visual/logo -->
-        <div class="split-panel__media">
-          <img
-            loading="lazy"
-            src="assets/imgs/NLSA-logo.png"
-            alt="Newfoundland and Labrador Stuttering Association logo"
-          />
+        <div class="layout-grid__item col-7">
+          <!--60% -->
+          <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/researching-barriers.jpg'); ?>" alt="NLSA Research Logo" />
+          <h3>Researching Communication Barriers</h3>
+          <p class="font-weight-medium">
+            We're exploring ways to improve access and support for people who
+            stutter. We need your voice to help make a difference in our
+            community.
+          </p>
+          <a href="research.html" class="btn btn--primary u-lift" aria-label="Learn more about researching communication barriers">
+            Learn More
+          </a>
         </div>
 
-        <!-- Hero content -->
-        <div>
-          <h1 id="hero-heading">
-            Supporting People Who Stutter in Newfoundland and Labrador
-          </h1>
+        <div class="layout-grid__item col-5">
+          <!--40%-->
+          <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/kitchen-party.jpg'); ?>" alt="Kitchen Party Logo" />
+          <h3>
+            Kitchen Party <br />
+            <span>Where Every Voice Belongs</span>
+          </h3>
 
           <p class="font-weight-medium">
-            The NLSA advocates for people who stutter...
+            Celebrate connection, storytelling, and community at our NLSA
+            Kitchen Party—where every voice is welcome.
           </p>
-
-          <a href="about.html" class="btn btn--primary u-lift">
-            Learn more about
-            <abbr title="Newfoundland and Labrador Stuttering Association">
-              NLSA
-            </abbr>
-          </a>
-        </div>
-      </section>
-
-      <!-- ===== Announcement / CTA Banner ===== -->
-      <section
-        class="announcement announcement--primary"
-        aria-labelledby="announcement-heading"
-      >
-        <!-- Icon (decorative SVG) -->
-        <div class="announcement__icon">
-          <!-- SVG icon omitted for brevity -->
+          <a href="https://nlstuttering.ca/kitchenparty/" class="btn btn--primary u-lift" aria-label="Get details about the kitchen party where everyone is welcomed">Get Details</a>
         </div>
 
-        <!-- Text content -->
-        <div class="announcement__content">
-          <h2 id="announcement-heading">
-            Be Part of Research That Makes a Difference
-          </h2>
-          <p class="font-weight-medium">Help improve access and support...</p>
-        </div>
-
-        <!-- CTA -->
-        <div class="announcement__actions">
-          <a
-            href="get-involved.html"
-            class="btn btn--secondary u-lift"
-            aria-label="Get involved today and make a difference"
-          >
-            Get Involved Today
-          </a>
-        </div>
-      </section>
-
-      <!-- ===== Programs / Initiatives Grid ===== -->
-      <section aria-labelledby="programs-heading">
-        <h2 id="programs-heading" class="visually-hidden">
-          Programs and Initiatives
-        </h2>
-
-        <!-- Grid layout (mixed 60/40 columns) -->
-        <div class="layout-grid">
-          <!-- Individual program cards follow same structure -->
-          <!-- Image → heading → description → CTA -->
-
-          <div class="layout-grid__item col-7">
-            <!--60% -->
-            <img
-              loading="lazy"
-              src="assets/imgs/researching-barriers.jpg"
-              alt="NLSA Research Logo"
-            />
-            <h3>Researching Communication Barriers</h3>
-            <p class="font-weight-medium">
-              We're exploring ways to improve access and support for people who
-              stutter. We need your voice to help make a difference in our
-              community.
-            </p>
-            <a
-              href="research.html"
-              class="btn btn--primary u-lift"
-              aria-label="Learn more about researching communication barriers"
-            >
-              Learn More
-            </a>
-          </div>
-
-          <div class="layout-grid__item col-5">
-            <!--40%-->
-            <img
-              loading="lazy"
-              src="assets/imgs/kitchen-party.jpg"
-              alt="Kitchen Party Logo"
-            />
-            <h3>
-              Kitchen Party <br />
-              <span>Where Every Voice Belongs</span>
-            </h3>
-
-            <p class="font-weight-medium">
-              Celebrate connection, storytelling, and community at our NLSA
-              Kitchen Party—where every voice is welcome.
-            </p>
-            <a
-              href="https://nlstuttering.ca/kitchenparty/"
-              class="btn btn--primary u-lift"
-              aria-label="Get details about the kitchen party where everyone is welcomed"
-              >Get Details</a
-            >
-          </div>
-
-          <div class="layout-grid__item col-7">
-            <!--60%-->
-            <img
-              loading="lazy"
-              src="assets/imgs/ssl.jpg"
-              alt="Some Stutter Luh! Logo"
-            />
-            <h3>
-              Some Stutter Luh! &mdash; Newfoundland and Labrador's First
-              Podcast About Communicating Differently
-            </h3>
-            <p class="font-weight-medium">
-              Some Stutter Luh! celebrates the many ways people communicate. As
-              Newfoundland and Labrador's first podcast focused on speech and
-              communication differences, it shines a light on the experiences of
-              people who stutter and others with devalued communication styles.
-              Through open conversations, the podcast challenges myths, reduces
-              stigma, and highlights the beauty of diverse voices. Every story
-              reminds us that all forms of communication—fluent, disfluent, or
-              in between—deserve to be heard, understood, and respected.
-              Together, we're changing how we talk about talking.
-            </p>
-            <a
-              href="https://somestutterluh.hcommons.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn--primary u-lift"
-              aria-label="Listen to Some Stutter Luh podcast now (opens in a new tab)"
-            >
-              Listen Now
-            </a>
-          </div>
-
-          <div class="layout-grid__item col-5">
-            <!--40%-->
-            <img
-              loading="lazy"
-              src="assets/imgs/walk-run-roll.jpg"
-              alt="Walk, Run, Roll Logo"
-            />
-            <h3>
-              Walk, Run, and Roll<br />
-              <span>Moving Forward Together</span>
-            </h3>
-            <p class="font-weight-medium">
-              Join us for Walk, Run, and Roll—a fun, inclusive event that brings
-              people together to support and celebrate people who stutter in
-              Newfoundland and Labrador. Everyone is welcome to move at their
-              own pace, connect with others, and help raise awareness about
-              stuttering. Each step strengthens our community and celebrates the
-              power of coming together.
-            </p>
-            <a
-              href="https://nlstuttering.ca/walk-run-roll/"
-              class="btn btn--primary u-lift"
-              aria-label="Get details on the annual walk, run, and roll raising awareness event"
-              >Get Details</a
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== Conference Highlight Section ===== -->
-      <section
-        class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first"
-        aria-labelledby="conference-heading"
-      >
-        <!-- Text -->
-        <div>
-          <h2 id="conference-heading">
-            Joint Canadian Stuttering Association & Newfoundland and Labrador
-            Stuttering Association Conference.
-          </h2>
-
-          <p class="font-weight-medium">August 21–23, 2026</p>
-
-          <a
-            href="https://stutter.ca/events/conference/2026"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn--primary u-lift"
-            aria-label="Learn more about the 2026 CSA Conference (opens in new tab)"
-          >
-            Learn more about the 2026 CSA Conference
-          </a>
-        </div>
-
-        <!-- Image -->
-        <div class="split-panel__media">
-          <img
-            loading="lazy"
-            src="assets/imgs/at-home-with-stuttering.jpg"
-            alt="Joint Conference with the Canadian Stuttering Association"
-          />
-        </div>
-      </section>
-    </main>
-
-    <!-- ================== FOOTER ================== -->
-    <footer>
-      <div class="wrapper footer-inner">
-        <!-- Newsletter subscription form -->
-        <div>
-          <h2 class="footer__title">Subscribe to Our Newsletter</h2>
-
-          <!-- Uses Formspree for handling submissions -->
-          <form
-            class="form-inline"
-            action="https://formspree.io/f/mabcdxyz"
-            method="POST"
-          >
-            <!-- Visually hidden label for accessibility -->
-            <label for="footer-email" class="visually-hidden">
-              Email address
-            </label>
-
-            <input
-              class="form-input"
-              id="footer-email"
-              name="email"
-              type="email"
-              placeholder="Enter your email"
-              required
-            />
-
-            <button
-              class="btn btn--primary"
-              type="submit"
-              aria-label="Subscribe to our newsletter"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-
-        <!-- Social links -->
-        <div>
-          <h3 class="footer__title">Get in Touch</h3>
-
-          <div class="social-icons">
-            <!-- External social links -->
-            <a
-              href="https://www.facebook.com/groups/535643736920153/"
-              aria-label="Get in touch with us through Facebook"
-            >
-              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
-            </a>
-
-            <a
-              href="https://www.instagram.com/nlstuttering/"
-              aria-label="Get in touch with us through Instagram"
-            >
-              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
-            </a>
-          </div>
-        </div>
-
-        <!-- Footer bottom -->
-        <div class="footer__bottom">
-          <p class="footer__text">
-            &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
+        <div class="layout-grid__item col-7">
+          <!--60%-->
+          <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/ssl.jpg'); ?>" alt="Some Stutter Luh! Logo" />
+          <h3>
+            Some Stutter Luh! &mdash; Newfoundland and Labrador's First
+            Podcast About Communicating Differently
+          </h3>
+          <p class="font-weight-medium">
+            Some Stutter Luh! celebrates the many ways people communicate. As
+            Newfoundland and Labrador's first podcast focused on speech and
+            communication differences, it shines a light on the experiences of
+            people who stutter and others with devalued communication styles.
+            Through open conversations, the podcast challenges myths, reduces
+            stigma, and highlights the beauty of diverse voices. Every story
+            reminds us that all forms of communication—fluent, disfluent, or
+            in between—deserve to be heard, understood, and respected.
+            Together, we're changing how we talk about talking.
           </p>
+          <a href="https://somestutterluh.hcommons.org/" target="_blank" rel="noopener noreferrer" class="btn btn--primary u-lift" aria-label="Listen to Some Stutter Luh podcast now (opens in a new tab)">
+            Listen Now
+          </a>
+        </div>
+
+        <div class="layout-grid__item col-5">
+          <!--40%-->
+          <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/walk-run-roll.jpg'); ?>" alt="Walk, Run, Roll Logo" />
+          <h3>
+            Walk, Run, and Roll<br />
+            <span>Moving Forward Together</span>
+          </h3>
+          <p class="font-weight-medium">
+            Join us for Walk, Run, and Roll—a fun, inclusive event that brings
+            people together to support and celebrate people who stutter in
+            Newfoundland and Labrador. Everyone is welcome to move at their
+            own pace, connect with others, and help raise awareness about
+            stuttering. Each step strengthens our community and celebrates the
+            power of coming together.
+          </p>
+          <a href="https://nlstuttering.ca/walk-run-roll/" class="btn btn--primary u-lift" aria-label="Get details on the annual walk, run, and roll raising awareness event">Get Details</a>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <!-- ================== SCRIPTS ================== -->
-    <!-- Main navigation + interaction logic -->
-    <script src="assets/js/scripts.js"></script>
-  </body>
+    <!-- ===== Conference Highlight Section ===== -->
+    <section class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first" aria-labelledby="conference-heading">
+      <!-- Text -->
+      <div>
+        <h2 id="conference-heading">
+          Joint Canadian Stuttering Association & Newfoundland and Labrador
+          Stuttering Association Conference.
+        </h2>
+
+        <p class="font-weight-medium">August 21–23, 2026</p>
+
+        <a href="https://stutter.ca/events/conference/2026" target="_blank" rel="noopener noreferrer" class="btn btn--primary u-lift" aria-label="Learn more about the 2026 CSA Conference (opens in new tab)">
+          Learn more about the 2026 CSA Conference
+        </a>
+      </div>
+
+      <!-- Image -->
+      <div class="split-panel__media">
+        <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/at-home-with-stuttering.jpg'); ?>" alt="Joint Conference with the Canadian Stuttering Association" />
+      </div>
+    </section>
+  </main>
+
+  <!-- ================== FOOTER ================== -->
+  <footer>
+    <div class="wrapper footer-inner">
+      <!-- Newsletter subscription form -->
+      <div>
+        <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+
+        <!-- Uses Formspree for handling submissions -->
+        <form class="form-inline" action="https://formspree.io/f/mabcdxyz" method="POST">
+          <!-- Visually hidden label for accessibility -->
+          <label for="footer-email" class="visually-hidden">
+            Email address
+          </label>
+
+          <input class="form-input" id="footer-email" name="email" type="email" placeholder="Enter your email" required />
+
+          <button class="btn btn--primary" type="submit" aria-label="Subscribe to our newsletter">
+            Subscribe
+          </button>
+        </form>
+      </div>
+
+      <!-- Social links -->
+      <div>
+        <h3 class="footer__title">Get in Touch</h3>
+
+        <div class="social-icons">
+          <!-- External social links -->
+          <a href="https://www.facebook.com/groups/535643736920153/" aria-label="Get in touch with us through Facebook">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+          </a>
+
+          <a href="https://www.instagram.com/nlstuttering/" aria-label="Get in touch with us through Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer bottom -->
+      <div class="footer__bottom">
+        <p class="footer__text">
+          &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================== SCRIPTS ================== -->
+  <!-- Main navigation + interaction logic -->
+  <?php wp_footer(); ?>
+</body>
+
 </html>
