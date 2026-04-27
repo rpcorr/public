@@ -1,14 +1,19 @@
 /* ============== 6. Utilities (helpers/overrides) ============== */
+/* Small, single-purpose classes meant for quick overrides or one-off use.
+   These should NOT replace component styles, only complement them. */
 
 /* ====================== Alignments ===================== */
 
+/* Centers inline text content */
 .u-text-center {
   text-align: center;
 }
 
 /* ================== Spacing Utilities ================== */
+/* Consistent margin helpers based on spacing scale variables.
+   Use sparingly to avoid “utility soup” in markup. */
 
-/* Margin top */
+/* --- Margin top --- */
 .u-mt-xs {
   margin-top: var(--space-xs);
 }
@@ -25,7 +30,7 @@
   margin-top: var(--space-xlg);
 }
 
-/* Margin bottom */
+/* --- Margin bottom --- */
 .u-mb-xs {
   margin-bottom: var(--space-xs);
 }
@@ -42,6 +47,11 @@
   margin-bottom: var(--space-xlg);
 }
 
+/* ================== Motion Utilities ================== */
+
+/* Floating animation:
+   Combines vertical movement + subtle scaling for a “lifted” feel.
+   Ideal for icons, illustrations, or emphasis elements. */
 .u-float {
   filter: drop-shadow(0 10px 25px rgba(11, 48, 114, 0.2));
   animation:
@@ -49,6 +59,7 @@
     float-up var(--float-speed) var(--ease-in-out) infinite;
 }
 
+/* Vertical float motion */
 @keyframes float-up {
   0% {
     transform: translateY(0);
@@ -61,6 +72,7 @@
   }
 }
 
+/* Subtle scaling pulse */
 @keyframes pulse-scale {
   0% {
     transform: scale(1);
@@ -73,14 +85,17 @@
   }
 }
 
+/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .u-float {
     animation: none;
   }
 }
 
+/* Hover lift effect:
+   Adds a small upward movement for interactive elements */
 .u-lift {
-  display: inline-block;
+  display: inline-block; /* ensures transform works properly */
   transition: transform var(--transition-fast);
 }
 
@@ -88,24 +103,29 @@
   transform: translateY(-2px);
 }
 
-/* Accessibility */
+/* ================== Accessibility ================== */
+
+/* Visually hide content while keeping it accessible to screen readers.
+   Commonly used for labels, instructions, or extra context. */
 .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
-  margin: -1px;
+  margin: -1px; /* remove from layout flow */
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
+  white-space: nowrap; /* prevent line breaks */
   border: 0;
 }
 
+/* Skip link:
+   Allows keyboard users to jump directly to main content */
 .skip-link {
   position: fixed;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, -150%); /* hidden off-screen initially */
 
   background: var(--primary);
   color: var(--white);
@@ -124,14 +144,16 @@
   opacity: 0;
 }
 
-/* --- Show on focus --- */
+/* Reveal skip link when focused (keyboard navigation) */
 .skip-link:focus,
 .skip-link:focus-visible {
   transform: translate(-50%, 0);
   opacity: 1;
 }
 
-/* --- Typography --- */
+/* ================== Typography Utilities ================== */
+
+/* Shared base styles for font-weight utility classes */
 [class^='font-weight-'] {
   font-size: var(--text-base);
   line-height: var(--lh-base);
@@ -139,6 +161,7 @@
   margin-bottom: var(--space-md);
 }
 
+/* Font weight variants */
 .font-weight-regular {
   font-weight: var(--fw-regular);
 }
@@ -155,6 +178,7 @@
   font-weight: var(--fw-bold);
 }
 
+/* Text size helpers (use sparingly; prefer semantic elements first) */
 .text-sm {
   font-size: var(--text-sm);
 }
@@ -165,6 +189,7 @@
   font-size: var(--text-lg);
 }
 
+/* Muted text for secondary content (e.g., captions, metadata) */
 .text-muted {
   color: rgba(0, 0, 0, 0.7);
 }

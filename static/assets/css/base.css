@@ -1,16 +1,19 @@
 /* ================== 3. Base (HTML elements) =================== */
+/* Enable smooth scrolling only when user has NOT requested reduced motion */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
+/* Abbreviations: remove default underline and replace with dotted hint */
 abbr {
   text-decoration: none;
-  border-bottom: var(--border-dotted);
-  cursor: help;
+  border-bottom: var(--border-dotted); /* visual cue for tooltip */
+  cursor: help; /* indicates additional info on hover */
 }
 
+/* Base body styles */
 body {
   background: var(--white);
   color: var(--text);
@@ -19,25 +22,30 @@ body {
   font-size: var(--text-base);
 }
 
+/* Lock scroll when mobile menu is open */
 body.menu-open {
   position: fixed;
   width: 100%;
-  overscroll-behavior: none;
+  overscroll-behavior: none; /* prevents bounce/scroll chaining */
 }
 
+/* Responsive images */
 img {
-  max-width: 100%;
-  display: block;
+  max-width: 100%; /* prevents overflow */
+  display: block; /* removes inline spacing issues */
 }
 
+/* Section spacing */
 section {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-lg); /* consistent vertical rhythm */
 }
 
+/* Remove margin from last section */
 section:last-of-type {
   margin-bottom: 0;
 }
 
+/* Default list spacing */
 ul,
 ol {
   margin-bottom: var(--space-md);
@@ -46,16 +54,19 @@ ol {
 /* --- Typography --- */
 
 /* ================== Headings ================== */
+/* Consistent heading scale using design tokens */
 
+/* Primary page heading */
 h1 {
   font-size: var(--text-3xl);
   font-weight: var(--fw-bold);
   color: var(--primary);
   line-height: var(--lh-tight);
   margin-bottom: var(--space-md);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.01em; /* slight tightening for large text */
 }
 
+/* Section headings */
 h2 {
   font-size: var(--text-2xl);
   font-weight: var(--fw-bold);
@@ -64,6 +75,7 @@ h2 {
   margin-bottom: var(--space-sm);
 }
 
+/* Subsection headings */
 h3 {
   font-size: var(--text-xl);
   font-weight: var(--fw-semibold);
@@ -72,6 +84,7 @@ h3 {
   margin-bottom: var(--space-sm);
 }
 
+/* Supporting headings */
 h4 {
   font-size: var(--text-lg);
   font-weight: var(--fw-semibold);
@@ -93,28 +106,33 @@ h6 {
   line-height: var(--lh-normal);
 }
 
+/* Body text */
 p {
   font-size: var(--text-base);
-  line-height: var(--lh-relaxed);
-  max-width: 68ch;
+  line-height: var(--lh-relaxed); /* improved readability for paragraphs */
+  max-width: 68ch; /* optimal line length */
   margin-bottom: var(--space-md);
 }
 
+/* Emphasis text */
 strong {
-  color: var(--primary);
+  color: var(--primary); /* aligns emphasis with brand color */
 }
 
+/* Base link reset */
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit; /* inherit text color */
+  text-decoration: none; /* remove default underline (handled elsewhere) */
 }
 
+/* Center page heading on mobile for better layout balance */
 @media (max-width: 768px) {
   #page-heading {
     text-align: center;
   }
 }
 
+/* Text selection styling */
 ::selection {
   background: var(--accent);
   color: var(--white);

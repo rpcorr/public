@@ -1,26 +1,35 @@
-/* ================== 1. CSS Reset ================== */
+/* ================== 1. CSS Reset ==================
+   Normalizes default browser styles and establishes
+   a consistent foundation across all elements.
+*/
 
-/* Box sizing */
+/* Box sizing
+   Use border-box everywhere so padding/borders
+   are included in width/height calculations */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default margins */
+/* Remove default margins
+   Eliminates inconsistent spacing from browsers */
 * {
   margin: 0;
 }
 
-/* Base body */
+/* Base body
+   Sets a consistent line-height and improves text rendering.
+   min-height ensures full viewport coverage */
 body {
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; /* improves font rendering on macOS/iOS */
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
 }
 
-/* Media elements */
+/* Media elements
+   Prevent inline spacing issues and ensure responsive scaling */
 img,
 picture,
 video,
@@ -30,7 +39,8 @@ svg {
   max-width: 100%;
 }
 
-/* Form elements */
+/* Form elements
+   Inherit typography styles instead of using browser defaults */
 input,
 button,
 textarea,
@@ -38,7 +48,8 @@ select {
   font: inherit;
 }
 
-/* Remove built-in heading styles */
+/* Remove built-in heading styles
+   Allows full control via your typography system */
 h1,
 h2,
 h3,
@@ -48,20 +59,23 @@ h6 {
   font-weight: inherit;
 }
 
-/* Links */
+/* Links
+   Remove default underline and color so links match design system */
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* Lists */
+/* Lists
+   Remove default spacing so layout is fully controlled */
 ul,
 ol {
   margin: 0;
   padding: 0;
 }
 
-/* Prevent text overflow */
+/* Prevent text overflow
+   Ensures long words/URLs wrap instead of breaking layout */
 p,
 h1,
 h2,
@@ -72,13 +86,16 @@ h6 {
   overflow-wrap: break-word;
 }
 
-/* Root stacking context */
+/* Root stacking context
+   Creates a new stacking context for app frameworks (React/Next)
+   to avoid z-index conflicts */
 #root,
 #__next {
   isolation: isolate;
 }
 
-/* Accessibility */
+/* Accessibility
+   Provides a consistent, visible focus style for keyboard users */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

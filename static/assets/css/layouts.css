@@ -1,11 +1,17 @@
-/* --- main --- */
+/* --- main ---
+   Primary content container.
+   Provides consistent background and vertical spacing for all pages.
+*/
 main {
   display: block;
   background-color: var(--bg-light);
   padding: var(--space-lg) 0;
 }
 
-/* --- wrapper --- */
+/* --- wrapper ---
+   Constrains content width and centers it horizontally.
+   Acts as a reusable page container.
+*/
 .wrapper {
   max-width: 1100px;
   margin: 0 auto;
@@ -13,20 +19,28 @@ main {
 }
 
 @media (max-width: 768px) {
+  /* Ensure paragraphs remain left-aligned on smaller screens
+     (overrides any centered text in components if needed) */
   .wrapper p {
     text-align: left;
   }
 }
 
-/* --- layout grid system --- */
+/* --- layout grid system ---
+   12-column CSS grid for flexible layouts.
+   Use .col-* utilities to control column span.
+*/
 .layout-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--space-lg);
-  align-items: stretch;
+  align-items: stretch; /* ensures equal-height items */
 }
 
-/* --- columns --- */
+/* --- columns ---
+   Utility classes for spanning grid columns.
+   Designed for desktop-first layout.
+*/
 .layout-grid > .col-12 {
   grid-column: span 12;
 }
@@ -46,7 +60,10 @@ main {
   grid-column: span 4;
 }
 
-/* --- cards --- */
+/* --- cards (grid items) ---
+   Standard card component used within the grid.
+   Centers content and provides elevation + hover interaction.
+*/
 .layout-grid__item {
   display: flex;
   flex-direction: column;
@@ -58,58 +75,72 @@ main {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 
+  /* subtle lift + shadow on hover */
   transition:
     box-shadow var(--transition-base),
     transform var(--transition-base);
 }
 
+/* Hover interaction for cards */
 .layout-grid__item:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
+/* Card image constraints */
 .layout-grid__item img {
   width: 100%;
   max-width: 300px;
   height: auto;
 }
 
+/* Ensure headings are centered inside cards */
 .layout-grid__item h2 {
   text-align: center;
 }
 
+/* Paragraph behavior inside cards */
 .layout-grid__item p {
   line-height: var(--lh-base);
   text-align: center; /* unified with card design */
-  flex-grow: 1;
+  flex-grow: 1; /* pushes content to fill height evenly */
 }
 
-/* --- tablet --- */
+/* --- tablet breakpoint ---
+   Collapse 12-column grid into 2 equal columns.
+   Simplifies layout while maintaining spacing.
+*/
 @media (max-width: 768px) {
   .layout-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Reset manual column spans */
   .layout-grid__item {
     grid-column: auto;
   }
 
+  /* Previously uneven spans become equal columns */
   .layout-grid > .col-5,
   .layout-grid > .col-7 {
     grid-column: span 1;
   }
 
+  /* Slightly reduce image size for smaller screens */
   .layout-grid__item img {
     max-width: 210px;
   }
 }
 
-/* --- mobile --- */
+/* --- mobile breakpoint ---
+   Single-column stacked layout for narrow screens.
+*/
 @media (max-width: 375px) {
   .layout-grid {
     grid-template-columns: 1fr;
   }
 
+  /* Each item spans full width */
   .layout-grid__item {
     grid-column: 1 / -1;
   }

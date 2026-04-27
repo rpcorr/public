@@ -1,17 +1,29 @@
 /* ================== 2. Variables ================== */
+/* Central design tokens for the entire project.
+   These variables define color, spacing, typography, motion, etc.
+   Update here to apply consistent changes globally. */
+
 :root {
-  /*-------------------Colours ------------------------ */
+  /* ------------------- Colours ------------------- */
+  /* Core brand + UI colours */
   --primary: #0b3072;
   --primary-dark: #092a63;
   --accent: #029fd4;
+
+  /* Text colours */
   --text: #333;
   --text-muted: #666;
+
+  /* Backgrounds */
   --bg-light: #f8fbff;
   --white: #fff;
   --black: #000;
+
+  /* Borders / neutral UI */
   --border: #ccc;
 
-  /*--------------------Font Sizes --------------------*/
+  /* ------------------- Font Sizes ------------------- */
+  /* Fluid scale from small UI text to large headings */
   --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -21,39 +33,45 @@
   --text-2xl: 1.375rem;
   --text-3xl: 1.625rem;
 
-  /* -------------------Font Weights ------------------ */
+  /* ------------------- Font Weights ------------------- */
+  /* Keep consistent naming across components */
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
 
-  /*--------------------Line Height ------------------ */
-  --lh-tight: 1.25;
-  --lh-snug: 1.3;
-  --lh-normal: 1.4;
-  --lh-base: 1.6;
-  --lh-relaxed: 1.75;
+  /* ------------------- Line Heights ------------------- */
+  /* Tuned for readability at different text sizes */
+  --lh-tight: 1.25; /* headings */
+  --lh-snug: 1.3; /* subheadings */
+  --lh-normal: 1.4; /* UI text */
+  --lh-base: 1.6; /* default body */
+  --lh-relaxed: 1.75; /* long-form text */
 
-  /* --------------- Border Radius ------------------- */
+  /* ------------------- Border Radius ------------------- */
+  /* Consistent rounding across UI elements */
   --radius: 1rem;
   --radius-sm: 8px;
 
-  /* -----------------------Borders ------------------- */
+  /* ------------------- Borders ------------------- */
+  /* Standard border tokens */
   --border-thick: 0.25rem;
   --border-dotted: 1px dotted var(--border);
 
-  /* ---------------- Shadows ------------------------- */
+  /* ------------------- Shadows ------------------- */
+  /* Elevation system: small → large */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 
-  /* semantic aliases */
+  /* Semantic shadow aliases (use these in components) */
   --shadow-card: var(--shadow);
   --shadow-quote: var(--shadow-md);
   --shadow-elevated: var(--shadow-lg);
 
-  /* ----------------------- Spaces ----------------- */
+  /* ------------------- Spacing Scale ------------------- */
+  /* Based on a consistent rhythm (4px/8px system) */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-small-plus: 0.75rem;
@@ -62,38 +80,47 @@
   --space-lg: 2rem;
   --space-xlg: 4rem;
 
-  /*------------------Icons Sizes --------------------*/
+  /* ------------------- Icon Sizes ------------------- */
+  /* Standard sizes for inline SVG/icons */
   --icon-sm: 1rem;
   --icon-md: 1.5rem;
   --icon-lg: 2.5rem;
 
-  /*--------------------Content-----------------------*/
+  /* ------------------- Content Widths ------------------- */
+  /* Used for readable text containers */
   --content-narrow: 37.5rem;
 
-  /*--------------------Z-Index-----------------------*/
+  /* ------------------- Z-Index Scale ------------------- */
+  /* Layering system to avoid arbitrary values */
   --z-base: 1;
   --z-dropdown: 100;
   --z-overlay: 1000;
   --z-modal: 2000;
 
-  /*------------------Motion---------------------*/
+  /* ------------------- Motion & Easing ------------------- */
+  /* Standard easing curves */
   --ease-standard: ease;
   --ease-in-out: ease-in-out;
 
+  /* Custom easing for smoother UI transitions */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-soft: cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* Timing durations */
   --motion-fast: 180ms;
   --motion-smooth: 320ms;
-  --mootion-delay: 60ms;
+  --motion-delay: 60ms;
 
+  /* Transition presets (preferred for consistency) */
   --transition-fast: var(--motion-fast) var(--ease-standard);
   --transition-base: 0.25s var(--ease-standard);
   --transition-slow: 0.35s var(--ease-standard);
   --transition-slower: 0.42s var(--ease-standard);
 
+  /* Animation timing */
   --float-speed: 2s;
 
-  /* -------------------Others -----------------------*/
+  /* ------------------- Misc ------------------- */
+  /* Layout-specific values */
   --drawer-width: 280px;
 }
