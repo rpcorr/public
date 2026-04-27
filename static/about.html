@@ -185,19 +185,43 @@
               <!-- Sub-navigation for About section -->
               <ul id="submenu-about" class="submenu" aria-label="About submenu">
                 <li>
-                  <a href="about.html" class="submenu__link"
-                    ><span class="link-text">Overview</span></a
-                  >
+                  <a href="about.html" class="submenu__link">
+                    <span class="link-text">Overview</span>
+                  </a>
                 </li>
                 <li>
-                  <a href="team.html" class="submenu__link"
-                    ><span class="link-text">Our Team</span></a
-                  >
+                  <a href="team.html" class="submenu__link">
+                    <span class="link-text">Our Team</span>
+                  </a>
                 </li>
-                <li>
-                  <a href="history.html" class="submenu__link"
-                    ><span class="link-text">History</span></a
+
+                <!-- Nested submenu -->
+                <li class="has-submenu">
+                  <a
+                    href="#"
+                    class="submenu__link submenu-toggle"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                   >
+                    <span class="link-text">History</span>
+                  </a>
+
+                  <!-- Sub-sub menu -->
+                  <ul
+                    class="submenu submenu--nested"
+                    aria-label="History submenu"
+                  >
+                    <li>
+                      <a href="early.html" class="submenu__link">
+                        <span class="link-text">Early Years</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="modern.html" class="submenu__link">
+                        <span class="link-text">Modern Era</span>
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
