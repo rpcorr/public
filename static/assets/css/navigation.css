@@ -1,17 +1,19 @@
 /* ================== Navigation ================== */
-
+/* Backdrop overlay behind mobile drawer (dim + blur effect) */
 .nav-backdrop {
   position: fixed;
   inset: 0;
 
   background: rgba(0, 0, 0, 0.45);
 
+  /* hidden by default */
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.02);
+  transform: scale(1.02); /* slight scale for subtle zoom-in feel */
 
   backdrop-filter: blur(0px);
 
+  /* smooth fade + blur + visibility delay to prevent flicker */
   transition:
     opacity var(--motion-smooth) 60ms,
     transform var(--motion-smooth) 60ms,
@@ -19,28 +21,31 @@
     visibility 0s linear calc(var(--motion-smooth) + var(--motion-delay));
 
   z-index: 800;
-  pointer-events: none;
+  pointer-events: none; /* disabled until visible */
 
   will-change: opacity, transform, backdrop-filter;
 }
 
+/* Visible/open state */
 .nav-backdrop.is-open {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
 
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px); /* Safari */
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
 }
 
+/* Allow interaction when visible or closing */
 .nav-backdrop.is-open,
 .nav-backdrop.is-closing {
   pointer-events: auto;
 }
 
 /* --- Hamburger --- */
+/* Mobile menu toggle button */
 .hamburger {
-  display: none;
+  display: none; /* hidden on desktop */
   position: relative;
   align-items: center;
   margin-left: auto; /* pushes to right */
@@ -58,27 +63,32 @@
   cursor: pointer;
 }
 
+/* Accessible focus state */
 .hamburger:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
+/* Hamburger bars */
 .hamburger span {
   display: block;
   position: absolute;
   left: 50%;
-  width: 28px; /* controls length */
-  height: 3px; /* controls thickness */
+  width: 28px; /* bar length */
+  height: 3px; /* bar thickness */
   background: var(--primary);
   border-radius: 2px;
+
+  /* animate opacity + transform for morphing into "X" */
   transition:
     opacity var(--motion-fast),
     transform var(--motion-smooth) var(--ease-smooth);
+
   transform-origin: center;
   will-change: transform;
 }
 
-/* ---Position the 3 bars --- */
+/* --- Position the 3 bars --- */
 .hamburger span:nth-child(1) {
   top: 12px;
   transform: translateX(-50%);
@@ -101,7 +111,7 @@
 }
 
 .hamburger.is-open span:nth-child(2) {
-  opacity: 0;
+  opacity: 0; /* hide middle bar */
 }
 
 .hamburger.is-open span:nth-child(3) {
@@ -109,6 +119,7 @@
   transform: translateX(-50%) rotate(-45deg);
 }
 
+/* Show hamburger only on mobile */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -116,6 +127,7 @@
 }
 
 /* --- header --- */
+/* Sticky header that stays on top */
 .site-header {
   position: sticky;
   top: 0;
@@ -125,6 +137,7 @@
 }
 
 /* --- site nav --- */
+/* Main navigation container */
 .site-nav {
   position: relative;
   z-index: auto;
@@ -132,6 +145,7 @@
   background: var(--white);
 }
 
+/* Reset default list styles */
 .site-nav ul,
 .site-nav ol {
   list-style: none;
@@ -140,6 +154,7 @@
 }
 
 /* --- Inner container --- */
+/* Layout wrapper for logo + nav */
 .site-nav__inner {
   display: flex;
   align-items: center;
@@ -155,7 +170,7 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* --- Tagline --- */
+/* --- Tagline / Logo --- */
 .site-nav__tagline {
   margin-right: auto;
   max-width: 380px;
@@ -163,6 +178,7 @@
   display: flex;
   align-items: center;
 
+  /* subtle slide animation when menu opens on mobile */
   transition: transform var(--motion-smooth) var(--ease-smooth);
   will-change: transform;
 }
@@ -178,11 +194,13 @@
     opacity var(--transition-base);
 }
 
+/* Slight zoom on hover */
 .site-nav__tagline:hover img {
   transform: scale(1.05);
 }
 
 /* --- Nav list --- */
+/* Horizontal nav (desktop) / drawer (mobile) */
 .site-nav__list {
   display: flex;
   align-items: center;
@@ -196,11 +214,13 @@
   overscroll-behavior: contain;
 }
 
+/* Closing animation state */
 .site-nav__list.is-closing {
   transition: transform var(--motion-smooth) var(--ease-in-soft);
 }
 
 /* --- Links --- */
+/* Top-level navigation links */
 .site-nav__link {
   position: relative;
   display: inline-flex;
@@ -217,14 +237,14 @@
     transform var(--transition-fast);
 }
 
-/* --- Underline animation --- */
+/* Hover + current page styling */
 .site-nav__link:hover,
 .site-nav__link[aria-current='page'] {
   color: var(--primary);
 }
 
 /* ================== Unified underline (text-only) ================== */
-
+/* Animated underline applied ONLY to text span */
 .link-text {
   position: relative;
   display: inline-block;
@@ -246,7 +266,7 @@
   transition: transform var(--transition-base);
 }
 
-/* Works for ALL links */
+/* Trigger underline for hover, focus, and active states */
 .site-nav__link:hover .link-text::after,
 .site-nav__link:focus .link-text::after,
 .site-nav__link:focus-visible .link-text::after,
@@ -258,10 +278,12 @@
   transform: scaleX(1);
 }
 
+/* Accessible focus for submenu links */
 .submenu__link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
 
 @media (max-width: 768px) {
   .site-nav__link {
@@ -449,12 +471,13 @@
 }
 
 /* ================== Submenu (Desktop base) ================== */
-
+/* Parent item containing submenu */
 .has-submenu {
   position: relative;
   display: flex;
 }
 
+/* First-level dropdown */
 .submenu {
   position: absolute;
   top: 100%;
@@ -468,6 +491,7 @@
   padding: var(--space-sm);
   margin: 0;
 
+  /* hidden by default */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -478,6 +502,7 @@
   z-index: 999;
 }
 
+/* Open state controlled by JS or CSS */
 .has-submenu.is-open .submenu {
   opacity: 1;
   visibility: visible;
@@ -493,6 +518,7 @@
   white-space: nowrap;
 }
 
+/* hover state */
 .submenu__link:hover {
   color: var(--primary);
 }
@@ -593,7 +619,9 @@
   }
 }
 
-/* second-level submenu */
+
+/* ================== Nested submenu ================== */
+/* Second-level (flyout) menu */
 .submenu--nested {
   position: absolute;
   top: 0;
@@ -601,6 +629,8 @@
   margin-left: 6px;
   min-width: 180px;
   padding-left: 12px;
+
+  /* hidden by default */
   max-height: 0;
   opacity: 0;
   overflow: hidden;
@@ -608,7 +638,7 @@
   visibility: hidden;
 }
 
-/* Only opens when ITS OWN parent is open */
+/* Opens ONLY when its parent submenu item is open */
 .submenu .has-submenu.is-open > .submenu--nested {
   max-height: 500px;
   opacity: 1;
@@ -637,6 +667,8 @@
   padding-right: 18px;
 }
 
+
+/* Arrow indicator for nested submenu */
 .submenu .has-submenu > .submenu__link::after {
   content: '';
   position: absolute;
@@ -652,6 +684,7 @@
   transition: transform 0.2s ease;
 }
 
+/* Rotate arrow when open/hovered */
 .submenu .has-submenu:hover > .submenu__link::after,
 .submenu .has-submenu.is-open > .submenu__link::after {
   transform: translateY(-50%) rotate(45deg);
@@ -681,5 +714,17 @@
     pointer-events: none;
 
     transition: all var(--transition-base);
+  }
+}
+
+
+/* ================== Accessibility / motion ================== */
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav__list,
+  .site-nav__list a,
+  .nav-backdrop,
+  .hamburger span {
+    transition: none !important;
   }
 }
