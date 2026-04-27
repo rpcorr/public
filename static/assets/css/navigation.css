@@ -507,6 +507,14 @@
     pointer-events: auto;
   }
 
+  .submenu .has-submenu:hover > .submenu--nested,
+  .submenu .has-submenu:focus-within > .submenu--nested {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
   .submenu {
     position: absolute;
     top: 100%;
