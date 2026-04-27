@@ -1,50 +1,63 @@
-const menu = document.querySelector('#primary-menu');
-const button = document.querySelector('.hamburger');
-const backdrop = document.querySelector('.nav-backdrop');
+// ================== MAIN NAV ELEMENTS ==================
+const menu = document.querySelector('#primary-menu'); // main nav container
+const button = document.querySelector('.hamburger'); // toggle button (open/close)
+const backdrop = document.querySelector('.nav-backdrop'); // overlay behind menu
 
+// Fail early if required elements are missing
 if (!button || !menu || !backdrop) {
   console.warn('Navigation elements missing');
 } else {
+  // All elements that can receive focus (used for keyboard trapping)
   const focusableSelectors =
     'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
 
+  // Focus management
   let focusables = [];
   let firstFocusable;
   let lastFocusable;
+
+  // Resize debounce timer
   let resizeTimeout;
 
+  // Scroll position (for locking body when menu opens)
   let scrollY = 0;
+
+  // Element that triggered menu open (for restoring focus)
   let lastTrigger = null;
 
+  // Detect mobile breakpoint (matches CSS breakpoint)
   function isMobile() {
     return window.matchMedia('(max-width: 768px)').matches;
   }
 
+  // ================== CLOSE MENU ==================
   function closeMenu() {
-    // 1. Apply closing state FIRST
+    // Step 1: apply closing class for CSS animation
     menu.classList.add('is-closing');
 
-    // 2. Next frame, remove open
+    // Step 2: next frame remove open state (ensures animation runs)
     requestAnimationFrame(() => {
       menu.classList.remove('is-open');
       button.classList.remove('is-open');
       backdrop.classList.remove('is-open');
     });
 
+    // Update accessibility state
     button.setAttribute('aria-expanded', 'false');
-
     document.body.classList.remove('menu-open');
 
     updateMenuAccessibility();
 
-    // disable whole menu properly
+    // Fully disable menu for screen readers + interaction
     menu.setAttribute('inert', '');
     menu.setAttribute('aria-hidden', 'true');
 
+    // Disable all submenus
     document.querySelectorAll('.submenu, .submenu--nested').forEach((el) => {
       el.inert = true;
     });
 
+    // Close any open submenu states
     document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
       item.classList.remove('is-open');
       item
@@ -52,6 +65,7 @@ if (!button || !menu || !backdrop) {
         ?.setAttribute('aria-expanded', 'false');
     });
 
+    // Restore scroll after animation completes
     setTimeout(() => {
       document.body.style.position = '';
       document.body.style.top = '';
@@ -62,12 +76,12 @@ if (!button || !menu || !backdrop) {
       window.scrollTo(0, scrollY);
     }, 420);
 
-    // cleanup
+    // Cleanup closing class
     setTimeout(() => {
       menu.classList.remove('is-closing');
     }, 420);
 
-    // restore focus
+    // Restore focus to trigger element (or fallback to button)
     if (lastTrigger && document.contains(lastTrigger)) {
       lastTrigger.focus();
     } else {
@@ -75,40 +89,47 @@ if (!button || !menu || !backdrop) {
     }
   }
 
+  // ================== OPEN MENU ==================
   function openMenu() {
     const activeLink = menu.querySelector('a.active');
 
+    // Save element that opened menu (for later focus restore)
     lastTrigger = document.activeElement;
 
+    // Apply open states
     menu.classList.add('is-open');
     button.classList.add('is-open');
     backdrop.classList.add('is-open');
     document.body.classList.add('menu-open');
 
+    // Accessibility
     button.setAttribute('aria-expanded', 'true');
-
     updateMenuAccessibility();
 
+    // Enable menu interaction
     menu.removeAttribute('inert');
     menu.removeAttribute('aria-hidden');
 
+    // Ensure all submenus start closed
     menu.querySelectorAll('.submenu, .submenu--nested').forEach((el) => {
-      el.inert = true; // default closed state
+      el.inert = true;
     });
 
+    // Lock body scroll
     scrollY = window.scrollY;
-
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.width = '100%';
 
+    // Prepare focusable elements
     setFocusableElements();
 
+    // Scroll active link into view
     scrollActiveItemIntoView();
 
-    // move focus to current link else home into menu
+    // Move focus to active link or first focusable item
     if (activeLink && typeof activeLink.focus === 'function') {
       activeLink.focus();
     } else if (firstFocusable && typeof firstFocusable.focus === 'function') {
@@ -116,12 +137,12 @@ if (!button || !menu || !backdrop) {
     }
   }
 
+  // Scroll currently active page link into view inside menu
   function scrollActiveItemIntoView() {
     const activeLink = menu.querySelector('a.active');
-
     if (!activeLink) return;
 
-    // Small delay ensures layout + transitions are applied
+    // Wait a frame to ensure layout is stable
     requestAnimationFrame(() => {
       activeLink.scrollIntoView({
         block: 'center',
@@ -131,28 +152,34 @@ if (!button || !menu || !backdrop) {
     });
   }
 
+  // Collect all focusable elements for focus trapping
   function setFocusableElements() {
     const navFocusables = menu.querySelectorAll(focusableSelectors);
-    const closeBtn = button; // hamburger acts as close button
+
+    // Include hamburger so it acts as first/last loop point
+    const closeBtn = button;
 
     focusables = [closeBtn, ...navFocusables];
-
     firstFocusable = focusables[0];
     lastFocusable = focusables[focusables.length - 1];
   }
 
+  // Toggle menu open/close
   function toggleMenu() {
     const isOpen = menu.classList.contains('is-open');
     isOpen ? closeMenu() : openMenu();
   }
 
+  // Bind global listeners (once)
   function bindGlobalNavEvents() {
     document.addEventListener('keydown', onGlobalKeyDown);
     document.addEventListener('click', onGlobalClick);
 
+    // Clicking backdrop closes menu
     backdrop.addEventListener('click', closeMenu);
   }
 
+  // Handle global key actions
   function onGlobalKeyDown(e) {
     if (e.key === 'Escape') {
       closeMenu();
@@ -160,31 +187,28 @@ if (!button || !menu || !backdrop) {
     }
   }
 
+  // Close all open submenus
   function closeAllSubmenus() {
     document.querySelectorAll('.has-submenu.is-open').forEach(closeSubmenu);
   }
 
+  // Handle clicks outside nav
   function onGlobalClick(e) {
     const clickedInsideNav = e.target.closest('.site-nav');
     const clickedHamburger = e.target.closest('.hamburger');
     const clickedSubmenuToggle = e.target.closest('.submenu-toggle');
 
+    // Click outside everything → close menu
     if (!clickedInsideNav && !clickedHamburger && !clickedSubmenuToggle) {
       closeMenu();
       return;
     }
 
+    // Otherwise close submenus if needed
     closeAllSubmenusIfOutside(e);
   }
 
-  // function closeAllSubmenusIfOutside(e) {
-  //   document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
-  //     if (!item.contains(e.target)) {
-  //       closeSubmenu(item);
-  //     }
-  //   });
-  // }
-
+  // Close submenus if click occurred outside them
   function closeAllSubmenusIfOutside(e) {
     document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
       if (!item.contains(e.target)) {
@@ -196,14 +220,15 @@ if (!button || !menu || !backdrop) {
     });
   }
 
+  // Close a specific submenu
   function closeSubmenu(item) {
     item.classList.remove('is-open');
-
     item
       .querySelector('.submenu-toggle')
       ?.setAttribute('aria-expanded', 'false');
   }
 
+  // Manage aria/inert based on state + breakpoint
   function updateMenuAccessibility() {
     if (isMobile()) {
       if (menu.classList.contains('is-open')) {
@@ -214,40 +239,43 @@ if (!button || !menu || !backdrop) {
         menu.setAttribute('aria-hidden', 'true');
       }
     } else {
-      // Desktop: always accessible
+      // Desktop: menu always accessible
       menu.removeAttribute('inert');
       menu.removeAttribute('aria-hidden');
     }
   }
 
+  // Toggle button click
   button.addEventListener('click', toggleMenu);
 
   /* ================== KEYBOARD NAVIGATION ================== */
   menu.addEventListener('keydown', (e) => {
+    // Only trap keys when menu is open
     if (!document.body.classList.contains('menu-open')) return;
 
-    /* ================== TAB (focus trap) ================== */
+    /* ===== TAB → focus trap ===== */
     if (e.key === 'Tab') {
       if (!firstFocusable || !lastFocusable) return;
 
-      // SHIFT + TAB (backwards)
+      // SHIFT + TAB (wrap backwards)
       if (e.shiftKey && document.activeElement === firstFocusable) {
         e.preventDefault();
         lastFocusable.focus();
       }
 
-      // TAB (forwards)
+      // TAB (wrap forwards)
       if (!e.shiftKey && document.activeElement === lastFocusable) {
         e.preventDefault();
         firstFocusable.focus();
       }
 
-      return; // IMPORTANT: stop here
+      return; // stop further handling
     }
 
-    /* ================== ARROW NAV ================== */
+    /* ===== ARROW KEYS → vertical nav ===== */
     if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
 
+    // Only include visible/valid links (skip hidden nested items)
     const items = Array.from(
       menu.querySelectorAll('.site-nav__link, .submenu__link'),
     ).filter((el) => {
@@ -262,13 +290,10 @@ if (!button || !menu || !backdrop) {
 
     e.preventDefault();
 
-    let nextIndex;
-
-    if (e.key === 'ArrowDown') {
-      nextIndex = Math.min(currentIndex + 1, items.length - 1);
-    } else {
-      nextIndex = Math.max(currentIndex - 1, 0);
-    }
+    let nextIndex =
+      e.key === 'ArrowDown'
+        ? Math.min(currentIndex + 1, items.length - 1)
+        : Math.max(currentIndex - 1, 0);
 
     items[nextIndex]?.focus();
   });
@@ -278,36 +303,39 @@ if (!button || !menu || !backdrop) {
     const link = e.target.closest('.site-nav__link');
     const submenuToggle = e.target.closest('.submenu-toggle');
 
-    // If it's a submenu toggle, DO NOTHING here
+    // Ignore submenu toggle clicks (handled elsewhere)
     if (submenuToggle) return;
 
-    // If it's a real navigation link (not a parent toggle), close menu
+    // Close menu on real navigation
     if (link && !submenuToggle) {
       closeMenu();
     }
   });
 
-  /* ================== SWIPE TO CLOSE (mobile feel) ================== */
+  /* ================== SWIPE TO CLOSE (mobile UX) ================== */
   let startX = 0;
   let isSwiping = false;
 
+  // Record initial touch position
   menu.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
     isSwiping = true;
   });
 
+  // Detect swipe gesture
   menu.addEventListener('touchmove', (e) => {
     if (!isSwiping) return;
 
     const diff = e.touches[0].clientX - startX;
 
-    // swipe right closes menu
+    // Swipe right → close menu
     if (diff > 100) {
       isSwiping = false;
       closeMenu();
     }
   });
 
+  // Reset swipe state
   menu.addEventListener('touchend', () => {
     isSwiping = false;
   });
@@ -316,22 +344,26 @@ if (!button || !menu || !backdrop) {
     isSwiping = false;
   });
 
+  // Initial accessibility setup
   updateMenuAccessibility();
 
+  // Bind global events once
   bindGlobalNavEvents();
 
+  // ================== RESPONSIVE RESET ==================
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
 
     resizeTimeout = setTimeout(() => {
       if (!isMobile()) {
+        // Fully reset menu state when switching to desktop
         menu.classList.remove('is-open');
         button.classList.remove('is-open');
         backdrop.classList.remove('is-open');
 
         document.body.classList.remove('menu-open');
 
-        // FULL reset of scroll lock
+        // Clear scroll lock styles
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.left = '';
@@ -346,11 +378,13 @@ if (!button || !menu || !backdrop) {
   });
 }
 
+// ================== SUBMENU LOGIC ==================
 document.querySelectorAll('.has-submenu').forEach((menuItem) => {
-  const toggle = menuItem.querySelector(':scope > .submenu-toggle');
+  const toggle = menuItem.querySelector(':scope > .submenu-toggle'); // direct child toggle
   const submenu = menuItem.querySelector('.submenu');
   const links = submenu?.querySelectorAll('.submenu__link') || [];
 
+  // Centralized submenu state handler
   function setSubmenuState(state) {
     menuItem.classList.toggle('is-open', state);
     toggle?.setAttribute('aria-expanded', String(state));
@@ -368,13 +402,18 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     setSubmenuState(false);
   }
 
+  // Detect touch vs hover device
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+  // Click behavior differs for touch vs desktop
   toggle.addEventListener('click', (e) => {
     const isOpen = menuItem.classList.contains('is-open');
 
-    // TOUCH DEVICES → toggle only (no navigation)
+    // TOUCH → toggle only (prevent navigation)
     if (isTouchDevice) {
       e.preventDefault();
 
+      // Close other open submenus (not ancestors)
       document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
         if (item !== menuItem && !item.contains(menuItem)) {
           item.classList.remove('is-open');
@@ -388,10 +427,10 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
       return;
     }
 
-    // DESKTOP → allow normal behavior
-    // (no preventDefault)
+    // DESKTOP → allow normal link behavior
   });
 
+  // Keyboard support for submenu toggle
   toggle.addEventListener('keydown', (e) => {
     switch (e.key) {
       case 'Enter':
@@ -419,19 +458,9 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     }
   });
 
-  // menuItem.addEventListener('focusout', (e) => {
-  //   const next = e.relatedTarget;
-
-  //   // If focus is still moving within this menu item, do nothing
-  //   if (next && menuItem.contains(next)) return;
-
-  //   setSubmenuState(false);
-  // });
-
-  const isTouchDevice = window.matchMedia('(hover: none)').matches;
-
   let isPointerInside = false;
 
+  // Hover interactions (desktop only)
   if (!isTouchDevice) {
     menuItem.addEventListener('mouseenter', () => {
       isPointerInside = true;
@@ -441,24 +470,27 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     menuItem.addEventListener('mouseleave', () => {
       isPointerInside = false;
 
+      // Don't close if user is still navigating via keyboard
       if (menuItem.contains(document.activeElement)) return;
 
       setSubmenuState(false);
     });
   }
 
+  // Close submenu when focus leaves (with pointer awareness)
   menuItem.addEventListener('focusout', (e) => {
     const next = e.relatedTarget;
 
-    // Still inside → do nothing
+    // Still inside submenu → ignore
     if (next && menuItem.contains(next)) return;
 
-    // If pointer is inside, user switched to mouse → keep open
+    // If pointer still inside (desktop), keep open
     if (!isTouchDevice && isPointerInside) return;
 
     setSubmenuState(false);
   });
 
+  // Open submenu on focus (desktop keyboard users)
   menuItem.addEventListener('focusin', () => {
     if (!window.matchMedia('(hover: none)').matches) {
       setSubmenuState(true);
@@ -466,15 +498,17 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   });
 });
 
+// ================== ACTIVE LINK HIGHLIGHT ==================
 document.addEventListener('DOMContentLoaded', () => {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
   document.querySelectorAll('.site-nav__link').forEach((link) => {
     const linkPath = link.getAttribute('href');
 
-    // skip external links
+    // Skip external links
     if (!linkPath || linkPath.startsWith('http')) return;
 
+    // Match current page
     if (linkPath === currentPath) {
       link.classList.add('active');
       link.setAttribute('aria-current', 'page');
