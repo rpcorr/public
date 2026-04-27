@@ -369,21 +369,27 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   }
 
   toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
     const isOpen = menuItem.classList.contains('is-open');
 
-    document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
-      if (item !== menuItem && !item.contains(menuItem)) {
-        item.classList.remove('is-open');
-        item
-          .querySelector('.submenu-toggle')
-          ?.setAttribute('aria-expanded', 'false');
-      }
-    });
+    // TOUCH DEVICES → toggle only (no navigation)
+    if (isTouchDevice) {
+      e.preventDefault();
 
-    setSubmenuState(!isOpen);
+      document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+        if (item !== menuItem && !item.contains(menuItem)) {
+          item.classList.remove('is-open');
+          item
+            .querySelector('.submenu-toggle')
+            ?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      setSubmenuState(!isOpen);
+      return;
+    }
+
+    // DESKTOP → allow normal behavior
+    // (no preventDefault)
   });
 
   toggle.addEventListener('keydown', (e) => {
@@ -413,12 +419,50 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     }
   });
 
-  menuItem.addEventListener('focusout', () => {
-    requestAnimationFrame(() => {
-      if (!menuItem.contains(document.activeElement)) {
-        setSubmenuState(false);
-      }
+  // menuItem.addEventListener('focusout', (e) => {
+  //   const next = e.relatedTarget;
+
+  //   // If focus is still moving within this menu item, do nothing
+  //   if (next && menuItem.contains(next)) return;
+
+  //   setSubmenuState(false);
+  // });
+
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+  let isPointerInside = false;
+
+  if (!isTouchDevice) {
+    menuItem.addEventListener('mouseenter', () => {
+      isPointerInside = true;
+      setSubmenuState(true);
     });
+
+    menuItem.addEventListener('mouseleave', () => {
+      isPointerInside = false;
+
+      if (menuItem.contains(document.activeElement)) return;
+
+      setSubmenuState(false);
+    });
+  }
+
+  menuItem.addEventListener('focusout', (e) => {
+    const next = e.relatedTarget;
+
+    // Still inside → do nothing
+    if (next && menuItem.contains(next)) return;
+
+    // If pointer is inside, user switched to mouse → keep open
+    if (!isTouchDevice && isPointerInside) return;
+
+    setSubmenuState(false);
+  });
+
+  menuItem.addEventListener('focusin', () => {
+    if (!window.matchMedia('(hover: none)').matches) {
+      setSubmenuState(true);
+    }
   });
 });
 
