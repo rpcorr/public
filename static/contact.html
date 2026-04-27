@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Core SEO Meta (Contact Page) -->
+    <!-- ================== SEO META (CONTACT PAGE) ================== -->
     <meta
       name="description"
       content="Contact the Newfoundland and Labrador Stuttering Association (NLSA). Reach out for questions, support, or to get involved in our community."
@@ -15,9 +15,10 @@
       content="Newfoundland and Labrador Stuttering Association"
     />
 
+    <!-- Optional: search engine indexing control (currently disabled) -->
     <!-- <meta name="robots" content="index, follow" /> -->
 
-    <!-- Open Graph (social sharing) -->
+    <!-- ================== OPEN GRAPH (SOCIAL SHARING) ================== -->
     <meta
       property="og:title"
       content="Contact NLSA | Newfoundland and Labrador Stuttering Association"
@@ -27,6 +28,8 @@
       content="Get in touch with the Newfoundland and Labrador Stuttering Association. We’re here to help and connect."
     />
     <meta property="og:type" content="website" />
+
+    <!-- IMPORTANT: canonical URL for social previews (update for production) -->
     <meta
       property="og:url"
       content="http://localhost:10023/static/contact.html"
@@ -36,8 +39,7 @@
       content="http://localhost:10023/static/assets/imgs/newfoundland-rugged-coast.jpg"
     />
 
-    <!-- Twitter (X) -->
-
+    <!-- ================== TWITTER / X CARD META ================== -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Contact NLSA" />
     <meta
@@ -49,31 +51,48 @@
       content="http://localhost:10023/static/assets/imgs/newfoundland-rugged-coast.jpg"
     />
 
+    <!-- ================== BRANDING / THEME SETTINGS ================== -->
     <meta name="theme-color" content="#0b3072" />
     <meta name="application-name" content="NLSA" />
+
+    <!-- Canonical URL (important for SEO duplicate prevention) -->
     <link rel="canonical" href="http://localhost:10023/static/contact.html" />
 
-    <!-- Load Font Awesome & Google Fonts -->
+    <!-- ================== EXTERNAL FONTS & ICON LIBRARIES ================== -->
+    <!-- Preconnect improves font loading performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Font Awesome (icons) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+
+    <!-- Google Font: Montserrat -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Load Custom CSS -->
+
+    <!-- ================== STYLESHEETS (ORDER MATTERS) ================== -->
+    <!-- Base reset and variables first -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/variables.css" />
+
+    <!-- Core layout and structure -->
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/layouts.css" />
+
+    <!-- Components and UI elements -->
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/navigation.css" />
+
+    <!-- Utility/helper classes last -->
     <link rel="stylesheet" href="assets/css/utilities.css" />
 
-    <!-- Favicon -->
+    <!-- ================== FAVICONS ================== -->
+    <!-- Standard browser favicon -->
     <link
       rel="icon"
       type="image/png"
@@ -81,7 +100,7 @@
       href="assets/imgs/favicons/fav-icon-32.png"
     />
 
-    <!-- Apple Touch Icons -->
+    <!-- Apple touch icons (iOS home screen shortcuts) -->
     <link
       rel="apple-touch-icon"
       sizes="57x57"
@@ -98,10 +117,12 @@
       href="assets/imgs/favicons/fav-icon-114.png"
     />
 
-    <!-- shortcuct icon-->
+    <!-- Legacy shortcut icon fallback -->
     <link rel="shortcut icon" href="assets/imgs/favicons/fav-icon-32.png" />
 
     <title>Contact - Newfoundland and Labrador Stuttering Association</title>
+
+    <!-- ================== STRUCTURED DATA (SEO / RICH RESULTS) ================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -123,23 +144,25 @@
   </head>
 
   <body>
+    <!-- Skip link improves accessibility for keyboard/screen reader users -->
     <a href="#primary" class="skip-link">Skip to content</a>
 
-    <!-- ===== Navbar ===== -->
+    <!-- ================== HEADER / NAVIGATION ================== -->
     <header class="site-header">
       <nav class="site-nav" aria-label="Main navigation">
         <div class="site-nav__inner">
-          <!-- Tagline -->
+          <!-- Site logo / brand link -->
           <div class="site-nav__tagline">
-            <a href="index.html"
-              ><img
+            <a href="index.html">
+              <img
                 loading="lazy"
                 src="assets/imgs/NLSA-logo.png"
                 alt="Newfoundland and Labrador Stuttering Association logo"
-            /></a>
+              />
+            </a>
           </div>
 
-          <!-- Hamburger Menu -->
+          <!-- Mobile navigation toggle (hamburger menu) -->
           <button
             class="hamburger"
             type="button"
@@ -152,15 +175,16 @@
             <span></span>
           </button>
 
-          <!-- Navigation Links -->
+          <!-- ================== PRIMARY NAV MENU ================== -->
           <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
+            <!-- Home -->
             <li>
               <a href="index.html" class="site-nav__link">
                 <span class="link-text">Home</span>
               </a>
             </li>
 
-            <!-- DROPDOWN ITEM -->
+            <!-- About dropdown -->
             <li class="site-nav__item has-submenu">
               <a
                 href="#"
@@ -173,6 +197,7 @@
                 <span class="link-text">About</span>
               </a>
 
+              <!-- Nested submenu -->
               <ul id="submenu-about" class="submenu" aria-label="About submenu">
                 <li>
                   <a href="about.html" class="submenu__link"
@@ -192,6 +217,7 @@
               </ul>
             </li>
 
+            <!-- Standard navigation links -->
             <li>
               <a href="research.html" class="site-nav__link"
                 ><span class="link-text">Research</span></a
@@ -208,6 +234,7 @@
               >
             </li>
 
+            <!-- External link (opens new tab) -->
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
@@ -216,16 +243,18 @@
                 rel="noopener noreferrer"
                 aria-label="Podcast (opens in new tab)"
               >
-                <span class="link-text"> Podcast </span>
+                <span class="link-text">Podcast</span>
               </a>
             </li>
 
+            <!-- Current page indicator -->
             <li>
-              <a href="contact.html" class="site-nav__link" aria-current="page"
-                ><span class="link-text">Contact</span></a
-              >
+              <a href="contact.html" class="site-nav__link" aria-current="page">
+                <span class="link-text">Contact</span>
+              </a>
             </li>
 
+            <!-- Primary call-to-action button -->
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
@@ -242,15 +271,19 @@
       </nav>
     </header>
 
+    <!-- Backdrop used when mobile menu is open -->
     <div class="nav-backdrop"></div>
 
+    <!-- ================== MAIN CONTENT ================== -->
     <main id="primary" class="wrapper">
+      <!-- Contact introduction section -->
       <section aria-labelledby="page-heading">
         <div class="split-panel split-panel--text">
           <div class="split-panel__inner">
             <h1 id="page-heading">Contact Us</h1>
 
             <div class="text-image text-image--reverse">
+              <!-- Contact text content -->
               <div class="text-image__content">
                 <p>
                   We'd love to hear from you! Whether you have a question,
@@ -270,6 +303,7 @@
                   news and resources:
                 </p>
 
+                <!-- Social media links -->
                 <div class="social-icons">
                   <a
                     href="https://www.facebook.com/groups/535643736920153/"
@@ -278,6 +312,7 @@
                     <i class="fab fa-facebook-f" aria-hidden="true"></i>
                     Facebook
                   </a>
+
                   <a
                     href="https://www.instagram.com/nlstuttering/"
                     aria-label="Get in touch with us through Instagram"
@@ -288,6 +323,7 @@
                 </div>
               </div>
 
+              <!-- Supporting image -->
               <div class="text-image__media">
                 <img
                   loading="lazy"
@@ -300,6 +336,7 @@
         </div>
       </section>
 
+      <!-- Quote section (decorative / contextual) -->
       <section aria-label="Quote about Newfoundland">
         <blockquote>
           “We are shaped by the sea as much as by the land.” &mdash;
@@ -308,20 +345,23 @@
       </section>
     </main>
 
+    <!-- ================== FOOTER ================== -->
     <footer>
-      <!-- Newsletter Subscription -->
+      <!-- Newsletter + social + copyright wrapper -->
       <div class="wrapper footer-inner">
-        <!-- Newsletter -->
+        <!-- Newsletter signup -->
         <div>
           <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+
           <form
             class="form-inline"
             action="https://formspree.io/f/mabcdxyz"
             method="POST"
           >
-            <label for="footer-email" class="visually-hidden"
-              >Email address</label
-            >
+            <label for="footer-email" class="visually-hidden">
+              Email address
+            </label>
+
             <input
               class="form-input"
               id="footer-email"
@@ -330,6 +370,7 @@
               placeholder="Enter your email"
               required
             />
+
             <button
               class="btn btn--primary"
               type="submit"
@@ -340,22 +381,28 @@
           </form>
         </div>
 
-        <!-- Socials -->
+        <!-- Footer social links -->
         <div>
           <h3 class="footer__title">Get in Touch</h3>
+
           <div class="social-icons">
             <a
               href="https://www.facebook.com/groups/535643736920153/"
               aria-label="Get in touch with us through Facebook"
-              ><i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook</a
             >
+              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+            </a>
+
             <a
               href="https://www.instagram.com/nlstuttering/"
               aria-label="Get in touch with us through Instagram"
-              ><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a
             >
+              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+            </a>
           </div>
         </div>
+
+        <!-- Copyright notice -->
         <div class="footer__bottom">
           <p class="footer__text">
             &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
@@ -364,6 +411,7 @@
       </div>
     </footer>
 
+    <!-- Main navigation behaviour script -->
     <script src="assets/js/scripts.js"></script>
   </body>
 </html>

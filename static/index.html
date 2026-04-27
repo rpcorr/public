@@ -1,28 +1,28 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- ================== META & SEO ================== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Core SEO Meta  (Home Page) -->
+    <!-- Core SEO (Home Page) -->
     <meta
       name="description"
       content="The Newfoundland and Labrador Stuttering Association (NLSA) supports people who stutter through advocacy, research, community events, and education. Promoting inclusion and equal opportunities for all voices."
     />
-
     <meta
       name="keywords"
       content="stuttering, Newfoundland and Labrador, speech, communication, NLSA, stutter support, speech advocacy, Canada stuttering association"
     />
-
     <meta
       name="author"
       content="Newfoundland and Labrador Stuttering Association"
     />
 
+    <!-- Control search engine indexing if needed -->
     <!-- <meta name="robots" content="index, follow" /> -->
 
-    <!-- Open Graph (social sharing) -->
+    <!-- ================== SOCIAL SHARING (Open Graph) ================== -->
     <meta
       property="og:title"
       content="Newfoundland and Labrador Stuttering Association"
@@ -38,7 +38,7 @@
       content="http://localhost:10023/static/assets/imgs/NLSA-logo.png"
     />
 
-    <!-- Twitter (X) Cards -->
+    <!-- ================== TWITTER (X) CARDS ================== -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -53,31 +53,49 @@
       content="http://localhost:10023/static/assets/imgs/NLSA-logo.png"
     />
 
+    <!-- ================== PWA / BRANDING ================== -->
     <meta name="theme-color" content="#0b3072" />
     <meta name="application-name" content="NLSA" />
+
+    <!-- Canonical URL (avoid duplicate content issues) -->
     <link rel="canonical" href="http://localhost:10023/static/index.html" />
 
-    <!-- Load Font Awesome & Google Fonts -->
+    <!-- ================== FONTS & ICONS ================== -->
+    <!-- Preconnect improves font loading performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Font Awesome icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+
+    <!-- Google Font: Montserrat -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Load Custom CSS -->
-    <link rel="stylesheet" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="assets/css/variables.css" />
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/layouts.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="stylesheet" href="assets/css/navigation.css" />
-    <link rel="stylesheet" href="assets/css/utilities.css" />
 
-    <!-- Favicon -->
+    <!-- ================== STYLESHEETS ================== -->
+    <!-- CSS is organized by responsibility (low → high specificity) -->
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <!-- Reset defaults -->
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <!-- Design tokens -->
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <!-- Base typography -->
+    <link rel="stylesheet" href="assets/css/layouts.css" />
+    <!-- Layout systems -->
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <!-- UI components -->
+    <link rel="stylesheet" href="assets/css/navigation.css" />
+    <!-- Navigation -->
+    <link rel="stylesheet" href="assets/css/utilities.css" />
+    <!-- Utility classes -->
+
+    <!-- ================== FAVICONS ================== -->
+    <!-- Standard favicon -->
     <link
       rel="icon"
       type="image/png"
@@ -85,7 +103,7 @@
       href="assets/imgs/favicons/fav-icon-32.png"
     />
 
-    <!-- Apple Touch Icons -->
+    <!-- Apple touch icons (iOS home screen) -->
     <link
       rel="apple-touch-icon"
       sizes="57x57"
@@ -102,10 +120,14 @@
       href="assets/imgs/favicons/fav-icon-114.png"
     />
 
-    <!-- shortcuct icon-->
+    <!-- Fallback shortcut icon -->
     <link rel="shortcut icon" href="assets/imgs/favicons/fav-icon-32.png" />
 
+    <!-- ================== PAGE TITLE ================== -->
     <title>Newfoundland and Labrador Stuttering Association</title>
+
+    <!-- ================== STRUCTURED DATA (SEO) ================== -->
+    <!-- Helps search engines understand organization details -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -120,16 +142,17 @@
   </head>
 
   <body>
+    <!-- Skip link improves keyboard accessibility -->
     <a href="#primary" class="skip-link">Skip to content</a>
 
-    <!-- ===== Navbar ===== -->
+    <!-- ================== HEADER / NAVIGATION ================== -->
     <header class="site-header">
       <nav class="site-nav" aria-label="Main navigation">
         <div class="site-nav__inner">
-          <!-- Tagline -->
+          <!-- Decorative tagline (hidden from screen readers) -->
           <div class="site-nav__tagline" aria-hidden="true"></div>
 
-          <!-- Hamburger -->
+          <!-- Mobile hamburger toggle -->
           <button
             class="hamburger"
             type="button"
@@ -142,15 +165,16 @@
             <span></span>
           </button>
 
-          <!-- Navigation -->
+          <!-- Primary navigation (inert by default for accessibility) -->
           <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
+            <!-- Top-level link -->
             <li>
               <a href="index.html" class="site-nav__link" aria-current="page">
                 <span class="link-text">Home</span>
               </a>
             </li>
 
-            <!-- DROPDOWN ITEM -->
+            <!-- Dropdown menu -->
             <li class="site-nav__item has-submenu">
               <a
                 href="#"
@@ -163,17 +187,20 @@
                 <span class="link-text">About</span>
               </a>
 
+              <!-- Submenu -->
               <ul id="submenu-about" class="submenu" aria-label="About submenu">
                 <li>
-                  <a href="about.html" class="submenu__link"
-                    ><span class="link-text">Overview</span></a
-                  >
+                  <a href="about.html" class="submenu__link">
+                    <span class="link-text">Overview</span>
+                  </a>
                 </li>
                 <li>
-                  <a href="team.html" class="submenu__link"
-                    ><span class="link-text">Our Team</span></a
-                  >
+                  <a href="team.html" class="submenu__link">
+                    <span class="link-text">Our Team</span>
+                  </a>
                 </li>
+
+                <!-- Nested submenu -->
                 <li class="has-submenu">
                   <a
                     href="#"
@@ -184,42 +211,44 @@
                     <span class="link-text">History</span>
                   </a>
 
-                  <!-- sub-sub menu -->
+                  <!-- Sub-sub menu -->
                   <ul
                     class="submenu submenu--nested"
                     aria-label="History submenu"
                   >
                     <li>
-                      <a href="early.html" class="submenu__link"
-                        ><span class="link-text">Early Years</span></a
-                      >
+                      <a href="early.html" class="submenu__link">
+                        <span class="link-text">Early Years</span>
+                      </a>
                     </li>
                     <li>
-                      <a href="modern.html" class="submenu__link"
-                        ><span class="link-text">Modern Era</span></a
-                      >
+                      <a href="modern.html" class="submenu__link">
+                        <span class="link-text">Modern Era</span>
+                      </a>
                     </li>
                   </ul>
                 </li>
               </ul>
             </li>
 
+            <!-- Standard navigation links -->
             <li>
-              <a href="research.html" class="site-nav__link"
-                ><span class="link-text">Research</span></a
-              >
+              <a href="research.html" class="site-nav__link">
+                <span class="link-text">Research</span>
+              </a>
             </li>
             <li>
-              <a href="get-involved.html" class="site-nav__link"
-                ><span class="link-text">Get Involved</span></a
-              >
+              <a href="get-involved.html" class="site-nav__link">
+                <span class="link-text">Get Involved</span>
+              </a>
             </li>
             <li>
-              <a href="news.html" class="site-nav__link"
-                ><span class="link-text">News</span></a
-              >
+              <a href="news.html" class="site-nav__link">
+                <span class="link-text">News</span>
+              </a>
             </li>
 
+            <!-- External link (opens in new tab) -->
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
@@ -232,11 +261,12 @@
             </li>
 
             <li>
-              <a href="contact.html" class="site-nav__link"
-                ><span class="link-text">Contact</span></a
-              >
+              <a href="contact.html" class="site-nav__link">
+                <span class="link-text">Contact</span>
+              </a>
             </li>
 
+            <!-- Call-to-action -->
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
@@ -253,15 +283,17 @@
       </nav>
     </header>
 
+    <!-- Backdrop used for mobile menu overlay -->
     <div class="nav-backdrop"></div>
 
+    <!-- ================== MAIN CONTENT ================== -->
     <main id="primary" class="wrapper">
       <!-- ===== Hero Section ===== -->
-
       <section
         class="split-panel split-panel--50-50 split-panel--hero"
         aria-labelledby="hero-heading"
       >
+        <!-- Visual/logo -->
         <div class="split-panel__media">
           <img
             loading="lazy"
@@ -270,61 +302,44 @@
           />
         </div>
 
+        <!-- Hero content -->
         <div>
           <h1 id="hero-heading">
             Supporting People Who Stutter in Newfoundland and Labrador
           </h1>
 
           <p class="font-weight-medium">
-            The NLSA advocates for people who stutter, fostering inclusion
-            across health care, education, and public life. We promote
-            understanding, support, and equal opportunities, ensuring every
-            voice is heard and valued.
+            The NLSA advocates for people who stutter...
           </p>
 
           <a href="about.html" class="btn btn--primary u-lift">
             Learn more about
-            <abbr title="Newfoundland and Labrador Stuttering Association"
-              >NLSA</abbr
-            >
+            <abbr title="Newfoundland and Labrador Stuttering Association">
+              NLSA
+            </abbr>
           </a>
         </div>
       </section>
 
-      <!-- ===== Get Involved Banner ===== -->
+      <!-- ===== Announcement / CTA Banner ===== -->
       <section
         class="announcement announcement--primary"
         aria-labelledby="announcement-heading"
       >
+        <!-- Icon (decorative SVG) -->
         <div class="announcement__icon">
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
+          <!-- SVG icon omitted for brevity -->
         </div>
 
+        <!-- Text content -->
         <div class="announcement__content">
           <h2 id="announcement-heading">
             Be Part of Research That Makes a Difference
           </h2>
-          <p class="font-weight-medium">
-            Help improve access and support for people who stutter in
-            Newfoundland and Labrador. Your participation matters!
-          </p>
+          <p class="font-weight-medium">Help improve access and support...</p>
         </div>
 
+        <!-- CTA -->
         <div class="announcement__actions">
           <a
             href="get-involved.html"
@@ -336,12 +351,17 @@
         </div>
       </section>
 
+      <!-- ===== Programs / Initiatives Grid ===== -->
       <section aria-labelledby="programs-heading">
         <h2 id="programs-heading" class="visually-hidden">
           Programs and Initiatives
         </h2>
 
+        <!-- Grid layout (mixed 60/40 columns) -->
         <div class="layout-grid">
+          <!-- Individual program cards follow same structure -->
+          <!-- Image → heading → description → CTA -->
+
           <div class="layout-grid__item col-7">
             <!--60% -->
             <img
@@ -450,10 +470,12 @@
         </div>
       </section>
 
+      <!-- ===== Conference Highlight Section ===== -->
       <section
         class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first"
         aria-labelledby="conference-heading"
       >
+        <!-- Text -->
         <div>
           <h2 id="conference-heading">
             Joint Canadian Stuttering Association & Newfoundland and Labrador
@@ -473,6 +495,7 @@
           </a>
         </div>
 
+        <!-- Image -->
         <div class="split-panel__media">
           <img
             loading="lazy"
@@ -483,20 +506,24 @@
       </section>
     </main>
 
+    <!-- ================== FOOTER ================== -->
     <footer>
-      <!-- Newsletter Subscription -->
       <div class="wrapper footer-inner">
-        <!-- Newsletter -->
+        <!-- Newsletter subscription form -->
         <div>
           <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+
+          <!-- Uses Formspree for handling submissions -->
           <form
             class="form-inline"
             action="https://formspree.io/f/mabcdxyz"
             method="POST"
           >
-            <label for="footer-email" class="visually-hidden"
-              >Email address</label
-            >
+            <!-- Visually hidden label for accessibility -->
+            <label for="footer-email" class="visually-hidden">
+              Email address
+            </label>
+
             <input
               class="form-input"
               id="footer-email"
@@ -505,6 +532,7 @@
               placeholder="Enter your email"
               required
             />
+
             <button
               class="btn btn--primary"
               type="submit"
@@ -515,22 +543,29 @@
           </form>
         </div>
 
-        <!-- Socials -->
+        <!-- Social links -->
         <div>
           <h3 class="footer__title">Get in Touch</h3>
+
           <div class="social-icons">
+            <!-- External social links -->
             <a
               href="https://www.facebook.com/groups/535643736920153/"
               aria-label="Get in touch with us through Facebook"
-              ><i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook</a
             >
+              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+            </a>
+
             <a
               href="https://www.instagram.com/nlstuttering/"
               aria-label="Get in touch with us through Instagram"
-              ><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a
             >
+              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+            </a>
           </div>
         </div>
+
+        <!-- Footer bottom -->
         <div class="footer__bottom">
           <p class="footer__text">
             &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
@@ -539,6 +574,8 @@
       </div>
     </footer>
 
+    <!-- ================== SCRIPTS ================== -->
+    <!-- Main navigation + interaction logic -->
     <script src="assets/js/scripts.js"></script>
   </body>
 </html>

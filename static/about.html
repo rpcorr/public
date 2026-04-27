@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Core SEO Meta (About Page) -->
+    <!-- ================== SEO META (ABOUT PAGE) ================== -->
     <meta
       name="description"
       content="Learn about the Newfoundland and Labrador Stuttering Association (NLSA), a non-profit supporting people who stutter through advocacy, education, and community programs."
@@ -15,9 +15,15 @@
       content="Newfoundland and Labrador Stuttering Association"
     />
 
+    <!-- Optional indexing control (currently disabled) -->
     <!-- <meta name="robots" content="index, follow" /> -->
 
-    <!-- Open Graph (social sharing) -->
+    <meta
+      name="keywords"
+      content="stuttering, Newfoundland and Labrador, NLSA, speech support, stutter advocacy, nonprofit Canada"
+    />
+
+    <!-- ================== OPEN GRAPH (SOCIAL SHARING) ================== -->
     <meta
       property="og:title"
       content="About NLSA | Newfoundland and Labrador Stuttering Association"
@@ -26,11 +32,6 @@
       property="og:description"
       content="Discover the mission, values, and community impact of the Newfoundland and Labrador Stuttering Association."
     />
-    <meta
-      name="keywords"
-      content="stuttering, Newfoundland and Labrador, NLSA, speech support, stutter advocacy, nonprofit Canada"
-    />
-
     <meta property="og:type" content="website" />
     <meta property="og:url" content="http://localhost:10023/about.html" />
     <meta
@@ -38,7 +39,7 @@
       content="http://localhost:10023/assets/imgs/SignalHill.jpg"
     />
 
-    <!-- Twitter (X) -->
+    <!-- ================== TWITTER / X CARD ================== -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="About NLSA" />
     <meta
@@ -50,22 +51,29 @@
       content="http://localhost:10023/assets/imgs/SignalHill.jpg"
     />
 
+    <!-- ================== SITE CONFIG ================== -->
     <meta name="theme-color" content="#0b3072" />
     <meta name="application-name" content="NLSA" />
+
+    <!-- Canonical URL (important for SEO consistency across environments) -->
     <link rel="canonical" href="http://localhost:10023/static/about.html" />
 
-    <!-- Load Font Awesome & Google Fonts -->
+    <!-- ================== FONTS & ICON LIBRARIES ================== -->
+    <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Load Custom CSS -->
+
+    <!-- ================== CORE STYLESHEETS ================== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/variables.css" />
     <link rel="stylesheet" href="assets/css/base.css" />
@@ -74,7 +82,7 @@
     <link rel="stylesheet" href="assets/css/navigation.css" />
     <link rel="stylesheet" href="assets/css/utilities.css" />
 
-    <!-- Favicon -->
+    <!-- ================== FAVICONS ================== -->
     <link
       rel="icon"
       type="image/png"
@@ -82,7 +90,7 @@
       href="assets/imgs/favicons/fav-icon-32.png"
     />
 
-    <!-- Apple Touch Icons -->
+    <!-- Apple touch icons for iOS devices -->
     <link
       rel="apple-touch-icon"
       sizes="57x57"
@@ -99,10 +107,12 @@
       href="assets/imgs/favicons/fav-icon-114.png"
     />
 
-    <!-- shortcuct icon-->
+    <!-- Legacy shortcut icon fallback -->
     <link rel="shortcut icon" href="assets/imgs/favicons/fav-icon-32.png" />
 
     <title>About - Newfoundland and Labrador Stuttering Association</title>
+
+    <!-- ================== STRUCTURED DATA (SEO / RICH RESULTS) ================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -119,23 +129,25 @@
   </head>
 
   <body>
+    <!-- Skip link for keyboard accessibility -->
     <a href="#primary" class="skip-link">Skip to content</a>
 
-    <!-- ===== Navbar ===== -->
+    <!-- ================== SITE HEADER / NAVIGATION ================== -->
     <header class="site-header">
       <nav class="site-nav" aria-label="Main navigation">
         <div class="site-nav__inner">
-          <!-- Tagline -->
+          <!-- Logo / Brand link -->
           <div class="site-nav__tagline">
-            <a href="index.html"
-              ><img
+            <a href="index.html">
+              <img
                 loading="lazy"
                 src="assets/imgs/NLSA-logo.png"
                 alt="Newfoundland and Labrador Stuttering Association logo"
-            /></a>
+              />
+            </a>
           </div>
 
-          <!-- Hamburger Menu -->
+          <!-- Mobile navigation toggle (hamburger menu) -->
           <button
             class="hamburger"
             type="button"
@@ -148,7 +160,7 @@
             <span></span>
           </button>
 
-          <!-- Navigation Links -->
+          <!-- ================== PRIMARY NAVIGATION MENU ================== -->
           <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
             <li>
               <a href="index.html" class="site-nav__link">
@@ -156,7 +168,7 @@
               </a>
             </li>
 
-            <!-- DROPDOWN ITEM -->
+            <!-- ================== ABOUT DROPDOWN ================== -->
             <li class="site-nav__item has-submenu">
               <a
                 href="#"
@@ -170,6 +182,7 @@
                 <span class="link-text">About</span>
               </a>
 
+              <!-- Sub-navigation for About section -->
               <ul id="submenu-about" class="submenu" aria-label="About submenu">
                 <li>
                   <a href="about.html" class="submenu__link"
@@ -205,6 +218,7 @@
               >
             </li>
 
+            <!-- External link (opens in new tab) -->
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
@@ -213,7 +227,7 @@
                 rel="noopener noreferrer"
                 aria-label="Podcast (opens in new tab)"
               >
-                <span class="link-text"> Podcast </span>
+                <span class="link-text">Podcast</span>
               </a>
             </li>
 
@@ -223,6 +237,7 @@
               >
             </li>
 
+            <!-- Call-to-action button -->
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
@@ -230,16 +245,19 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Donate (opens in new tab)"
-                >Donate</a
               >
+                Donate
+              </a>
             </li>
           </ul>
         </div>
       </nav>
     </header>
 
+    <!-- Backdrop overlay for mobile menu -->
     <div class="nav-backdrop"></div>
 
+    <!-- ================== MAIN PAGE CONTENT ================== -->
     <main id="primary" class="wrapper">
       <section
         class="split-panel split-panel--text"
@@ -248,10 +266,11 @@
         <h1 id="page-heading">
           Newfoundland and Labrador Stuttering Association (NLSA)
         </h1>
+
         <div class="text-image">
+          <!-- ================== TEXT CONTENT ================== -->
           <div class="text-image__content">
             <p>
-              The
               <strong
                 >Newfoundland and Labrador Stuttering Association (NLSA)</strong
               >
@@ -265,15 +284,16 @@
 
             <h2 class="u-mt-md u-mb-md">Our Mission</h2>
             <p>
-              Our mission is to
-              <strong>create a supportive environment</strong> that fosters
-              confidence and understanding for individuals who stutter. Through
-              community events, educational programs, and partnerships across
-              Newfoundland and Labrador, we work to break down stigma, promote
-              inclusion, and amplify the voices of people who stutter.
+              Our mission is to <strong>create a supportive environment</strong>
+              that fosters confidence and understanding for individuals who
+              stutter. Through community events, educational programs, and
+              partnerships across Newfoundland and Labrador, we work to break
+              down stigma, promote inclusion, and amplify the voices of people
+              who stutter.
             </p>
 
             <p>Want to get involved or learn more about our work?</p>
+
             <p class="u-text-center">
               <a href="get-involved.html" class="btn btn--primary u-lift">
                 Get Involved
@@ -281,6 +301,7 @@
             </p>
           </div>
 
+          <!-- ================== IMAGE CONTENT ================== -->
           <div class="text-image__media">
             <img
               loading="lazy"
@@ -290,28 +311,30 @@
           </div>
         </div>
 
+        <!-- Inspirational quote -->
         <blockquote>
           “From the shores of Newfoundland to the coastlines of Labrador, we
-          believe every story deserves to be told — in its own time and its own
-          way.”
+          believe every story deserves to be told.”
         </blockquote>
       </section>
     </main>
 
+    <!-- ================== FOOTER ================== -->
     <footer>
-      <!-- Newsletter Subscription -->
       <div class="wrapper footer-inner">
-        <!-- Newsletter -->
+        <!-- Newsletter signup -->
         <div>
           <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+
           <form
             class="form-inline"
             action="https://formspree.io/f/mabcdxyz"
             method="POST"
           >
-            <label for="footer-email" class="visually-hidden"
-              >Email address</label
-            >
+            <label for="footer-email" class="visually-hidden">
+              Email address
+            </label>
+
             <input
               class="form-input"
               id="footer-email"
@@ -320,6 +343,7 @@
               placeholder="Enter your email"
               required
             />
+
             <button
               class="btn btn--primary"
               type="submit"
@@ -330,22 +354,28 @@
           </form>
         </div>
 
-        <!-- Socials -->
+        <!-- Social media links -->
         <div>
           <h3 class="footer__title">Get in Touch</h3>
+
           <div class="social-icons">
             <a
               href="https://www.facebook.com/groups/535643736920153/"
               aria-label="Get in touch with us through Facebook"
-              ><i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook</a
             >
+              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+            </a>
+
             <a
               href="https://www.instagram.com/nlstuttering/"
               aria-label="Get in touch with us through Instagram"
-              ><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a
             >
+              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+            </a>
           </div>
         </div>
+
+        <!-- Copyright -->
         <div class="footer__bottom">
           <p class="footer__text">
             &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
@@ -354,6 +384,7 @@
       </div>
     </footer>
 
+    <!-- Main site JavaScript -->
     <script src="assets/js/scripts.js"></script>
   </body>
 </html>

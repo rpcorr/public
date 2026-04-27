@@ -4,20 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Core SEO META (Get Involved Page) -->
+    <!-- ================== SEO META (Page-Level) ================== -->
+    <!-- Primary description used for search engines -->
     <meta
       name="description"
       content="Get involved with the Newfoundland and Labrador Stuttering Association (NLSA). Participate in research, volunteer, attend events, and help support people who stutter."
     />
 
+    <!-- Organization metadata -->
     <meta
       name="author"
       content="Newfoundland and Labrador Stuttering Association"
     />
 
+    <!-- Optional: search engine indexing rules (currently disabled) -->
     <!-- <meta name="robots" content="index, follow" /> -->
 
-    <!-- Open Graph (social sharing) -->
+    <!-- ================== OPEN GRAPH (Social Sharing) ================== -->
+    <!-- Controls how the page appears when shared on social platforms -->
     <meta
       property="og:title"
       content="Get Involved | Newfoundland and Labrador Stuttering Association"
@@ -36,7 +40,8 @@
       content="http://localhost:10023/static/assets/imgs/get-involved.jpg"
     />
 
-    <!-- Twitter (X) -->
+    <!-- ================== TWITTER / X CARD ================== -->
+    <!-- Social preview metadata for X (Twitter) -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Get Involved with NLSA" />
     <meta
@@ -48,35 +53,56 @@
       content="http://localhost:10023/static/assets/imgs/get-involved.jpg"
     />
 
+    <!-- ================== SITE CONFIG ================== -->
+    <!-- Browser theme color (mobile address bar, etc.) -->
     <meta name="theme-color" content="#0b3072" />
+
+    <!-- Application name used by browsers / bookmarks -->
     <meta name="application-name" content="NLSA" />
+
+    <!-- Canonical URL to avoid duplicate content issues -->
     <link
       rel="canonical"
       href="http://localhost:10023/static/get-involved.html"
     />
 
-    <!-- Load Font Awesome & Google Fonts -->
+    <!-- ================== FONTS & ICON LIBRARIES ================== -->
+    <!-- Preconnect improves font loading performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Font Awesome icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
 
+    <!-- Google Fonts: Montserrat -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Load Custom CSS -->
+
+    <!-- ================== STYLESHEETS (ORDER MATTERS) ================== -->
+    <!-- Base reset + variables -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/variables.css" />
+
+    <!-- Core layout & structure -->
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/layouts.css" />
+
+    <!-- Components (buttons, cards, etc.) -->
     <link rel="stylesheet" href="assets/css/components.css" />
+
+    <!-- Navigation-specific styles -->
     <link rel="stylesheet" href="assets/css/navigation.css" />
+
+    <!-- Utility classes (spacing, alignment, helpers) -->
     <link rel="stylesheet" href="assets/css/utilities.css" />
 
-    <!-- Favicon -->
+    <!-- ================== FAVICONS ================== -->
+    <!-- Browser tab icon -->
     <link
       rel="icon"
       type="image/png"
@@ -84,7 +110,7 @@
       href="assets/imgs/favicons/fav-icon-32.png"
     />
 
-    <!-- Apple Touch Icons -->
+    <!-- Apple touch icons (iOS home screen shortcuts) -->
     <link
       rel="apple-touch-icon"
       sizes="57x57"
@@ -101,12 +127,15 @@
       href="assets/imgs/favicons/fav-icon-114.png"
     />
 
-    <!-- shortcuct icon-->
+    <!-- Legacy shortcut icon fallback -->
     <link rel="shortcut icon" href="assets/imgs/favicons/fav-icon-32.png" />
 
     <title>
       Get Involved - Newfoundland and Labrador Stuttering Association
     </title>
+
+    <!-- ================== STRUCTURED DATA (SEO) ================== -->
+    <!-- Helps search engines understand page content and organization -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -132,23 +161,25 @@
   </head>
 
   <body>
+    <!-- Skip link for keyboard and screen reader users -->
     <a href="#primary" class="skip-link">Skip to content</a>
 
-    <!-- ===== Navbar ===== -->
+    <!-- ================== SITE HEADER / NAVIGATION ================== -->
     <header class="site-header">
       <nav class="site-nav" aria-label="Main navigation">
         <div class="site-nav__inner">
-          <!-- Tagline -->
+          <!-- Brand logo / home link -->
           <div class="site-nav__tagline">
-            <a href="index.html"
-              ><img
+            <a href="index.html">
+              <img
                 loading="lazy"
                 src="assets/imgs/NLSA-logo.png"
                 alt="Newfoundland and Labrador Stuttering Association logo"
-            /></a>
+              />
+            </a>
           </div>
 
-          <!-- Hamburger Menu -->
+          <!-- Mobile navigation toggle button -->
           <button
             class="hamburger"
             type="button"
@@ -161,16 +192,19 @@
             <span></span>
           </button>
 
-          <!-- Navigation Links -->
+          <!-- ================== PRIMARY NAV MENU ================== -->
+          <!-- Note: inert/aria-hidden controlled via JS for accessibility -->
           <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
+            <!-- Home link -->
             <li>
               <a href="index.html" class="site-nav__link">
                 <span class="link-text">Home</span>
               </a>
             </li>
 
-            <!-- DROPDOWN ITEM -->
+            <!-- ================== ABOUT DROPDOWN ================== -->
             <li class="site-nav__item has-submenu">
+              <!-- Toggle button for submenu -->
               <a
                 href="#"
                 role="button"
@@ -182,6 +216,7 @@
                 <span class="link-text">About</span>
               </a>
 
+              <!-- Submenu items -->
               <ul id="submenu-about" class="submenu" aria-label="About submenu">
                 <li>
                   <a href="about.html" class="submenu__link"
@@ -201,25 +236,30 @@
               </ul>
             </li>
 
+            <!-- Standard nav links -->
             <li>
               <a href="research.html" class="site-nav__link"
                 ><span class="link-text">Research</span></a
               >
             </li>
+
+            <!-- Current page (active state set via JS as well) -->
             <li>
               <a
                 href="get-involved.html"
                 class="site-nav__link"
                 aria-current="page"
-                ><span class="link-text">Get Involved</span></a
-              >
+                ><span class="link-text">Get Involved</span>
+              </a>
             </li>
+
             <li>
               <a href="news.html" class="site-nav__link"
                 ><span class="link-text">News</span></a
               >
             </li>
 
+            <!-- External link opens in new tab -->
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
@@ -238,6 +278,7 @@
               >
             </li>
 
+            <!-- CTA button styled link -->
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
@@ -254,15 +295,21 @@
       </nav>
     </header>
 
+    <!-- Dark overlay used when mobile menu is open -->
     <div class="nav-backdrop"></div>
 
+    <!-- ================== MAIN PAGE CONTENT ================== -->
     <main id="primary" class="wrapper">
+      <!-- Primary content section for "Get Involved" page -->
       <section
         class="split-panel split-panel--text"
         aria-labelledby="page-heading"
       >
         <h1 id="page-heading">Get Involved</h1>
+
+        <!-- Text + image layout block -->
         <div class="text-image text-image--wrap">
+          <!-- Supporting image -->
           <div class="text-image__media">
             <img
               loading="lazy"
@@ -270,16 +317,13 @@
               alt="Community members connecting and participating in an NLSA event"
             />
           </div>
+
+          <!-- Page content -->
           <div class="text-image__content">
+            <!-- Intro paragraph -->
             <p>
               People who stutter deserve to be heard, understood, and supported
-              in every part of life. By getting involved with the Newfoundland
-              and Labrador Stuttering Association, you can help create a more
-              inclusive and compassionate community. Whether you choose to
-              participate in research, volunteer your time, attend events, or
-              simply learn more, your involvement makes a meaningful
-              difference—for individuals, families, and the future of
-              communication in our province.
+              in every part of life...
             </p>
 
             <h2 class="u-mt-md u-mb-md">We Need Your Voice</h2>
@@ -291,6 +335,7 @@
 
             <h3>Ways you can get involved:</h3>
 
+            <!-- Participation options list -->
             <ul>
               <li><strong>Surveys:</strong> Share your experiences</li>
               <li><strong>Interviews:</strong> Tell your story</li>
@@ -300,15 +345,17 @@
               <li><strong>Peer support:</strong> Join our community</li>
             </ul>
 
+            <!-- Callout emphasis -->
             <p>
               <strong
-                ><em
-                  >Your participation makes a real difference. Let's work
+                ><em>
+                  Your participation makes a real difference. Let's work
                   together to create positive change!</em
                 ></strong
               >
             </p>
 
+            <!-- CTA button -->
             <p class="u-text-center">
               <a href="contact.html" class="btn btn--primary u-lift">
                 Contact Us to Participate
@@ -319,20 +366,23 @@
       </section>
     </main>
 
+    <!-- ================== FOOTER ================== -->
     <footer>
-      <!-- Newsletter Subscription -->
       <div class="wrapper footer-inner">
-        <!-- Newsletter -->
+        <!-- Newsletter signup -->
         <div>
           <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+
+          <!-- Email capture form -->
           <form
             class="form-inline"
             action="https://formspree.io/f/mabcdxyz"
             method="POST"
           >
-            <label for="footer-email" class="visually-hidden"
-              >Email address</label
-            >
+            <label for="footer-email" class="visually-hidden">
+              Email address
+            </label>
+
             <input
               class="form-input"
               id="footer-email"
@@ -341,6 +391,7 @@
               placeholder="Enter your email"
               required
             />
+
             <button
               class="btn btn--primary"
               type="submit"
@@ -351,22 +402,28 @@
           </form>
         </div>
 
-        <!-- Socials -->
+        <!-- Social media links -->
         <div>
           <h3 class="footer__title">Get in Touch</h3>
+
           <div class="social-icons">
             <a
               href="https://www.facebook.com/groups/535643736920153/"
               aria-label="Get in touch with us through Facebook"
-              ><i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook</a
             >
+              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+            </a>
+
             <a
               href="https://www.instagram.com/nlstuttering/"
               aria-label="Get in touch with us through Instagram"
-              ><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a
             >
+              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+            </a>
           </div>
         </div>
+
+        <!-- Footer copyright -->
         <div class="footer__bottom">
           <p class="footer__text">
             &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
@@ -375,6 +432,7 @@
       </div>
     </footer>
 
+    <!-- Main site JavaScript -->
     <script src="assets/js/scripts.js"></script>
   </body>
 </html>

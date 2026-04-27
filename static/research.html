@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- =========================================================
+         SEO META (Search Engine Optimization)
+         Purpose: Improve discoverability and page relevance
+    ========================================================== -->
+
     <!-- Core SEO Meta (Research Page) -->
     <meta
       name="description"
@@ -15,9 +20,14 @@
       content="Newfoundland and Labrador Stuttering Association"
     />
 
+    <!-- Optional crawler control (currently disabled)
+         Uncomment if you want search engines to index page -->
     <!-- <meta name="robots" content="index, follow" /> -->
 
-    <!-- Open Graph (social sharing ) -->
+    <!-- =========================================================
+         OPEN GRAPH (SOCIAL MEDIA SHARING)
+         Controls preview when sharing link on Facebook, LinkedIn, etc.
+    ========================================================== -->
     <meta
       property="og:title"
       content="Research | Newfoundland and Labrador Stuttering Association"
@@ -36,7 +46,10 @@
       content="http://localhost:10023/static/assets/imgs/coworkers-researching-planning.jpg"
     />
 
-    <!-- Twitter (X ) -->
+    <!-- =========================================================
+         TWITTER / X CARD
+         Controls how page appears when shared on X (Twitter)
+    ========================================================== -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NLSA Research" />
     <meta
@@ -48,26 +61,41 @@
       content="http://localhost:10023/static/assets/imgs/coworkers-researching-planning.jpg"
     />
 
+    <!-- =========================================================
+         THEME / APP SETTINGS
+         Controls browser UI styling and PWA identity hints
+    ========================================================== -->
     <meta name="theme-color" content="#0b3072" />
     <meta name="application-name" content="NLSA" />
+
+    <!-- Canonical URL ensures SEO avoids duplicate content issues -->
     <link rel="canonical" href="http://localhost:10023/static/research.html" />
 
-    <meta name="theme-color" content="#0b3072" />
-    <meta name="application-name" content="NLSA" />
-    <link rel="canonical" href="http://localhost:10023/static/research.html" />
+    <!-- =========================================================
+         FONTS & ICONS
+         External resources loaded for typography and icons
+    ========================================================== -->
 
-    <!-- Load Font Awesome & Google Fonts -->
+    <!-- Preconnect improves font loading performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Font Awesome (icons library) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+
+    <!-- Google Fonts: Montserrat (primary site font) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Load Custom CSS -->
+
+    <!-- =========================================================
+         STYLESHEETS (CSS ARCHITECTURE)
+         Organized by responsibility: reset → variables → layout → components
+    ========================================================== -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/variables.css" />
     <link rel="stylesheet" href="assets/css/base.css" />
@@ -76,7 +104,11 @@
     <link rel="stylesheet" href="assets/css/navigation.css" />
     <link rel="stylesheet" href="assets/css/utilities.css" />
 
-    <!-- Favicon -->
+    <!-- =========================================================
+         FAVICONS (Browser + Device Icons)
+    ========================================================== -->
+
+    <!-- Standard favicon -->
     <link
       rel="icon"
       type="image/png"
@@ -84,7 +116,7 @@
       href="assets/imgs/favicons/fav-icon-32.png"
     />
 
-    <!-- Apple Touch Icons -->
+    <!-- Apple touch icons (iOS home screen shortcuts) -->
     <link
       rel="apple-touch-icon"
       sizes="57x57"
@@ -101,10 +133,15 @@
       href="assets/imgs/favicons/fav-icon-114.png"
     />
 
-    <!-- shortcuct icon-->
+    <!-- Legacy shortcut icon fallback -->
     <link rel="shortcut icon" href="assets/imgs/favicons/fav-icon-32.png" />
 
     <title>Research - Newfoundland and Labrador Stuttering Association</title>
+
+    <!-- =========================================================
+         STRUCTURED DATA (JSON-LD)
+         Helps search engines understand page content
+    ========================================================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -121,23 +158,28 @@
   </head>
 
   <body>
+    <!-- Skip link improves keyboard accessibility for screen readers -->
     <a href="#primary" class="skip-link">Skip to content</a>
 
-    <!-- ===== Navbar ===== -->
+    <!-- =========================================================
+         SITE HEADER / NAVIGATION
+         Shared across all pages
+    ========================================================== -->
     <header class="site-header">
       <nav class="site-nav" aria-label="Main navigation">
         <div class="site-nav__inner">
-          <!-- Tagline -->
+          <!-- Logo / Home link -->
           <div class="site-nav__tagline">
-            <a href="index.html"
-              ><img
+            <a href="index.html">
+              <img
                 loading="lazy"
                 src="assets/imgs/NLSA-logo.png"
                 alt="Newfoundland and Labrador Stuttering Association logo"
-            /></a>
+              />
+            </a>
           </div>
 
-          <!-- Hamburger Menu -->
+          <!-- Mobile hamburger toggle button -->
           <button
             class="hamburger"
             type="button"
@@ -150,26 +192,20 @@
             <span></span>
           </button>
 
-          <!-- Navigation Links -->
+          <!-- Main navigation menu -->
           <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
+            <!-- Home link -->
             <li>
-              <a
-                href="#"
-                role="button"
-                class="site-nav__link submenu-toggle"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="submenu-about"
-              >
-                <span class="link-text">About</span>
+              <a href="index.html" class="site-nav__link">
+                <span class="link-text">Home</span>
               </a>
             </li>
 
-            <!-- DROPDOWN ITEM -->
+            <!-- About dropdown menu -->
             <li class="site-nav__item has-submenu">
-              <a href="#" class="site-nav__link submenu-toggle"
-                ><span class="link-text">About</span></a
-              >
+              <a href="#" class="site-nav__link submenu-toggle">
+                <span class="link-text">About</span>
+              </a>
 
               <ul id="submenu-about" class="submenu" aria-label="About submenu">
                 <li>
@@ -190,6 +226,7 @@
               </ul>
             </li>
 
+            <!-- Main nav links -->
             <li>
               <a href="research.html" class="site-nav__link" aria-current="page"
                 ><span class="link-text">Research</span></a
@@ -206,6 +243,7 @@
               >
             </li>
 
+            <!-- External podcast link (opens new tab) -->
             <li>
               <a
                 href="https://somestutterluh.hcommons.org/"
@@ -224,6 +262,7 @@
               >
             </li>
 
+            <!-- CTA button -->
             <li>
               <a
                 href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/"
@@ -240,15 +279,23 @@
       </nav>
     </header>
 
+    <!-- Overlay used for mobile navigation interaction -->
     <div class="nav-backdrop"></div>
 
+    <!-- =========================================================
+         MAIN PAGE CONTENT
+    ========================================================== -->
     <main id="primary" class="wrapper">
+      <!-- Research page hero/content section -->
       <section
         class="split-panel split-panel--text"
         aria-labelledby="page-heading"
       >
         <h1 id="page-heading">Research at the NLSA</h1>
+
+        <!-- Two-column layout: image + content -->
         <div class="text-image text-image--wrap">
+          <!-- Visual supporting research theme -->
           <div class="text-image__media">
             <img
               loading="lazy"
@@ -256,66 +303,45 @@
               alt="Coworkers researching and planning"
             />
           </div>
+
+          <!-- Main research content -->
           <div class="text-image__content">
+            <!-- Intro paragraph explaining mission -->
             <p>
               The Newfoundland and Labrador Stuttering Association (NLSA) is
               proud to lead community-based research dedicated to improving
               accessibility, inclusion, and quality of life for people with
-              communication disabilities in Newfoundland and Labrador. Our work
-              centres the voices of people who stutter and their families, while
-              engaging educators, health professionals, and community leaders in
-              building more inclusive environments across the province.
+              communication disabilities in Newfoundland and Labrador...
             </p>
 
+            <!-- Project section -->
             <h2 class="u-mt-md u-mb-md">Accessibility and Inclusion Project</h2>
 
             <p>
               Funded through a provincial
               <a href="https://www.gov.nl.ca/sswb/accessibility-grant/"
                 >Accessibility Grant</a
-              >, this project brings together a wide network of stakeholders to
-              better understand the barriers faced by people with communication
-              disabilities—and to help create meaningful, community-driven
-              change.
+              >, this project brings together stakeholders...
             </p>
 
+            <!-- List of research methods -->
             <p>Our research includes:</p>
 
             <ul>
-              <li>
-                <strong>A province-wide survey</strong> examining accessibility,
-                participation, and the impact of stuttering and other
-                communication differences in NL.
-              </li>
-              <li>
-                <strong>Interviews</strong> with individuals, families, and
-                professionals to gather lived experiences and identify practical
-                solutions.
-              </li>
-              <li>
-                <strong>Workshops</strong> delivered in communities across the
-                province to share findings, promote inclusive practices, and
-                strengthen local networks.
-              </li>
-
-              <li>
-                <strong
-                  >Knowledge mobilization through the Some Stutter, Luh!
-                  podcast</strong
-                >, which amplifies community voices, discusses project insights,
-                and shares stories of lived experience. With hundreds of
-                subscribers and a growing global audience, the podcast helps us
-                conduct research with people with communication disabilities
-                rather than on them.
-              </li>
+              <li><strong>Province-wide survey</strong>...</li>
+              <li><strong>Interviews</strong>...</li>
+              <li><strong>Workshops</strong>...</li>
+              <li><strong>Podcast-based knowledge mobilization</strong>...</li>
             </ul>
 
+            <!-- Call to action -->
             <p class="u-text-center">
               <a href="get-involved.html" class="btn btn--primary">
                 Participate in Our Research
               </a>
             </p>
 
+            <!-- Supporting image + caption -->
             <figure class="figure">
               <img
                 loading="lazy"
@@ -323,32 +349,32 @@
                 alt="Community workshop session in Newfoundland and Labrador"
               />
               <figcaption>
-                Greg O'Grady discusses the Collaborative Surveys with Out of the
-                Fog (Lynn) Cullen O'Connor about the Collaborative Surveys on
-                Wednesday, October 20, 2021.
+                Greg O'Grady discusses the Collaborative Surveys...
               </figcaption>
             </figure>
 
+            <!-- Closing section -->
             <h2 class="u-mt-md u-mb-md">Our Commitment</h2>
 
             <p>
               This research is grounded in collaboration, empowerment, and
-              community engagement. By connecting research with action, the NLSA
-              aims to build stronger grassroots networks in communities across
-              Newfoundland and Labrador and to create resources that support all
-              individuals facing communication barriers—locally and beyond.
+              community engagement...
             </p>
           </div>
         </div>
       </section>
     </main>
 
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
     <footer>
-      <!-- Newsletter Subscription -->
+      <!-- Newsletter + social links wrapper -->
       <div class="wrapper footer-inner">
-        <!-- Newsletter -->
+        <!-- Newsletter signup -->
         <div>
           <h2 class="footer__title">Subscribe to Our Newsletter</h2>
+
           <form
             class="form-inline"
             action="https://formspree.io/f/mabcdxyz"
@@ -365,32 +391,31 @@
               placeholder="Enter your email"
               required
             />
-            <button
-              class="btn btn--primary"
-              type="submit"
-              aria-label="Subscribe to our newsletter"
-            >
-              Subscribe
-            </button>
+            <button class="btn btn--primary" type="submit">Subscribe</button>
           </form>
         </div>
 
-        <!-- Socials -->
+        <!-- Social media links -->
         <div>
           <h3 class="footer__title">Get in Touch</h3>
           <div class="social-icons">
             <a
               href="https://www.facebook.com/groups/535643736920153/"
-              aria-label="Get in touch with us through Facebook"
-              ><i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook</a
+              aria-label="Facebook"
             >
+              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+            </a>
+
             <a
               href="https://www.instagram.com/nlstuttering/"
-              aria-label="Get in touch with us through Instagram"
-              ><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a
+              aria-label="Instagram"
             >
+              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+            </a>
           </div>
         </div>
+
+        <!-- Copyright -->
         <div class="footer__bottom">
           <p class="footer__text">
             &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
@@ -399,6 +424,7 @@
       </div>
     </footer>
 
+    <!-- Main site JavaScript -->
     <script src="assets/js/scripts.js"></script>
   </body>
 </html>
