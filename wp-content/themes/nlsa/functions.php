@@ -1,6 +1,37 @@
 <?php
 
-function nlsa_enqueue_assets() {
+if ( !function_exists( 'nlsa_theme_setup' ) ) {
+  /* ================== THEME SETUP ================== */
+  function nlsa_theme_setup() {
+
+
+    load_theme_textdomain( 'nlsa', get_template_directory() . '/languages' );
+
+    // Enable support for dynamic document titles
+    add_theme_support('title-tag');
+
+    // Enable support for featured images (post thumbnails)
+    add_theme_support('post-thumbnails');
+
+    add_theme_support( 'html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption') );
+
+    add_theme_support( 'customize-selective-refresh-widgets' );
+
+    add_theme_support( 'responsive-embeds' );
+
+    // Register a primary navigation menu
+    register_nav_menus(
+      array(
+        'primary' => esc_html__('Primary Menu', 'nlsa'),
+      )
+    );
+  }
+
+}
+
+add_action('after_setup_theme', 'nlsa_theme_setup');
+
+function nlsa_assets() {
 
   /* ================== STYLES ================== */
 
@@ -86,6 +117,4 @@ function nlsa_enqueue_assets() {
   }
 }
 
-add_action('wp_enqueue_scripts', 'nlsa_enqueue_assets');
-
-add_theme_support('title-tag');
+add_action('wp_enqueue_scripts', 'nlsa_assets');
