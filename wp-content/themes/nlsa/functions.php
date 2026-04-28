@@ -122,6 +122,7 @@ add_action('wp_enqueue_scripts', 'nlsa_assets');
 class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
 
   private $submenu_count = 0;
+  private $current_item = null;
 
   // OPEN <ul>
   function start_lvl(&$output, $depth = 0, $args = null) {
@@ -132,97 +133,118 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
       ? 'submenu'
       : 'submenu submenu--nested';
 
-    $output .= '<ul class="' . esc_attr($classes) . '" aria-label="Submenu ' . $this->submenu_count . '">';
+    // Fallback label
+    $label = 'Submenu ' . $this->submenu_count;
+
+    // Use parent title if available
+    if ($this->current_item) {
+      $label = esc_attr($this->current_item->title . ' submenu');
+    }
+
+    // ID only for first level
+    $submenu_id = '';
+
+    if ($depth === 0 && $this->current_item) {
+      $submenu_id = ' id="submenu-' . esc_attr($this->current_item->ID) . '"';
+    }
+
+    $output .= '<ul' . $submenu_id . ' class="' . esc_attr($classes) . '" aria-label="' . $label . '">';
   }
 
-  // CLOSE <ul>
   function end_lvl(&$output, $depth = 0, $args = null) {
     $output .= '</ul>';
   }
 
   // START ITEM
-function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+  function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
 
-  $classes = empty($item->classes) ? [] : (array) $item->classes;
-  $has_children = in_array('menu-item-has-children', $classes);
+    $this->current_item = $item;
 
-  // ---------- <li> (scalable approach) ----------
-  $li_classes = [];
+    $classes = empty($item->classes) ? [] : (array) $item->classes;
+    $has_children = in_array('menu-item-has-children', $classes);
 
-  if ($has_children) {
-    $li_classes[] = 'has-submenu';
+    // ---------- <li> ----------
+    $li_classes = [];
+
+    if ($depth === 0) {
+      $li_classes[] = 'site-nav__item';
+    }
+
+    if ($has_children) {
+      $li_classes[] = 'has-submenu';
+    }
+
+    $li_attr = !empty($li_classes)
+      ? ' class="' . esc_attr(implode(' ', $li_classes)) . '"'
+      : '';
+
+    $output .= '<li' . $li_attr . '>';
+
+    // ---------- LINK CLASSES ----------
+
+    // Detect user-defined classes (ignore WP defaults)
+    $user_classes = array_filter($classes, function($class) {
+      return !empty($class)
+        && !str_starts_with($class, 'menu-item')
+        && !str_starts_with($class, 'current')
+        && !str_starts_with($class, 'page');
+    });
+
+    // If user defined classes → use ONLY those
+    if (!empty($user_classes)) {
+      $link_classes = $user_classes;
+    } else {
+      // Default classes
+      $link_classes = ($depth === 0)
+        ? ['site-nav__link']
+        : ['submenu__link'];
+    }
+
+    // Add submenu toggle ONLY if no custom classes
+    if ($has_children && empty($user_classes)) {
+      $link_classes[] = 'submenu-toggle';
+    }
+
+    $link_classes = implode(' ', array_unique($link_classes));
+
+    // ---------- ARIA ----------
+    $aria = '';
+
+    if ($has_children) {
+      $aria = ' aria-haspopup="true" aria-expanded="false"';
+
+      if ($depth === 0) {
+        $aria .= ' aria-controls="submenu-' . esc_attr($item->ID) . '"';
+      }
+    }
+
+    // role="button" only for top-level toggles without custom classes
+    $role = ($has_children && $depth === 0 && empty($user_classes))
+      ? ' role="button"'
+      : '';
+
+    // ---------- TARGET ----------
+    $target = '';
+    $rel = '';
+
+    if (!empty($item->target) && $item->target === '_blank') {
+      $target = ' target="_blank"';
+      $rel = ' rel="noopener noreferrer"';
+    }
+
+    // ---------- OUTPUT ----------
+    $output .= '<a href="' . esc_url($item->url) . '"'
+            . $role
+            . ' class="' . esc_attr($link_classes) . '"'
+            . $aria
+            . $target
+            . $rel
+            . '>';
+
+    $output .= '<span class="link-text">' . esc_html($item->title) . '</span>';
+    $output .= '</a>';
   }
 
-  $li_class_attr = !empty($li_classes)
-    ? ' class="' . esc_attr(implode(' ', $li_classes)) . '"'
-    : '';
-
-  $output .= '<li' . $li_class_attr . '>';
-
-  // ---------- LINK CLASSES ----------
-  // Detect user-defined classes (ignore all WP-generated ones)
-  $user_classes = array_filter($classes, function($class) {
-    return !empty($class)
-      && !str_starts_with($class, 'menu-item')
-      && !str_starts_with($class, 'current')
-      && !str_starts_with($class, 'page')
-      && !str_starts_with($class, 'menu')
-      && $class !== 'current_page_item'
-      && $class !== 'current_page_parent'
-      && $class !== 'current_page_ancestor';
-  });
-
-  // Decide classes
-  if (!empty($user_classes)) {
-    // Use ONLY what user defined (e.g. btn btn--cta)
-    $link_classes = $user_classes;
-  } else {
-    // Fallback
-    $link_classes = ['site-nav__link'];
-  }
-
-  // Add submenu toggle if needed
-  if ($has_children) {
-    $link_classes[] = 'submenu-toggle';
-  }
-
-  // Final string
-  $link_classes = implode(' ', array_unique($link_classes));
-
-  // ---------- ARIA ----------
-  $aria = '';
-
-  if ($has_children) {
-    $submenu_id = 'submenu-' . $item->ID;
-
-    $aria = ' aria-haspopup="true"'
-          . ' aria-expanded="false"'
-          . ' aria-controls="' . esc_attr($submenu_id) . '"';
-  }
-
-  // ---------- TARGET ----------
-  $target = '';
-  $rel = '';
-
-  if (!empty($item->target) && $item->target === '_blank') {
-    $target = ' target="_blank"';
-    $rel = ' rel="noopener noreferrer"';
-  }
-
-  // ---------- OUTPUT LINK ----------
-  $output .= '<a href="' . esc_url($item->url) . '"'
-          . ' class="' . esc_attr($link_classes) . '"'
-          . $aria
-          . $target
-          . $rel
-          . '>';
-
-  $output .= '<span class="link-text">' . esc_html($item->title) . '</span>';
-
-  $output .= '</a>';
-}
-
-  // CLOSE ITEM
   function end_el(&$output, $item, $depth = 0, $args = null) {
     $output .= '</li>';
   }
