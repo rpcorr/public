@@ -232,11 +232,22 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
       $rel = ' rel="noopener noreferrer"';
     }
 
+    // ---------- ARIA CURRENT ----------
+    $aria_current = '';
+
+    if (
+      in_array('current-menu-item', $classes) ||
+      in_array('current_page_item', $classes)
+    ) {
+      $aria_current = ' aria-current="page"';
+    }
+
     // ---------- OUTPUT ----------
     $output .= '<a href="' . esc_url($item->url) . '"'
             . $role
             . ' class="' . esc_attr($link_classes) . '"'
             . $aria
+            . $aria_current
             . $target
             . $rel
             . '>';
