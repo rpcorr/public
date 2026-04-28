@@ -65,7 +65,7 @@
   <?php wp_head(); ?>
 </head>
 
-<body>
+<body <?php body_class(); ?>>
   <!-- Skip link improves keyboard accessibility -->
   <a href="#primary" class="skip-link">Skip to content</a>
 
