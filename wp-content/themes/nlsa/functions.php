@@ -141,62 +141,23 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
   }
 
   // START ITEM
-  // function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
-
-  //   $classes = empty($item->classes) ? [] : (array) $item->classes;
-  //   $has_children = in_array('menu-item-has-children', $classes);
-
-  //   $li_class = $has_children ? 'has-submenu' : '';
-
-  //   $output .= '<li class="' . esc_attr($li_class) . '">';
-
-  //   // Default link classes
-  //   $link_classes = 'site-nav__link';
-
-  //   if ($has_children) {
-  //     $link_classes .= ' submenu-toggle';
-  //   }
-
-  //   // Build aria attributes
-  //   $aria = '';
-
-  //   if ($has_children) {
-  //     $submenu_id = 'submenu-' . $item->ID;
-
-  //     $aria = ' aria-haspopup="true"'
-  //           . ' aria-expanded="false"'
-  //           . ' aria-controls="' . esc_attr($submenu_id) . '"';
-  //   }
-
-  //   // Handle external links
-  //   $target = '';
-  //   $rel = '';
-
-  //   if (!empty($item->target) && $item->target === '_blank') {
-  //     $target = ' target="_blank"';
-  //     $rel = ' rel="noopener noreferrer"';
-  //   }
-
-  //   $output .= '<a href="' . esc_url($item->url) . '"'
-  //           . ' class="' . esc_attr($link_classes) . '"'
-  //           . $aria
-  //           . $target
-  //           . $rel
-  //           . '>';
-
-  //   $output .= '<span class="link-text">' . esc_html($item->title) . '</span>';
-
-  //   $output .= '</a>';
-  // }
-
-  function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
 
   $classes = empty($item->classes) ? [] : (array) $item->classes;
   $has_children = in_array('menu-item-has-children', $classes);
 
-  // ---------- <li> ----------
-  $li_class = $has_children ? 'has-submenu' : '';
-  $output .= '<li class="' . esc_attr($li_class) . '">';
+  // ---------- <li> (scalable approach) ----------
+  $li_classes = [];
+
+  if ($has_children) {
+    $li_classes[] = 'has-submenu';
+  }
+
+  $li_class_attr = !empty($li_classes)
+    ? ' class="' . esc_attr(implode(' ', $li_classes)) . '"'
+    : '';
+
+  $output .= '<li' . $li_class_attr . '>';
 
   // ---------- LINK CLASSES ----------
   // Detect user-defined classes (ignore all WP-generated ones)
