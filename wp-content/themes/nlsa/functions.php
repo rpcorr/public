@@ -118,3 +118,151 @@ function nlsa_assets() {
 }
 
 add_action('wp_enqueue_scripts', 'nlsa_assets');
+
+class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
+
+  private $submenu_count = 0;
+
+  // OPEN <ul>
+  function start_lvl(&$output, $depth = 0, $args = null) {
+
+    $this->submenu_count++;
+
+    $classes = ($depth === 0)
+      ? 'submenu'
+      : 'submenu submenu--nested';
+
+    $output .= '<ul class="' . esc_attr($classes) . '" aria-label="Submenu ' . $this->submenu_count . '">';
+  }
+
+  // CLOSE <ul>
+  function end_lvl(&$output, $depth = 0, $args = null) {
+    $output .= '</ul>';
+  }
+
+  // START ITEM
+  // function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+
+  //   $classes = empty($item->classes) ? [] : (array) $item->classes;
+  //   $has_children = in_array('menu-item-has-children', $classes);
+
+  //   $li_class = $has_children ? 'has-submenu' : '';
+
+  //   $output .= '<li class="' . esc_attr($li_class) . '">';
+
+  //   // Default link classes
+  //   $link_classes = 'site-nav__link';
+
+  //   if ($has_children) {
+  //     $link_classes .= ' submenu-toggle';
+  //   }
+
+  //   // Build aria attributes
+  //   $aria = '';
+
+  //   if ($has_children) {
+  //     $submenu_id = 'submenu-' . $item->ID;
+
+  //     $aria = ' aria-haspopup="true"'
+  //           . ' aria-expanded="false"'
+  //           . ' aria-controls="' . esc_attr($submenu_id) . '"';
+  //   }
+
+  //   // Handle external links
+  //   $target = '';
+  //   $rel = '';
+
+  //   if (!empty($item->target) && $item->target === '_blank') {
+  //     $target = ' target="_blank"';
+  //     $rel = ' rel="noopener noreferrer"';
+  //   }
+
+  //   $output .= '<a href="' . esc_url($item->url) . '"'
+  //           . ' class="' . esc_attr($link_classes) . '"'
+  //           . $aria
+  //           . $target
+  //           . $rel
+  //           . '>';
+
+  //   $output .= '<span class="link-text">' . esc_html($item->title) . '</span>';
+
+  //   $output .= '</a>';
+  // }
+
+  function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+
+  $classes = empty($item->classes) ? [] : (array) $item->classes;
+  $has_children = in_array('menu-item-has-children', $classes);
+
+  // ---------- <li> ----------
+  $li_class = $has_children ? 'has-submenu' : '';
+  $output .= '<li class="' . esc_attr($li_class) . '">';
+
+  // ---------- LINK CLASSES ----------
+  // Detect user-defined classes (ignore all WP-generated ones)
+  $user_classes = array_filter($classes, function($class) {
+    return !empty($class)
+      && !str_starts_with($class, 'menu-item')
+      && !str_starts_with($class, 'current')
+      && !str_starts_with($class, 'page')
+      && !str_starts_with($class, 'menu')
+      && $class !== 'current_page_item'
+      && $class !== 'current_page_parent'
+      && $class !== 'current_page_ancestor';
+  });
+
+  // Decide classes
+  if (!empty($user_classes)) {
+    // Use ONLY what user defined (e.g. btn btn--cta)
+    $link_classes = $user_classes;
+  } else {
+    // Fallback
+    $link_classes = ['site-nav__link'];
+  }
+
+  // Add submenu toggle if needed
+  if ($has_children) {
+    $link_classes[] = 'submenu-toggle';
+  }
+
+  // Final string
+  $link_classes = implode(' ', array_unique($link_classes));
+
+  // ---------- ARIA ----------
+  $aria = '';
+
+  if ($has_children) {
+    $submenu_id = 'submenu-' . $item->ID;
+
+    $aria = ' aria-haspopup="true"'
+          . ' aria-expanded="false"'
+          . ' aria-controls="' . esc_attr($submenu_id) . '"';
+  }
+
+  // ---------- TARGET ----------
+  $target = '';
+  $rel = '';
+
+  if (!empty($item->target) && $item->target === '_blank') {
+    $target = ' target="_blank"';
+    $rel = ' rel="noopener noreferrer"';
+  }
+
+  // ---------- OUTPUT LINK ----------
+  $output .= '<a href="' . esc_url($item->url) . '"'
+          . ' class="' . esc_attr($link_classes) . '"'
+          . $aria
+          . $target
+          . $rel
+          . '>';
+
+  $output .= '<span class="link-text">' . esc_html($item->title) . '</span>';
+
+  $output .= '</a>';
+}
+
+  // CLOSE ITEM
+  function end_el(&$output, $item, $depth = 0, $args = null) {
+    $output .= '</li>';
+  }
+}

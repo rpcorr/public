@@ -380,8 +380,13 @@ if (!button || !menu || !backdrop) {
 
 // ================== SUBMENU LOGIC ==================
 document.querySelectorAll('.has-submenu').forEach((menuItem) => {
-  const toggle = menuItem.querySelector(':scope > .submenu-toggle'); // direct child toggle
-  const submenu = menuItem.querySelector('.submenu');
+  const toggle = menuItem.querySelector(':scope > .submenu-toggle');
+
+  // NEW: get submenu via aria-controls
+  const submenuId = toggle?.getAttribute('aria-controls');
+  const submenu = submenuId
+    ? document.getElementById(submenuId)
+    : menuItem.querySelector('.submenu'); // fallback (nested menus)
   const links = submenu?.querySelectorAll('.submenu__link') || [];
 
   // Centralized submenu state handler

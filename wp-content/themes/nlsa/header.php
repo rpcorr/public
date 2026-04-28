@@ -84,93 +84,18 @@
         </button>
 
         <!-- Primary navigation (inert by default for accessibility) -->
-        <ul id="primary-menu" class="site-nav__list" inert aria-hidden="true">
-          <!-- Top-level link -->
-          <li>
-            <a href="index.html" class="site-nav__link" aria-current="page">
-              <span class="link-text">Home</span>
-            </a>
-          </li>
+         <?php
+            wp_nav_menu([
+            'theme_location' => 'primary',
+            'container'      => false,
+            'menu_id'        => 'primary-menu',
+            'menu_class'     => 'site-nav__list',
+            'depth'          => 3,
+            'fallback_cb'    => false,
+            'walker'         => new NLSA_Walker_Nav_Menu(),
+            ]);
+          ?>
 
-          <!-- Dropdown menu -->
-          <li class="site-nav__item has-submenu">
-            <a href="#" role="button" class="site-nav__link submenu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-about">
-              <span class="link-text">About</span>
-            </a>
-
-            <!-- Submenu -->
-            <ul id="submenu-about" class="submenu" aria-label="About submenu">
-              <li>
-                <a href="about.html" class="submenu__link">
-                  <span class="link-text">Overview</span>
-                </a>
-              </li>
-              <li>
-                <a href="team.html" class="submenu__link">
-                  <span class="link-text">Our Team</span>
-                </a>
-              </li>
-
-              <!-- Nested submenu -->
-              <li class="has-submenu">
-                <a href="#" class="submenu__link submenu-toggle" aria-haspopup="true" aria-expanded="false">
-                  <span class="link-text">History</span>
-                </a>
-
-                <!-- Sub-sub menu -->
-                <ul class="submenu submenu--nested" aria-label="History submenu">
-                  <li>
-                    <a href="early.html" class="submenu__link">
-                      <span class="link-text">Early Years</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="modern.html" class="submenu__link">
-                      <span class="link-text">Modern Era</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Standard navigation links -->
-          <li>
-            <a href="research.html" class="site-nav__link">
-              <span class="link-text">Research</span>
-            </a>
-          </li>
-          <li>
-            <a href="get-involved.html" class="site-nav__link">
-              <span class="link-text">Get Involved</span>
-            </a>
-          </li>
-          <li>
-            <a href="news.html" class="site-nav__link">
-              <span class="link-text">News</span>
-            </a>
-          </li>
-
-          <!-- External link (opens in new tab) -->
-          <li>
-            <a href="https://somestutterluh.hcommons.org/" class="site-nav__link" target="_blank" rel="noopener noreferrer">
-              <span class="link-text"> Podcast </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="contact.html" class="site-nav__link">
-              <span class="link-text">Contact</span>
-            </a>
-          </li>
-
-          <!-- Call-to-action -->
-          <li>
-            <a href="https://www.canadahelps.org/en/charities/newfoundland-and-labrador-stuttering-association-inc/" class="btn btn--cta" target="_blank" rel="noopener noreferrer" aria-label="Donate (opens in new tab)">
-              Donate
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
   </header>
