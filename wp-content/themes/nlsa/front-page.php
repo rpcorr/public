@@ -88,8 +88,6 @@
             $col_class = $layout === '40' ? 'col-5' : 'col-7';
 
             $id = 'program-' . $i . '-' . get_the_ID();
-
-            $is_external = $link && !str_contains($link, home_url());
           ?>
 
             <div class="layout-grid__item <?php echo esc_attr($col_class); ?>"
@@ -115,12 +113,19 @@
                 <?php echo esc_html($desc); ?>
               </p>
 
-              <?php if ($link): ?>
-                <a href="<?php echo esc_url($link); ?>"
+              <?php if ($link): 
+                $url = $link['url'];
+                $link_title = $link['title'];
+                $target = $link['target'] ?: '_self';
+              ?>
+
+                <a href="<?php echo esc_url($url); ?>"
                   class="btn btn--primary u-lift"
-                  <?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
-                  <?php echo esc_html($text ?: 'Learn More'); ?>
+                  target="<?php echo esc_attr($target); ?>"
+                  <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+                  <?php echo esc_html($text ?: $link_title); ?>
                 </a>
+
               <?php endif; ?>
 
             </div>
