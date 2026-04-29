@@ -197,25 +197,65 @@ $hero_btn_txt = get_field('hero_button_text');
     </section>
 
     <!-- ===== Conference Highlight Section ===== -->
-    <section class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first" aria-labelledby="conference-heading">
+    <?php
+    $conf_heading = get_field('conference_heading');
+    $conf_date    = get_field('conference_date');
+    $conf_link    = get_field('conference_link');
+    $conf_image   = get_field('conference_image');
+    ?>
+
+    <section class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first"
+      <?php echo $conf_heading ? 'aria-labelledby="conference-heading"' : ''; ?>>
+
       <!-- Text -->
       <div>
-        <h2 id="conference-heading">
-          Joint Canadian Stuttering Association & Newfoundland and Labrador
-          Stuttering Association Conference.
-        </h2>
 
-        <p class="font-weight-medium">August 21–23, 2026</p>
+        <?php if ($conf_heading): ?>
+          <h2 id="conference-heading">
+            <?php echo esc_html($conf_heading); ?>
+          </h2>
+        <?php endif; ?>
 
-        <a href="https://stutter.ca/events/conference/2026" target="_blank" rel="noopener noreferrer" class="btn btn--primary u-lift" aria-label="Learn more about the 2026 CSA Conference (opens in new tab)">
-          Learn more about the 2026 CSA Conference
-        </a>
+        <?php if ($conf_date): ?>
+          <p class="font-weight-medium">
+            <?php echo esc_html($conf_date); ?>
+          </p>
+        <?php endif; ?>
+
+        <?php if ($conf_link): 
+          $url = is_array($conf_link) ? $conf_link['url'] : $conf_link;
+          $target = is_array($conf_link) ? ($conf_link['target'] ?: '_self') : '_self';
+          $link_title = is_array($conf_link) ? $conf_link['title'] : '';
+        ?>
+
+          <a href="<?php echo esc_url($url); ?>"
+            class="btn btn--primary u-lift"
+            target="<?php echo esc_attr($target); ?>"
+            <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+
+            <?php echo esc_html($link_title ?: 'Learn More'); ?>
+
+          </a>
+
+        <?php endif; ?>
+
       </div>
 
       <!-- Image -->
       <div class="split-panel__media">
-        <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/at-home-with-stuttering.jpg'); ?>" alt="Joint Conference with the Canadian Stuttering Association" />
+        <?php if ($conf_image):
+          $img_url = is_array($conf_image) ? $conf_image['url'] : wp_get_attachment_image_url($conf_image, 'full');
+          $img_alt = is_array($conf_image) ? $conf_image['alt'] : get_post_meta($conf_image, '_wp_attachment_image_alt', true);
+          $img_alt = $img_alt ?: 'Conference image';
+        ?>
+          <?php if (!empty($img_url)): ?>
+            <img loading="lazy"
+                src="<?php echo esc_url($img_url); ?>"
+                alt="<?php echo esc_attr($img_alt); ?>">
+          <?php endif; ?>
+        <?php endif; ?>
       </div>
+
     </section>
   </main>
 
