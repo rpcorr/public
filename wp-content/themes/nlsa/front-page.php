@@ -100,9 +100,11 @@
                 $img_alt = is_array($image) ? $image['alt'] : get_post_meta($image, '_wp_attachment_image_alt', true);
                 $img_alt = $img_alt ?: $title;
               ?>
-                <img loading="lazy"
-                    src="<?php echo esc_url($img_url); ?>"
-                    alt="<?php echo esc_attr($img_alt); ?>">
+                <?php if (!empty($img_url)): ?>
+                  <img loading="lazy"
+                      src="<?php echo esc_url($img_url); ?>"
+                      alt="<?php echo esc_attr($img_alt); ?>">
+                <?php endif; ?>
               <?php endif; ?>
 
               <h3 id="<?php echo esc_attr($id); ?>">
