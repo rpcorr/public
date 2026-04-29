@@ -62,71 +62,63 @@ $hero_btn_txt = get_field('hero_button_text');
 
     <?php
     $ann_heading = get_field('announcement_heading');
+    $ann_icon    = get_field('announcement_icon');
     $ann_text    = get_field('announcement_text');
     $ann_link    = get_field('announcement_button_link');
     $ann_btn_txt = get_field('announcement_button_text');
-    ?>
+  ?>
 
-    <section class="announcement announcement--primary" aria-labelledby="announcement-heading">
+  <section class="announcement announcement--primary" aria-labelledby="announcement-heading">
 
-      <!-- Icon (static) -->
-      <div class="announcement__icon">
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
-      </div>
+    <!-- Icon -->
+    <div class="announcement__icon">
 
-      <!-- Content -->
-      <div class="announcement__content">
-
-        <?php if ($ann_heading): ?>
-          <h2 id="announcement-heading">
-            <?php echo esc_html($ann_heading); ?>
-          </h2>
-        <?php endif; ?>
-
-        <?php if ($ann_text): ?>
-          <p class="font-weight-medium">
-            <?php echo esc_html($ann_text); ?>
-          </p>
-        <?php endif; ?>
-
-      </div>
-
-      <!-- CTA -->
-      <?php if ($ann_link): 
-        $url = is_array($ann_link) ? $ann_link['url'] : $ann_link;
-        $target = is_array($ann_link) ? ($ann_link['target'] ?: '_self') : '_self';
-        $link_title = is_array($ann_link) ? $ann_link['title'] : '';
-      ?>
-
-        <div class="announcement__actions">
-          <a href="<?php echo esc_url($url); ?>"
-            class="btn btn--secondary u-lift"
-            target="<?php echo esc_attr($target); ?>"
-            <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
-
-            <?php echo esc_html($ann_btn_txt ?: $link_title ?: 'Learn More'); ?>
-
-          </a>
-        </div>
-
+      <?php if ($ann_icon && $ann_icon !== 'none'): ?>
+        <?php echo nlsa_get_icon($ann_icon); ?>
       <?php endif; ?>
 
-    </section>
+    </div>
+
+    <!-- Content -->
+    <div class="announcement__content">
+
+      <?php if ($ann_heading): ?>
+        <h2 id="announcement-heading">
+          <?php echo esc_html($ann_heading); ?>
+        </h2>
+      <?php endif; ?>
+
+      <?php if ($ann_text): ?>
+        <p class="font-weight-medium">
+          <?php echo esc_html($ann_text); ?>
+        </p>
+      <?php endif; ?>
+
+    </div>
+
+    <!-- CTA -->
+    <?php if ($ann_link): 
+      $url    = is_array($ann_link) ? $ann_link['url'] : $ann_link;
+      $target = is_array($ann_link) ? ($ann_link['target'] ?: '_self') : '_self';
+      $title  = is_array($ann_link) ? $ann_link['title'] : '';
+    ?>
+
+      <div class="announcement__actions">
+
+        <a href="<?php echo esc_url($url); ?>"
+          class="btn btn--secondary u-lift"
+          target="<?php echo esc_attr($target); ?>"
+          <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+
+          <?php echo esc_html($ann_btn_txt ?: $title ?: 'Learn More'); ?>
+
+        </a>
+
+      </div>
+
+    <?php endif; ?>
+
+  </section>
 
     <!-- ===== Programs / Initiatives Grid ===== -->
     <section aria-labelledby="programs-heading">
