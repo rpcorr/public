@@ -3,30 +3,62 @@
   <!-- ================== MAIN CONTENT ================== -->
   <main id="primary" class="wrapper">
     <!-- ===== Hero Section ===== -->
-    <section class="split-panel split-panel--50-50 split-panel--hero" aria-labelledby="hero-heading">
-      <!-- Visual/logo -->
-      <div class="split-panel__media">
-        <img loading="lazy" src="<?php echo get_theme_file_uri('/assets/imgs/NLSA-logo.png'); ?>" alt="Newfoundland and Labrador Stuttering Association logo" />
-      </div>
+    <?php
+$hero_heading = get_field('hero_heading');
+$hero_text    = get_field('hero_text');
+$hero_image   = get_field('hero_image');
+$hero_link    = get_field('hero_button_link');
+$hero_btn_txt = get_field('hero_button_text');
+?>
 
-      <!-- Hero content -->
-      <div>
+<section class="split-panel split-panel--50-50 split-panel--hero" aria-labelledby="hero-heading">
+
+  <!-- Image -->
+  <div class="split-panel__media">
+      <?php if ($hero_image):
+        $img_url = is_array($hero_image) ? $hero_image['url'] : wp_get_attachment_image_url($hero_image, 'full');
+        $img_alt = is_array($hero_image) ? $hero_image['alt'] : get_post_meta($hero_image, '_wp_attachment_image_alt', true);
+        $img_alt = $img_alt ?: 'Hero image';
+      ?>
+        <img loading="lazy"
+            src="<?php echo esc_url($img_url); ?>"
+            alt="<?php echo esc_attr($img_alt); ?>">
+      <?php endif; ?>
+    </div>
+
+    <!-- Hero Content -->
+    <div>
+
+      <?php if ($hero_heading): ?>
         <h1 id="hero-heading">
-          Supporting People Who Stutter in Newfoundland and Labrador
+          <?php echo esc_html($hero_heading); ?>
         </h1>
+      <?php endif; ?>
 
+      <?php if ($hero_text): ?>
         <p class="font-weight-medium">
-          The NLSA advocates for people who stutter, fostering inclusion across health care, education, and public life. We promote understanding, support, and equal opportunities, ensuring every voice is heard and valued.
+          <?php echo esc_html($hero_text); ?>
         </p>
+      <?php endif; ?>
 
-        <a href="about.html" class="btn btn--primary u-lift">
-          Learn more about
-          <abbr title="Newfoundland and Labrador Stuttering Association">
-            NLSA
-          </abbr>
+      <?php if ($hero_link): 
+        $url = is_array($hero_link) ? $hero_link['url'] : $hero_link;
+        $target = is_array($hero_link) ? ($hero_link['target'] ?: '_self') : '_self';
+        $link_title = is_array($hero_link) ? $hero_link['title'] : '';
+      ?>
+        <a href="<?php echo esc_url($url); ?>"
+          class="btn btn--primary u-lift"
+          target="<?php echo esc_attr($target); ?>"
+          <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+
+          <?php echo esc_html($hero_btn_txt ?: $link_title ?: 'Learn more'); ?>
+
         </a>
-      </div>
-    </section>
+      <?php endif; ?>
+
+    </div>
+
+  </section>
 
     <!-- ===== Announcement / CTA Banner ===== -->
     <section class="announcement announcement--primary" aria-labelledby="announcement-heading">
