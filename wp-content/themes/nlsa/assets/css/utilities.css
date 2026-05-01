@@ -94,12 +94,12 @@
 
 /* Hover lift effect:
    Adds a small upward movement for interactive elements */
-.u-lift {
+.wp-block-button.u-lift {
   display: inline-block; /* ensures transform works properly */
   transition: transform var(--transition-fast);
 }
 
-.u-lift:hover {
+.wp-block-button.u-lift:hover {
   transform: translateY(-2px);
 }
 
