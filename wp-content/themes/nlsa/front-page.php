@@ -46,14 +46,15 @@ $hero_btn_txt = get_field('hero_button_text');
         $target = is_array($hero_link) ? ($hero_link['target'] ?: '_self') : '_self';
         $link_title = is_array($hero_link) ? $hero_link['title'] : '';
       ?>
-        <a href="<?php echo esc_url($url); ?>"
-          class="btn btn--primary u-lift"
-          target="<?php echo esc_attr($target); ?>"
-          <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+        <div class="btn btn--primary u-lift">
+          <a href="<?php echo esc_url($url); ?>"
+            target="<?php echo esc_attr($target); ?>"
+            <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
 
-          <?php echo esc_html($hero_btn_txt ?: $link_title ?: 'Learn more'); ?>
+            <?php echo esc_html($hero_btn_txt ?: $link_title ?: 'Learn more'); ?>
 
-        </a>
+          </a>
+        </div>
       <?php endif; ?>
 
     </div>
@@ -105,14 +106,15 @@ $hero_btn_txt = get_field('hero_button_text');
 
       <div class="announcement__actions">
 
-        <a href="<?php echo esc_url($url); ?>"
-          class="btn btn--secondary u-lift"
-          target="<?php echo esc_attr($target); ?>"
-          <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+       <div class="btn btn--secondary u-lift">
+          <a href="<?php echo esc_url($url); ?>"
+            target="<?php echo esc_attr($target); ?>"
+            <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
 
-          <?php echo esc_html($ann_btn_txt ?: $title ?: 'Learn More'); ?>
+            <?php echo esc_html($ann_btn_txt ?: $title ?: 'Learn More'); ?>
 
-        </a>
+          </a>
+        </div>
 
       </div>
 
@@ -173,12 +175,13 @@ $hero_btn_txt = get_field('hero_button_text');
                 $target = $link['target'] ?: '_self';
               ?>
 
-                <a href="<?php echo esc_url($url); ?>"
-                  class="btn btn--primary u-lift"
-                  target="<?php echo esc_attr($target); ?>"
-                  <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
-                  <?php echo esc_html($text ?: $link_title); ?>
-                </a>
+                <div class="btn btn--primary u-lift">
+                  <a href="<?php echo esc_url($url); ?>"
+                    target="<?php echo esc_attr($target); ?>"
+                    <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+                    <?php echo esc_html($text ?: $link_title); ?>
+                  </a>
+                </div>
 
               <?php endif; ?>
 
@@ -220,14 +223,15 @@ $hero_btn_txt = get_field('hero_button_text');
           $link_title = is_array($conf_link) ? $conf_link['title'] : '';
         ?>
 
-          <a href="<?php echo esc_url($url); ?>"
-            class="btn btn--primary u-lift"
-            target="<?php echo esc_attr($target); ?>"
-            <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+          <div class="btn btn--primary u-lift">
+            <a href="<?php echo esc_url($url); ?>"
+              target="<?php echo esc_attr($target); ?>"
+              <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
 
-            <?php echo esc_html($link_title ?: 'Learn More'); ?>
+              <?php echo esc_html($link_title ?: 'Learn More'); ?>
 
-          </a>
+            </a>
+          </div>
 
         <?php endif; ?>
 
