@@ -110,8 +110,9 @@ h6 {
 p {
   font-size: var(--text-base);
   line-height: var(--lh-relaxed); /* improved readability for paragraphs */
-  max-width: 68ch; /* optimal line length */
-  margin-bottom: var(--space-md);
+  margin-bottom: var(
+    --space-md
+  ) !important; /* consistent spacing between paragraphs */
 }
 
 /* Emphasis text */
