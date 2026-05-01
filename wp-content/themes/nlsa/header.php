@@ -73,8 +73,19 @@
   <header class="site-header">
     <nav class="site-nav" aria-label="Main navigation">
       <div class="site-nav__inner">
-        <!-- Decorative tagline (hidden from screen readers) -->
-        <div class="site-nav__tagline" aria-hidden="true"></div>
+         <!-- Show logo on all pages except front page, where the tagline is sufficient -->
+        <div class="site-nav__tagline" <?php echo is_front_page() ? 'aria-hidden="true"' : ''; ?>>
+            
+            <?php if (!is_front_page()) : ?>
+              <a href="<?php echo esc_url(home_url('/')); ?>">
+                <img 
+                  loading="lazy"
+                  src="<?php echo esc_url(get_theme_file_uri('/assets/imgs/NLSA-logo.png')); ?>"
+                  alt="<?php bloginfo('name'); ?> logo">
+              </a>
+            <?php endif; ?>
+
+        </div>
 
         <!-- Mobile hamburger toggle -->
         <button class="hamburger" type="button" aria-label="Toggle main menu" aria-expanded="false" aria-controls="primary-menu">
