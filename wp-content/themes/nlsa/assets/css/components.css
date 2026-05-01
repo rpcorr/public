@@ -155,6 +155,11 @@ blockquote cite {
   opacity: 0.8;
 }
 
+blockquote > p {
+  margin: 0; /* reset default margins for better spacing control */
+  max-width: unset; /* allow full width for better layout in narrow containers */
+}
+
 /* --- Buttons ---
    Base button styles + variants
 */
@@ -198,6 +203,38 @@ blockquote cite {
 button,
 .btn {
   cursor: pointer;
+}
+
+/* Lift wrapper (Gutenberg + custom buttons) */
+.wp-block-button.u-lift,
+.btn.u-lift {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+/* Hover effect */
+.wp-block-button.u-lift:hover,
+.btn.u-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Base Gutenberg button = your .btn */
+.wp-block-button__link {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+/* Primary style */
+.wp-block-button.is-style-fill .wp-block-button__link,
+.wp-block-button__link {
+  background-color: var(--primary);
+  color: var(--white);
 }
 
 /* --- Callouts ---
@@ -358,7 +395,8 @@ button,
 /* --- Split Panel ---
    Two-column layout for content + media
 */
-.split-panel {
+.split-panel,
+.page-content {
   display: grid;
   align-items: center;
   grid-template-columns: var(--split-ratio, 1fr 1fr);
@@ -368,6 +406,10 @@ button,
   padding: var(--space-md) var(--space-lg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.page-content {
+  grid-template-columns: 1fr; /* default to single column for regular content */
 }
 
 /* Inner wrapper for width control */
@@ -441,6 +483,10 @@ button,
     margin: 0 auto;
     height: auto;
   }
+
+  .page-content {
+    padding: var(--space-md);
+  }
 }
 
 /* =========================
@@ -456,13 +502,32 @@ button,
 }
 
 /* Shared image styling */
-.text-image__media img {
+.text-image__media img,
+.wp-block-image img {
   width: 100%;
   height: auto;
   max-width: 300px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 375px) {
+  .wp-block-image img,
+  .text-image__media img {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: var(--space-md);
+  }
+
+  .wp-block-image.alignright,
+  .wp-block-image .alignright {
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+  }
 }
 
 /* Optional button under image */
@@ -541,5 +606,16 @@ button,
 
   .text-image__media img {
     max-width: 300px;
+  }
+
+  .wp-block-image.alignright {
+    float: none;
+    display: block;
+    margin: 0 auto var(--space-md);
+  }
+
+  .wp-block-image.alignright img {
+    display: block;
+    margin: 0 auto;
   }
 }
