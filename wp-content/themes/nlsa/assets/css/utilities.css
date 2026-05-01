@@ -96,7 +96,7 @@
    Adds a small upward movement for interactive elements */
 .wp-block-button.u-lift {
   display: inline-block; /* ensures transform works properly */
-  margin-bottom: var(--space-md); /* consistent spacing with other elements */
+  margin-bottom: var(--space-lg); /* consistent spacing with other elements */
   transition: transform var(--transition-fast);
 }
 
