@@ -425,6 +425,14 @@ figcaption {
   grid-template-columns: 1fr; /* default to single column for regular content */
 }
 
+.page-content a {
+  text-decoration: underline;
+}
+
+.page-content a:hover {
+  text-decoration-thickness: 2px;
+}
+
 .page-content ul {
   list-style: disc;
   padding-left: var(--space-lg);
