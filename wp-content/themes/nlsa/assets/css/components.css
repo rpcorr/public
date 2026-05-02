@@ -520,20 +520,7 @@ figcaption {
   }
 }
 
-/* =========================
-   Text + Image Layout
-   ========================= */
-
-/* Two-column layout with fixed image column */
-.text-image {
-  display: grid;
-  grid-template-columns: 1fr minmax(240px, 300px);
-  gap: var(--space-lg);
-  align-items: start;
-}
-
 /* Shared image styling */
-.text-image__media img,
 .wp-block-image img {
   width: 100%;
   height: auto;
@@ -551,8 +538,7 @@ figcaption {
 }
 
 @media (max-width: 375px) {
-  .wp-block-image img,
-  .text-image__media img {
+  .wp-block-image img {
     max-width: 100%;
     width: 100%;
     margin-bottom: var(--space-md);
@@ -566,84 +552,7 @@ figcaption {
   }
 }
 
-/* Optional button under image */
-.text-image__media .btn {
-  display: block;
-  width: fit-content;
-  margin: var(--space-md) auto 0;
-}
-
-/* Prevent overflow issues in grid */
-.text-image__content {
-  min-width: 0;
-}
-
-/* Remove top margin for first paragraph */
-.text-image__content p:first-child {
-  margin-top: 0;
-}
-
-/* List styling inside text */
-.text-image__content ul {
-  list-style: disc;
-  padding-left: var(--space-lg);
-  margin: var(--space-md) 0;
-}
-
-.text-image__content ul li {
-  margin-bottom: var(--space-small-plus);
-}
-
-/* Reverse layout (image left) using direction trick */
-.text-image--reverse {
-  direction: rtl;
-}
-
-.text-image--reverse > * {
-  direction: ltr;
-}
-
-/* Float-based wrap variant (desktop only) */
-.text-image--wrap::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-@media (min-width: 769px) {
-  .text-image--wrap {
-    display: block; /* override grid */
-  }
-
-  .text-image--wrap .text-image__media {
-    float: right;
-    margin: 0 0 var(--space-md) var(--space-lg);
-    max-width: 300px;
-  }
-
-  .text-image--wrap .text-image__media img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-}
-
 @media (max-width: 768px) {
-  /* Stack layout vertically */
-  .text-image {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  .text-image__media {
-    justify-self: center;
-    margin-block: var(--space-lg);
-  }
-
-  .text-image__media img {
-    max-width: 300px;
-  }
-
   .wp-block-image.alignright {
     float: none;
     display: block;
