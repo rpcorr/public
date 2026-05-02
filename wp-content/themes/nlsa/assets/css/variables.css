@@ -9,6 +9,8 @@
   --primary: #0b3072;
   --primary-dark: #092a63;
   --accent: #029fd4;
+  --white: #fff;
+  --black: #000;
 
   /* Text colours */
   --text: #333;
@@ -16,8 +18,7 @@
 
   /* Backgrounds */
   --bg-light: #f8fbff;
-  --white: #fff;
-  --black: #000;
+  --bg-accent-light: #eef4ff;
 
   /* Borders / neutral UI */
   --border: #ccc;
