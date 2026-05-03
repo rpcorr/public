@@ -368,8 +368,9 @@ figcaption {
 }
 
 @media (max-width: 375px) {
-  .footer__text {
+  .wrapper .footer__text {
     max-width: 290px;
+    text-align: center;
   }
 
   .form-inline .btn--nlsa,
