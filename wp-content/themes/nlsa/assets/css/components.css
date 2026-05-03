@@ -376,6 +376,22 @@ figcaption {
   .form-input {
     font-size: var(--text-sm);
   }
+
+  .form-inline {
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    flex-direction: column; /* stack input + button */
+    text-align: center;
+  }
+
+  .form-input {
+    width: 100%;
+    max-width: 260px; /* prevents it from stretching too wide */
+  }
+
+  .form-inline .btn {
+    width: fit-content;
+  }
 }
 
 /* --- Social Icons ---
