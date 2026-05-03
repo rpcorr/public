@@ -386,8 +386,6 @@
     flex-direction: column;
     gap: var(--space-sm);
 
-    padding: var(--space-md) !important;
-
     background: var(--white);
     box-shadow: var(--shadow-lg);
 
@@ -399,6 +397,10 @@
     z-index: 1000;
     overflow-y: auto;
     opacity: 0.98;
+  }
+
+  .site-nav ul.site-nav__list {
+    padding: var(--space-md);
   }
 
   .site-nav__list.is-open {

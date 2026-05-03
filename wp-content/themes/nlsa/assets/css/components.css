@@ -237,12 +237,8 @@ button,
   color: var(--white);
 }
 
-.wp-block-button a {
-  text-decoration: none !important; /* ensure links inside buttons are styled correctly */
-}
-
-.wp-block-button.u-lift {
-  margin-bottom: 0 !important; /* override default spacing for Gutenberg buttons */
+.page-content .wp-block-button a {
+  text-decoration: none; /* ensure links inside buttons are styled correctly */
 }
 
 /* --- Callouts ---

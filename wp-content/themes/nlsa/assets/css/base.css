@@ -110,9 +110,7 @@ h6 {
 p {
   font-size: var(--text-base);
   line-height: var(--lh-relaxed); /* improved readability for paragraphs */
-  margin-bottom: var(
-    --space-md
-  ) !important; /* consistent spacing between paragraphs */
+  margin-bottom: var(--space-md); /* consistent spacing between paragraphs */
 }
 
 /* Emphasis text */
