@@ -612,16 +612,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .site-nav__list,
-  .site-nav__list a,
-  .nav-backdrop,
-  .hamburger span {
-    transition: none !important;
-  }
-}
-
-
 /* ================== Nested submenu ================== */
 /* Second-level (flyout) menu */
 .submenu--nested {
