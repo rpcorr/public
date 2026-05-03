@@ -65,7 +65,7 @@
       <!-- Footer bottom -->
       <div class="footer__bottom">
         <p class="footer__text">
-          &copy; 2026 Newfoundland &amp; Labrador Stuttering Association
+          &copy; <?php echo date('Y'); ?> <?php echo get_bloginfo('name'); ?>. All rights reserved.
         </p>
       </div>
     </div>
