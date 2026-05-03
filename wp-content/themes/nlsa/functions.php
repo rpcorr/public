@@ -337,3 +337,17 @@ function nlsa_require_plugins_notice() {
 }
 
 add_action('admin_notices', 'nlsa_require_plugins_notice');
+
+
+/**
+ * Safe ACF field getter
+ * Prevents fatal errors if ACF is not active
+ */
+function nlsa_get_field($field, $post_id = false) {
+
+  if (!function_exists('get_field')) {
+    return null;
+  }
+
+  return get_field($field, $post_id);
+}

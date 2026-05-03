@@ -31,11 +31,11 @@
   <main id="primary" class="wrapper">
     <!-- ===== Hero Section ===== -->
     <?php
-$hero_heading = get_field('hero_heading');
-$hero_text    = get_field('hero_text');
-$hero_image   = get_field('hero_image');
-$hero_link    = get_field('hero_button_link');
-$hero_btn_txt = get_field('hero_button_text');
+$hero_heading = nlsa_get_field('hero_heading');
+$hero_text    = nlsa_get_field('hero_text');
+$hero_image   = nlsa_get_field('hero_image');
+$hero_link    = nlsa_get_field('hero_button_link');
+$hero_btn_txt = nlsa_get_field('hero_button_text');
 ?>
 
 <section class="split-panel split-panel--50-50 split-panel--hero" aria-labelledby="hero-heading">
@@ -89,11 +89,11 @@ $hero_btn_txt = get_field('hero_button_text');
   </section>
 
     <?php
-    $ann_heading = get_field('announcement_heading');
-    $ann_icon    = get_field('announcement_icon');
-    $ann_text    = get_field('announcement_text');
-    $ann_link    = get_field('announcement_button_link');
-    $ann_btn_txt = get_field('announcement_button_text');
+    $ann_heading = nlsa_get_field('announcement_heading');
+    $ann_icon    = nlsa_get_field('announcement_icon');
+    $ann_text    = nlsa_get_field('announcement_text');
+    $ann_link    = nlsa_get_field('announcement_button_link');
+    $ann_btn_txt = nlsa_get_field('announcement_button_text');
   ?>
 
   <section class="announcement announcement--primary" aria-labelledby="announcement-heading">
@@ -159,12 +159,12 @@ $hero_btn_txt = get_field('hero_button_text');
       <div class="layout-grid">
           <?php for ($i = 1; $i <= 4; $i++) :
 
-            $layout = get_field("program_{$i}_layout");
-            $image  = get_field("program_{$i}_image");
-            $title  = get_field("program_{$i}_title");
-            $desc   = get_field("program_{$i}_description");
-            $link   = get_field("program_{$i}_link");
-            $text   = get_field("program_{$i}_link_text");
+            $layout = nlsa_get_field("program_{$i}_layout");
+            $image  = nlsa_get_field("program_{$i}_image");
+            $title  = nlsa_get_field("program_{$i}_title");
+            $desc   = nlsa_get_field("program_{$i}_description");
+            $link   = nlsa_get_field("program_{$i}_link");
+            $text   = nlsa_get_field("program_{$i}_link_text");
 
             if (!$title && !$image && !$desc && !$link) continue;
 
@@ -220,10 +220,10 @@ $hero_btn_txt = get_field('hero_button_text');
 
     <!-- ===== Conference Highlight Section ===== -->
     <?php
-    $conf_heading = get_field('conference_heading');
-    $conf_date    = get_field('conference_date');
-    $conf_link    = get_field('conference_link');
-    $conf_image   = get_field('conference_image');
+    $conf_heading = nlsa_get_field('conference_heading');
+    $conf_date    = nlsa_get_field('conference_date');
+    $conf_link    = nlsa_get_field('conference_link');
+    $conf_image   = nlsa_get_field('conference_image');
     ?>
 
     <section class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first"
