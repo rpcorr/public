@@ -199,7 +199,14 @@ if (!button || !menu || !backdrop) {
     const clickedSubmenuToggle = e.target.closest('.submenu-toggle');
 
     // Click outside everything → close menu
-    if (!clickedInsideNav && !clickedHamburger && !clickedSubmenuToggle) {
+    const isMenuOpen = menu.classList.contains('is-open');
+
+    if (
+      isMenuOpen &&
+      !clickedInsideNav &&
+      !clickedHamburger &&
+      !clickedSubmenuToggle
+    ) {
       closeMenu();
       return;
     }
@@ -246,7 +253,10 @@ if (!button || !menu || !backdrop) {
   }
 
   // Toggle button click
-  button.addEventListener('click', toggleMenu);
+  button.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevents document click from interfering
+    toggleMenu();
+  });
 
   /* ================== KEYBOARD NAVIGATION ================== */
   menu.addEventListener('keydown', (e) => {
@@ -401,6 +411,10 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
 
   function openSubmenu() {
     setSubmenuState(true);
+
+    if (submenu) {
+      submenu.inert = false; // ensure it's interactive
+    }
   }
 
   function closeSubmenu() {
@@ -408,14 +422,18 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   }
 
   // Detect touch vs hover device
-  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+  function isTouchDevice() {
+    return window.matchMedia('(hover: none)').matches;
+  }
 
   // Click behavior differs for touch vs desktop
   toggle.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent global click handler
+
     const isOpen = menuItem.classList.contains('is-open');
 
     // TOUCH → toggle only (prevent navigation)
-    if (isTouchDevice) {
+    if (isTouchDevice()) {
       e.preventDefault();
 
       // Close other open submenus (not ancestors)
@@ -466,7 +484,7 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   let isPointerInside = false;
 
   // Hover interactions (desktop only)
-  if (!isTouchDevice) {
+  if (!isTouchDevice()) {
     menuItem.addEventListener('mouseenter', () => {
       isPointerInside = true;
       setSubmenuState(true);
@@ -490,16 +508,14 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
     if (next && menuItem.contains(next)) return;
 
     // If pointer still inside (desktop), keep open
-    if (!isTouchDevice && isPointerInside) return;
+    if (!isTouchDevice() && isPointerInside) return;
 
     setSubmenuState(false);
   });
 
   // Open submenu on focus (desktop keyboard users)
   menuItem.addEventListener('focusin', () => {
-    if (!window.matchMedia('(hover: none)').matches) {
-      setSubmenuState(true);
-    }
+    setSubmenuState(true);
   });
 });
 
