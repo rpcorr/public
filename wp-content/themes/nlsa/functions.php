@@ -50,7 +50,8 @@ if ( !function_exists( 'nlsa_theme_setup' ) ) {
 
 add_action('after_setup_theme', 'nlsa_theme_setup');
 
-function nlsa_assets() {
+if (!function_exists('nlsa_assets')) {
+  function nlsa_assets() {
 
   /* ================== STYLES ================== */
 
@@ -134,6 +135,7 @@ function nlsa_assets() {
   if (is_singular() && comments_open() && get_option('thread_comments')) {
     wp_enqueue_script('comment-reply');
   }
+  }
 }
 
 add_action('wp_enqueue_scripts', 'nlsa_assets');
@@ -180,7 +182,7 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
     $this->current_item = $item;
 
     $classes = empty($item->classes) ? [] : (array) $item->classes;
-    $has_children = in_array('menu-item-has-children', $classes);
+    $has_children = in_array('menu-item-has-children', $classes, true);
 
     // ---------- <li> ----------
     $li_classes = [];
