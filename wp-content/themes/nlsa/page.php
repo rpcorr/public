@@ -1,4 +1,15 @@
-<?php get_header(); ?>
+<?php 
+/**
+ *  The template for displaying page
+ * 
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-page
+ * 
+ * @package NLSA_Theme
+ * @since 1.0.0
+*/
+
+
+get_header(); ?>
 
 <main id="primary" class="wrapper">
 

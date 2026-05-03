@@ -1,4 +1,23 @@
 <?php
+/**
+ * Theme Functions File
+ *
+ * This file contains core setup and functionality for the NLSA theme.
+ *
+ * Responsibilities:
+ * - Theme setup (supports, menus, translations)
+ * - Asset registration and enqueueing (CSS/JS)
+ * - Custom navigation walker for primary menu
+ * - Reusable helper functions (e.g. SVG icon system)
+ *
+ * Notes:
+ * - Keep this file focused on theme-level functionality only.
+ * - Business logic or complex features should be moved into /inc/ or modules if needed.
+ * - All assets are loaded via wp_enqueue_scripts for proper dependency handling.
+ *
+ * @package NLSA_Theme
+ * @since 1.0.0
+ */
 
 if ( !function_exists( 'nlsa_theme_setup' ) ) {
   /* ================== THEME SETUP ================== */

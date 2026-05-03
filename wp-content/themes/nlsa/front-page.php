@@ -1,3 +1,30 @@
+<?php
+/**
+ * Front Page Template
+ *
+ * This file controls the layout and content of the site's homepage
+ * when a static front page is assigned in WordPress settings.
+ *
+ * Responsibilities:
+ * - Renders the homepage hero section (headline, text, image, CTA)
+ * - Displays announcement banner content
+ * - Outputs programs/initiatives grid (dynamic ACF repeater-style fields)
+ * - Shows featured conference/event highlight section
+ *
+ * Data Source:
+ * - Advanced Custom Fields (ACF) for all dynamic content
+ *
+ * Notes:
+ * - This template is only used when "A static page" is set as the homepage
+ *   in Settings → Reading → "Your homepage displays"
+ * - Keep layout logic minimal; heavy logic should stay in functions.php
+ * - All images use lazy loading for performance
+ *
+ * @package NLSA_Theme
+ * @since 1.0.0
+ */
+?>
+
 <?php get_header(); ?>
 
   <!-- ================== MAIN CONTENT ================== -->
