@@ -434,19 +434,23 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
 
     // TOUCH → toggle only (prevent navigation)
     if (isTouchDevice()) {
-      e.preventDefault();
+      if (!isOpen) {
+        // First tap → open submenu
+        e.preventDefault();
 
-      // Close other open submenus (not ancestors)
-      document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
-        if (item !== menuItem && !item.contains(menuItem)) {
-          item.classList.remove('is-open');
-          item
-            .querySelector('.submenu-toggle')
-            ?.setAttribute('aria-expanded', 'false');
-        }
-      });
+        // Close other open submenus (not ancestors)
+        document.querySelectorAll('.has-submenu.is-open').forEach((item) => {
+          if (item !== menuItem && !item.contains(menuItem)) {
+            item.classList.remove('is-open');
+            item
+              .querySelector('.submenu-toggle')
+              ?.setAttribute('aria-expanded', 'false');
+          }
+        });
 
-      setSubmenuState(!isOpen);
+        setSubmenuState(true);
+      }
+      // Second tap → allow navigation (no preventDefault)
       return;
     }
 
@@ -457,6 +461,8 @@ document.querySelectorAll('.has-submenu').forEach((menuItem) => {
   toggle.addEventListener('keydown', (e) => {
     switch (e.key) {
       case 'Enter':
+        return; // allow default link behavior
+
       case ' ':
         e.preventDefault();
         setSubmenuState(!menuItem.classList.contains('is-open'));
