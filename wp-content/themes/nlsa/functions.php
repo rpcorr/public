@@ -311,3 +311,29 @@ if (!function_exists('nlsa_get_icon')) {
     return $svg;
   }
 }
+
+
+/* ================== ADMIN NOTICES ================== */
+
+/**
+ * Warn admin if required plugins are missing
+ */
+function nlsa_require_plugins_notice() {
+
+  // Only show in WP admin dashboard
+  if (!current_user_can('activate_plugins')) {
+    return;
+  }
+
+  // Check for ACF
+  if (!defined('ACF_VERSION')) {
+
+    echo '<div class="notice notice-error"><p>';
+    echo '<strong>NLSA Theme:</strong> This theme requires the ';
+    echo '<strong>Advanced Custom Fields (ACF)</strong> plugin. ';
+    echo 'Please install and activate it.';
+    echo '</p></div>';
+  }
+}
+
+add_action('admin_notices', 'nlsa_require_plugins_notice');
