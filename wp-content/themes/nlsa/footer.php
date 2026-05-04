@@ -30,8 +30,9 @@
     <div class="wrapper footer-inner">
       <!-- Newsletter subscription form -->
       <div>
-        <h2 class="footer__title">Subscribe to Our Newsletter</h2>
-
+        <h2 class="footer__title">
+          <?php echo esc_html(get_theme_mod('nlsa_footer_newsletter_title', 'Subscribe to Our Newsletter')); ?>
+        </h2>
         <!-- Uses Formspree for handling submissions -->
         <form class="form-inline" action="https://formspree.io/f/mabcdxyz" method="POST">
           <!-- Visually hidden label for accessibility -->
@@ -49,24 +50,27 @@
 
       <!-- Social links -->
       <div>
-        <h3 class="footer__title">Get in Touch</h3>
+          <h3 class="footer__title">
+            <?php echo esc_html(get_theme_mod('nlsa_footer_get_in_touch_title', 'Get in Touch')); ?>
+          </h3>
 
-        <div class="social-icons">
-          <!-- External social links -->
-          <a href="https://www.facebook.com/groups/535643736920153/" aria-label="Get in touch with us through Facebook">
-            <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
-          </a>
+          <div class="social-icons">
 
-          <a href="https://www.instagram.com/nlstuttering/" aria-label="Get in touch with us through Instagram">
-            <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
-          </a>
-        </div>
+            <a href="<?php echo esc_url(get_theme_mod('nlsa_facebook_url')); ?>" aria-label="Facebook">
+              <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+            </a>
+
+            <a href="<?php echo esc_url(get_theme_mod('nlsa_instagram_url')); ?>" aria-label="Instagram">
+              <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+            </a>
+
+          </div>
       </div>
 
       <!-- Footer bottom -->
       <div class="footer__bottom">
         <p class="footer__text">
-          &copy; <?php echo date('Y'); ?> <?php echo get_bloginfo('name'); ?>. All rights reserved.
+          &copy; <?php echo date('Y'); ?> <?php echo get_bloginfo('name'); ?>. <?php echo esc_html(get_theme_mod('nlsa_footer_copyright_text', 'All rights reserved.')); ?>
         </p>
       </div>
     </div>
