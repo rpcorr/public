@@ -1,0 +1,722 @@
+/* ================== Navigation ================== */
+/* Backdrop overlay behind mobile drawer (dim + blur effect) */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  /* hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02); /* slight scale for subtle zoom-in feel */
+
+  backdrop-filter: blur(0px);
+
+  /* smooth fade + blur + visibility delay to prevent flicker */
+  transition:
+    opacity var(--motion-smooth) 60ms,
+    transform var(--motion-smooth) 60ms,
+    backdrop-filter var(--motion-smooth) 60ms,
+    visibility 0s linear calc(var(--motion-smooth) + var(--motion-delay));
+
+  z-index: 800;
+  pointer-events: none; /* disabled until visible */
+
+  will-change: opacity, transform, backdrop-filter;
+}
+
+/* Visible/open state */
+.nav-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
+}
+
+/* Allow interaction when visible or closing */
+.nav-backdrop.is-open,
+.nav-backdrop.is-closing {
+  pointer-events: auto;
+}
+
+/* --- Hamburger --- */
+/* Mobile menu toggle button */
+.hamburger {
+  display: none; /* hidden on desktop */
+  position: relative;
+  align-items: center;
+  margin-left: auto; /* pushes to right */
+  z-index: 1100; /* above drawer */
+
+  width: 44px;
+  height: 44px;
+
+  overflow: visible;
+  padding: 12px;
+  min-width: 50px;
+  min-height: 50px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Accessible focus state */
+.hamburger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Hamburger bars */
+.hamburger span {
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 28px; /* bar length */
+  height: 3px; /* bar thickness */
+  background: var(--primary);
+  border-radius: 2px;
+
+  /* animate opacity + transform for morphing into "X" */
+  transition:
+    opacity var(--motion-fast),
+    transform var(--motion-smooth) var(--ease-smooth);
+
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* --- Position the 3 bars --- */
+.hamburger span:nth-child(1) {
+  top: 12px;
+  transform: translateX(-50%);
+}
+
+.hamburger span:nth-child(2) {
+  top: 20px;
+  transform: translateX(-50%);
+}
+
+.hamburger span:nth-child(3) {
+  top: 28px;
+  transform: translateX(-50%);
+}
+
+/* --- Animate to X on open --- */
+.hamburger.is-open span:nth-child(1) {
+  top: 20px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0; /* hide middle bar */
+}
+
+.hamburger.is-open span:nth-child(3) {
+  top: 20px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Show hamburger only on mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* --- header --- */
+/* Sticky header that stays on top */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background: var(--white);
+  overflow: visible;
+}
+
+/* --- site nav --- */
+/* Main navigation container */
+.site-nav {
+  position: relative;
+  z-index: auto;
+  width: 100%;
+  background: var(--white);
+}
+
+/* Reset default list styles */
+.site-nav ul,
+.site-nav ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Inner container --- */
+/* Layout wrapper for logo + nav */
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+
+  max-width: 1100px;
+  min-height: clamp(70px, 10vw, 100px);
+  margin: 0 auto;
+  padding: 0 var(--space-md) var(--space-sm);
+
+  border-bottom: 2px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Tagline / Logo --- */
+.site-nav__tagline {
+  margin-right: auto;
+  max-width: 380px;
+
+  display: flex;
+  align-items: center;
+
+  /* subtle slide animation when menu opens on mobile */
+  transition: transform var(--motion-smooth) var(--ease-smooth);
+  will-change: transform;
+}
+
+.site-nav__tagline img {
+  height: clamp(56px, 8vw, 90px);
+  width: auto;
+  display: block;
+  margin-bottom: var(--mb);
+
+  transition:
+    transform var(--transition-base),
+    opacity var(--transition-base);
+}
+
+/* Slight zoom on hover */
+.site-nav__tagline:hover img {
+  transform: scale(1.05);
+}
+
+/* --- Nav list --- */
+/* Horizontal nav (desktop) / drawer (mobile) */
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 30px);
+
+  transition: transform var(--motion-smooth) var(--ease-out-soft);
+
+  will-change: transform;
+  outline: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Closing animation state */
+.site-nav__list.is-closing {
+  transition: transform var(--motion-smooth) var(--ease-in-soft);
+}
+
+/* --- Links --- */
+/* Top-level navigation links */
+.site-nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #003366;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 0.5rem 0;
+
+  line-height: 1;
+
+  transition:
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+/* Hover + current page styling */
+.site-nav__link:hover,
+.site-nav__link[aria-current='page'] {
+  color: var(--primary);
+}
+
+/* ================== Unified underline (text-only) ================== */
+/* Animated underline applied ONLY to text span */
+.link-text {
+  position: relative;
+  display: inline-block;
+}
+
+.link-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform var(--transition-base);
+}
+
+/* Trigger underline for hover, focus, and active states */
+.site-nav__link:hover .link-text::after,
+.site-nav__link:focus .link-text::after,
+.site-nav__link:focus-visible .link-text::after,
+.site-nav__link[aria-current='page'] .link-text::after,
+.submenu__link:hover .link-text::after,
+.submenu__link:focus .link-text::after,
+.submenu__link:focus-visible .link-text::after,
+.submenu__link[aria-current='page'] .link-text::after {
+  transform: scaleX(1);
+}
+
+/* Accessible focus for submenu links */
+.submenu__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+@media (max-width: 768px) {
+  .site-nav__link {
+    display: inline-flex; /* key: shrink to text */
+    width: auto; /* key: NOT full width */
+    justify-content: center;
+  }
+}
+
+/* caret icon */
+.has-submenu > .site-nav__link {
+  position: relative;
+  width: 100%;
+  justify-content: center; /* keeps text centered */
+}
+
+.has-submenu > .site-nav__link::before {
+  content: '';
+  position: absolute;
+  right: 8px; /* pushes to far right */
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+
+  width: 6px;
+  height: 6px;
+
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+
+@media (min-width: 769px) {
+  .has-submenu > .site-nav__link::before {
+    right: -12px; /* moves caret outside link on desktop */
+  }
+}
+
+.has-submenu:hover > .site-nav__link::before,
+.has-submenu:focus-within > .site-nav__link::before,
+.has-submenu.is-open > .site-nav__link::before {
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.site-nav__link:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 769px) {
+  .site-nav__list {
+    margin-right: var(--space-sm);
+  }
+}
+
+@media (max-width: 768px) {
+  .site-nav__link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+  .site-nav__list > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  body.menu-open .site-nav__tagline {
+    transform: translateX(-60%);
+  }
+
+  .site-nav__inner {
+    position: relative;
+  }
+
+  .site-nav__tagline {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-right: 0; /* override desktop behavior */
+  }
+
+  .site-nav__list {
+    position: fixed;
+    top: 3em;
+    right: 0;
+    bottom: 0;
+
+    width: min(var(--drawer-width), 90vw);
+    max-width: 85vw;
+
+    height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+
+    transform: translateX(102%);
+    transition: transform var(--motion-smooth);
+
+    -webkit-overflow-scrolling: touch;
+
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0.98;
+  }
+
+  .site-nav ul.site-nav__list {
+    padding: var(--space-md);
+  }
+
+  .site-nav__list.is-open {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+  }
+
+  /* --- reset items --- */
+  .site-nav__list > li {
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(20px);
+    transition:
+      opacity var(--transition-slower),
+      transform var(--motion-smooth);
+  }
+
+  /* --- open state --- */
+  .site-nav__list.is-open > li {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+  }
+
+  /* --- stagger --- */
+  .site-nav__list.is-open > li:nth-child(1) {
+    transition-delay: 40ms;
+  }
+  .site-nav__list.is-open > li:nth-child(2) {
+    transition-delay: 70ms;
+  }
+  .site-nav__list.is-open > li:nth-child(3) {
+    transition-delay: 100ms;
+  }
+  .site-nav__list.is-open > li:nth-child(4) {
+    transition-delay: 130ms;
+  }
+  .site-nav__list.is-open > li:nth-child(5) {
+    transition-delay: 160ms;
+  }
+  .site-nav__list.is-open > li:nth-child(6) {
+    transition-delay: 190ms;
+  }
+
+  /* --- stagger reverse (on close) --- */
+  .site-nav__list.is-closing > li:nth-child(1) {
+    transition-delay: 190ms;
+  }
+  .site-nav__list.is-closing > li:nth-child(2) {
+    transition-delay: 160ms;
+  }
+  .site-nav__list.is-closing > li:nth-child(3) {
+    transition-delay: 130ms;
+  }
+  .site-nav__list.is-closing > li:nth-child(4) {
+    transition-delay: 100ms;
+  }
+  .site-nav__list.is-closing > li:nth-child(5) {
+    transition-delay: 70ms;
+  }
+  .site-nav__list.is-closing > li:nth-child(6) {
+    transition-delay: 40ms;
+  }
+}
+
+.site-nav__list.is-closing > li {
+  transition:
+    opacity var(--transition-base),
+    transform var(--motion-smooth);
+}
+
+/* ================== Submenu (Desktop base) ================== */
+/* Parent item containing submenu */
+.has-submenu {
+  position: relative;
+  display: flex;
+}
+
+/* First-level dropdown */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  min-width: 200px;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+
+  list-style: none;
+  padding: var(--space-sm);
+  margin: 0;
+
+  /* hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  pointer-events: none;
+
+  transition: all var(--transition-base);
+  z-index: 999;
+}
+
+/* Open state controlled by JS or CSS */
+.has-submenu.is-open .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* submenu links */
+.submenu__link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: #003366;
+  white-space: nowrap;
+}
+
+/* hover state */
+.submenu__link:hover {
+  color: var(--primary);
+}
+
+@media (min-width: 769px) {
+  .has-submenu:hover > .submenu,
+  .has-submenu:focus-within > .submenu,
+  .has-submenu.is-open > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .submenu .has-submenu:hover > .submenu--nested,
+  .submenu .has-submenu:focus-within > .submenu--nested {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    min-width: 200px;
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+
+    padding: var(--space-sm);
+    margin: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    pointer-events: none;
+
+    transition: all var(--transition-base);
+    z-index: 9999;
+  }
+}
+
+@media (max-width: 768px) {
+  .submenu {
+    position: static;
+
+    text-align: left;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(-6px);
+
+    pointer-events: none;
+
+    transition:
+      max-height 0.3s ease,
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .submenu__link {
+    justify-content: flex-start;
+  }
+
+  .has-submenu {
+    display: block;
+  }
+
+  /* ONLY direct child submenu opens */
+  .has-submenu.is-open > .submenu {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .has-submenu:hover > .submenu {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* ================== Nested submenu ================== */
+/* Second-level (flyout) menu */
+.submenu--nested {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 6px;
+  min-width: 180px;
+  padding-left: 12px;
+
+  /* hidden by default */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Opens ONLY when its parent submenu item is open */
+.submenu .has-submenu.is-open > .submenu--nested {
+  max-height: 500px;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* mobile override */
+@media (max-width: 768px) {
+  .submenu--nested {
+    position: static;
+    margin-left: 0;
+  }
+
+  .submenu--nested .submenu__link {
+    padding-left: var(--space-md-plus);
+  }
+}
+
+.submenu .has-submenu {
+  position: relative;
+}
+
+.submenu .has-submenu > .submenu__link {
+  position: relative;
+  padding-right: 18px;
+}
+
+
+/* Arrow indicator for nested submenu */
+.submenu .has-submenu > .submenu__link::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+
+  transform: translateY(-50%) rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when open/hovered */
+.submenu .has-submenu:hover > .submenu__link::after,
+.submenu .has-submenu.is-open > .submenu__link::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (min-width: 769px) {
+  .submenu .has-submenu:hover > .submenu,
+  .submenu .has-submenu:focus-within > .submenu,
+  .submenu .has-submenu.is-open > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .submenu .submenu--nested {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: -4px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    pointer-events: none;
+
+    transition: all var(--transition-base);
+  }
+}
+
+
+/* ================== Accessibility / motion ================== */
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav__list,
+  .site-nav__list a,
+  .nav-backdrop,
+  .hamburger span {
+    transition: none !important;
+  }
+}
