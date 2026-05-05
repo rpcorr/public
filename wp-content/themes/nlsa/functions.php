@@ -336,6 +336,27 @@ function nlsa_get_field($field, $post_id = false) {
 }
 
 /**
+ * ACF Local JSON - Save field groups to theme
+ */
+add_filter('acf/settings/save_json', function () {
+    return get_stylesheet_directory() . '/acf-json';
+});
+
+/**
+ * ACF Local JSON - Load field groups from theme
+ */
+add_filter('acf/settings/load_json', function ($paths) {
+
+    // remove default path (optional but cleaner)
+    unset($paths[0]);
+
+    // add your theme path
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+
+    return $paths;
+});
+
+/**
  * Register Customizer settings for footer content
  */
 function nlsa_customize_footer($wp_customize) {
