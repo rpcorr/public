@@ -2,144 +2,128 @@
 /**
  * Theme Functions File
  *
- * This file contains core setup and functionality for the NLSA theme.
+ * Core setup and functionality for the NLSA theme.
  *
  * Responsibilities:
  * - Theme setup (supports, menus, translations)
  * - Asset registration and enqueueing (CSS/JS)
- * - Custom navigation walker for primary menu
- * - Reusable helper functions (e.g. SVG icon system)
+ * - Custom navigation walker for primary menu (accessible, multi-level)
+ * - Customizer settings (footer content)
+ * - Reusable helper functions (e.g. SVG icon system, safe ACF access)
+ * - Admin notices for required plugins
+ * - Security enhancements (e.g. generic login error messages)
  *
  * Notes:
  * - Keep this file focused on theme-level functionality only.
  * - Business logic or complex features should be moved into /inc/ or modules if needed.
  * - All assets are loaded via wp_enqueue_scripts for proper dependency handling.
+ * - Avoid direct output where possible; prefer hooks and filters.
  *
  * @package NLSA_Theme
  * @since 1.0.0
  */
 
 if ( !function_exists( 'nlsa_theme_setup' ) ) {
+
   /* ================== THEME SETUP ================== */
   function nlsa_theme_setup() {
 
-
+    // Load translations
     load_theme_textdomain( 'nlsa', get_template_directory() . '/languages' );
 
-    // Enable support for dynamic document titles
+    // Enable dynamic <title> tag support
     add_theme_support('title-tag');
 
-    // Enable support for featured images (post thumbnails)
+    // Enable featured images
     add_theme_support('post-thumbnails');
 
+    // Enable HTML5 markup support
     add_theme_support( 'html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption') );
 
+    // Enable selective refresh in Customizer
     add_theme_support( 'customize-selective-refresh-widgets' );
 
+    // Enable responsive embeds (videos, iframes)
     add_theme_support( 'responsive-embeds' );
 
-    // Register a primary navigation menu
+    // Register navigation menus
     register_nav_menus(
       array(
         'primary' => esc_html__('Primary Menu', 'nlsa'),
       )
     );
   }
-
 }
 
+// Hook theme setup
 add_action('after_setup_theme', 'nlsa_theme_setup');
 
 if (!function_exists('nlsa_assets')) {
+
+   /* ================== ASSETS ================== */
+  /**
+   * Enqueue theme styles and scripts
+   *
+   * Ensures proper dependency order and avoids hardcoding in templates
+   */
   function nlsa_assets() {
 
-  /* ================== STYLES ================== */
+    /* ================== STYLES ================== */
 
-  // Google Fonts
-  wp_enqueue_style(
-    'nlsa-google-fonts',
-    'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap',
-    [],
-    null
-  );
+    // Google Fonts
+    wp_enqueue_style(
+      'nlsa-google-fonts',
+      'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap',
+      [],
+      null
+    );
 
-  // Font Awesome
-  wp_enqueue_style(
-    'nlsa-font-awesome',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css',
-    [],
-    '6.4.2'
-  );
+    // Font Awesome
+    wp_enqueue_style(
+      'nlsa-font-awesome',
+      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css',
+      [],
+      '6.4.2'
+    );
 
-  // Theme CSS (ordered from low → high specificity)
-  wp_enqueue_style(
-    'nlsa-reset',
-    get_theme_file_uri('/assets/css/reset.css'),
-    [],
-    '1.0'
-  );
+    // Theme CSS (ordered from low → high specificity)
+    wp_enqueue_style('nlsa-reset', get_theme_file_uri('/assets/css/reset.css'), [], '1.0');
+    wp_enqueue_style('nlsa-variables', get_theme_file_uri('/assets/css/variables.css'), ['nlsa-reset'], '1.0');
+    wp_enqueue_style('nlsa-base', get_theme_file_uri('/assets/css/base.css'), ['nlsa-variables'], '1.0');
+    wp_enqueue_style('nlsa-layouts', get_theme_file_uri('/assets/css/layouts.css'), ['nlsa-base'], '1.0');
+    wp_enqueue_style('nlsa-components', get_theme_file_uri('/assets/css/components.css'), ['nlsa-layouts'], '1.0');
+    wp_enqueue_style('nlsa-navigation', get_theme_file_uri('/assets/css/navigation.css'), ['nlsa-components'], '1.0');
+    wp_enqueue_style('nlsa-utilities', get_theme_file_uri('/assets/css/utilities.css'), ['nlsa-navigation'], '1.0');
 
-  wp_enqueue_style(
-    'nlsa-variables',
-    get_theme_file_uri('/assets/css/variables.css'),
-    ['nlsa-reset'],
-    '1.0'
-  );
+    /* ================== SCRIPTS ================== */
 
-  wp_enqueue_style(
-    'nlsa-base',
-    get_theme_file_uri('/assets/css/base.css'),
-    ['nlsa-variables'],
-    '1.0'
-  );
+    wp_enqueue_script(
+      'nlsa-scripts',
+      get_theme_file_uri('/assets/js/scripts.js'),
+      [],
+      '1.0',
+      true // load in footer
+    );
 
-  wp_enqueue_style(
-    'nlsa-layouts',
-    get_theme_file_uri('/assets/css/layouts.css'),
-    ['nlsa-base'],
-    '1.0'
-  );
-
-  wp_enqueue_style(
-    'nlsa-components',
-    get_theme_file_uri('/assets/css/components.css'),
-    ['nlsa-layouts'],
-    '1.0'
-  );
-
-  wp_enqueue_style(
-    'nlsa-navigation',
-    get_theme_file_uri('/assets/css/navigation.css'),
-    ['nlsa-components'],
-    '1.0'
-  );
-
-  wp_enqueue_style(
-    'nlsa-utilities',
-    get_theme_file_uri('/assets/css/utilities.css'),
-    ['nlsa-navigation'],
-    '1.0'
-  );
-
-  /* ================== SCRIPTS ================== */
-
-  wp_enqueue_script(
-    'nlsa-scripts',
-    get_theme_file_uri('/assets/js/scripts.js'),
-    [],
-    '1.0',
-    true // load in footer
-  );
-
-  // WordPress threaded comments support (only when needed)
-  if (is_singular() && comments_open() && get_option('thread_comments')) {
-    wp_enqueue_script('comment-reply');
-  }
+    // Load comment reply script only when needed
+    if (is_singular() && comments_open() && get_option('thread_comments')) {
+      wp_enqueue_script('comment-reply');
+    }
   }
 }
 
+// Hook assets
 add_action('wp_enqueue_scripts', 'nlsa_assets');
 
+
+/**
+ * Custom navigation walker
+ *
+ * Handles:
+ * - Accessible submenu structure (ARIA attributes)
+ * - Conditional class handling
+ * - Multi-level navigation rendering
+ */
 class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
 
   private $submenu_count = 0;
@@ -154,15 +138,15 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
       ? 'submenu'
       : 'submenu submenu--nested';
 
-    // Fallback label
+    // Default fallback label
     $label = 'Submenu ' . $this->submenu_count;
 
-    // Use parent title if available
+    // Use parent title for accessibility
     if ($this->current_item) {
       $label = esc_attr($this->current_item->title . ' submenu');
     }
 
-    // ID only for first level
+    // Only first-level submenu gets ID
     $submenu_id = '';
 
     if ($depth === 0 && $this->current_item) {
@@ -202,8 +186,7 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
     $output .= '<li' . $li_attr . '>';
 
     // ---------- LINK CLASSES ----------
-
-    // Detect user-defined classes (ignore WP defaults)
+    // Strip default WP classes; keep user-defined ones only
     $user_classes = array_filter($classes, function($class) {
       return !empty($class)
         && !str_starts_with($class, 'menu-item')
@@ -211,17 +194,15 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
         && !str_starts_with($class, 'page');
     });
 
-    // If user defined classes → use ONLY those
     if (!empty($user_classes)) {
       $link_classes = $user_classes;
     } else {
-      // Default classes
       $link_classes = ($depth === 0)
         ? ['site-nav__link']
         : ['submenu__link'];
     }
 
-    // Add submenu toggle ONLY if no custom classes
+    // Add toggle class if submenu exists
     if ($has_children && empty($user_classes)) {
       $link_classes[] = 'submenu-toggle';
     }
@@ -282,7 +263,9 @@ class NLSA_Walker_Nav_Menu extends Walker_Nav_Menu {
   }
 }
 
-
+/**
+ * Returns inline SVG icons by name
+ */
 if (!function_exists('nlsa_get_icon')) {
   function nlsa_get_icon($name) {
 
@@ -312,22 +295,18 @@ if (!function_exists('nlsa_get_icon')) {
   }
 }
 
-
-/* ================== ADMIN NOTICES ================== */
-
 /**
- * Warn admin if required plugins are missing
+ * Display admin notice if required plugins are missing
  */
 function nlsa_require_plugins_notice() {
 
-  // Only show in WP admin dashboard
+  // Only show in WP admin dashboard and to users who can activate plugins
   if (!current_user_can('activate_plugins')) {
     return;
   }
 
-  // Check for ACF
+  // Check for ACF plugin
   if (!defined('ACF_VERSION')) {
-
     echo '<div class="notice notice-error"><p>';
     echo '<strong>NLSA Theme:</strong> This theme requires the ';
     echo '<strong>Advanced Custom Fields (ACF)</strong> plugin. ';
@@ -340,8 +319,7 @@ add_action('admin_notices', 'nlsa_require_plugins_notice');
 
 
 /**
- * Safe ACF field getter
- * Prevents fatal errors if ACF is not active
+ * Safe wrapper for ACF get_field()
  */
 function nlsa_get_field($field, $post_id = false) {
 
@@ -352,10 +330,12 @@ function nlsa_get_field($field, $post_id = false) {
   return get_field($field, $post_id);
 }
 
-
+/**
+ * Register Customizer settings for footer content
+ */
 function nlsa_customize_footer($wp_customize) {
 
-  // ================== FOOTER SECTION ==================
+  // Footer section
   $wp_customize->add_section('nlsa_footer_section', [
     'title'    => __('Footer Settings', 'nlsa'),
     'priority' => 120,
@@ -424,7 +404,9 @@ function nlsa_customize_footer($wp_customize) {
 
 add_action('customize_register', 'nlsa_customize_footer');
 
-// Custom login error message to prevent username enumeration
+/**
+ * Override login error messages to prevent username enumeration
+ */
 function nlsa_login_error_message() {
     return 'We couldn\'t log you in. Please check your details and try again.';
 }
