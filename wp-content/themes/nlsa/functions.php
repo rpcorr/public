@@ -6,18 +6,20 @@
  *
  * Responsibilities:
  * - Theme setup (supports, menus, translations)
- * - Asset registration and enqueueing (CSS/JS)
+ * - Asset registration and enqueueing (CSS/JS, including login screen styles)
  * - Custom navigation walker for primary menu (accessible, multi-level)
- * - Customizer settings (footer content)
+ * - Customizer settings (footer content and theme options)
  * - Reusable helper functions (e.g. SVG icon system, safe ACF access)
  * - Admin notices for required plugins
  * - Security enhancements (e.g. generic login error messages)
+ * - Login page customization (branding, logo, URL, accessibility text)
  *
  * Notes:
  * - Keep this file focused on theme-level functionality only.
  * - Business logic or complex features should be moved into /inc/ or modules if needed.
- * - All assets are loaded via wp_enqueue_scripts for proper dependency handling.
+ * - All assets are loaded via wp_enqueue_scripts or appropriate hooks.
  * - Avoid direct output where possible; prefer hooks and filters.
+ * - Ensure accessibility (ARIA, semantics) is preserved when customizing UI.
  *
  * @package NLSA_Theme
  * @since 1.0.0
@@ -411,3 +413,14 @@ function nlsa_login_error_message() {
     return 'We couldn\'t log you in. Please check your details and try again.';
 }
 add_filter('login_errors', 'nlsa_login_error_message');
+
+// Custom login page styling
+function nlsa_login_logo() {
+    wp_enqueue_style(
+        'nlsa-login',
+        get_theme_file_uri('/assets/css/login.css'),
+        [],
+        '1.0'
+    );
+}
+add_action('login_enqueue_scripts', 'nlsa_login_logo');
