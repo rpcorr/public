@@ -12,7 +12,10 @@
  * - Reusable helper functions (e.g. SVG icon system, safe ACF access)
  * - Admin notices for required plugins
  * - Security enhancements (e.g. generic login error messages)
- * - Login page customization (branding, logo, URL, accessibility text)
+ * - Login page customization:
+ *     - Branding (logo styling and appearance)
+ *     - Login logo URL override (redirects to site/blog instead of wordpress.org)
+ *     - Accessibility text for login branding
  *
  * Notes:
  * - Keep this file focused on theme-level functionality only.
@@ -406,6 +409,8 @@ function nlsa_customize_footer($wp_customize) {
 
 add_action('customize_register', 'nlsa_customize_footer');
 
+/* ================== LOGIN SCREEN CUSTOMIZATION ================== */
+
 /**
  * Override login error messages to prevent username enumeration
  */
@@ -424,3 +429,13 @@ function nlsa_login_logo() {
     );
 }
 add_action('login_enqueue_scripts', 'nlsa_login_logo');
+
+// Login logo link -> your blog
+add_filter('login_headerurl', function () {
+    return home_url('/');
+});
+
+// Login logo tooltip text
+add_filter('login_headertext', function () {
+    return 'Go to our Website';
+});
