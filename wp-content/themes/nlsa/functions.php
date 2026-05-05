@@ -423,3 +423,9 @@ function nlsa_customize_footer($wp_customize) {
 }
 
 add_action('customize_register', 'nlsa_customize_footer');
+
+// Custom login error message to prevent username enumeration
+function nlsa_login_error_message() {
+    return 'We couldn\'t log you in. Please check your details and try again.';
+}
+add_filter('login_errors', 'nlsa_login_error_message');
