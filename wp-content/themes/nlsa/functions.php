@@ -585,6 +585,19 @@ function nlsa_clean_menu_ui_for_editors() {
             display: none !important;
         }
 
+        /* ===============================
+          DISABLE MENU NAME EDITING
+        =============================== */
+        #menu-name {
+            pointer-events: none !important;
+            background: #f1f1f1 !important;
+            color: #666 !important;
+        }
+
+        label[for="menu-name"] {
+            opacity: 0.5;
+        }
+
     </style>';
 }
 add_action('admin_head-nav-menus.php', 'nlsa_clean_menu_ui_for_editors');
@@ -613,3 +626,28 @@ function nlsa_hide_add_menu_button() {
     }
 }
 add_action('admin_head-nav-menus.php', 'nlsa_hide_add_menu_button');
+
+
+function nlsa_disable_menu_name_for_editors( $args ) {
+    if ( current_user_can('editor') && ! current_user_can('administrator') ) {
+
+        // Remove menu name field entirely
+        add_filter('wp_nav_menu_manage_columns', '__return_empty_array');
+
+        // Disable menu name input rendering
+        add_action('admin_footer-nav-menus.php', function () {
+            echo '<style>
+                #menu-name {
+                    pointer-events: none;
+                    background: #f1f1f1;
+                }
+
+                label[for="menu-name"] {
+                    opacity: 0.6;
+                }
+            </style>';
+        });
+    }
+
+    return $args;
+}
