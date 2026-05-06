@@ -684,3 +684,75 @@ function nlsa_hide_menu_locations_customizer_ui() {
     }
 }
 add_action('customize_controls_print_styles', 'nlsa_hide_menu_locations_customizer_ui');
+
+// Hide "Add Menu" button in Customizer for editors
+function nlsa_hide_create_menu_button_customizer() {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        echo '<style>
+            /* Hide "Create New Menu" button */
+            .customize-control-create-nav-menu {
+                display: none !important;
+            }
+
+            /* Hide "Create New Menu" inside panel (fallback) */
+            .customize-pane-child .customize-control-create-nav-menu {
+                display: none !important;
+            }
+
+            /* Extra fallback for newer WP markup */
+            button.create-menu,
+            .button.create-menu {
+                display: none !important;
+            }
+        </style>';
+    }
+}
+add_action('customize_controls_print_styles', 'nlsa_hide_create_menu_button_customizer');
+
+// Prevent editors from creating new menus via the backend
+function nlsa_prevent_editor_menu_creation($term, $taxonomy) {
+    if ($taxonomy === 'nav_menu' && current_user_can('editor') && !current_user_can('administrator')) {
+        wp_die('You are not allowed to create menus.');
+    }
+}
+add_action('created_term', 'nlsa_prevent_editor_menu_creation', 10, 2);
+
+// Additional JavaScript fallback to remove "Create New Menu" button in Customizer for editors (handles dynamic rendering)
+function nlsa_remove_create_menu_button_customizer_js() {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        ?>
+        <script>
+        (function() {
+
+            function removeCreateMenu() {
+                document.querySelectorAll('button, a').forEach(el => {
+                    if (el.textContent.trim() === 'Create New Menu') {
+                        el.remove();
+                    }
+                });
+            }
+
+            // Run repeatedly for a short time (handles async rendering)
+            let attempts = 0;
+            const interval = setInterval(() => {
+                removeCreateMenu();
+                attempts++;
+
+                if (attempts > 20) {
+                    clearInterval(interval);
+                }
+            }, 300);
+
+            // Also observe future DOM changes
+            const observer = new MutationObserver(removeCreateMenu);
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+        })();
+        </script>
+        <?php
+    }
+}
+add_action('customize_controls_print_footer_scripts', 'nlsa_remove_create_menu_button_customizer_js');
