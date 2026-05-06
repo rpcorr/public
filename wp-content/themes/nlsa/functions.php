@@ -484,16 +484,8 @@ function nlsa_lock_editor_to_primary_menu() {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            const manageMenus = document.querySelector('.manage-menus');
             const menuSelect = document.querySelector('#menu');
 
-            if (manageMenus && !document.querySelector('.nlsa-menu-message')) {
-                const msg = document.createElement('div');
-                msg.className = 'nlsa-menu-message';
-                msg.textContent = 'Edit your menu below and do not forget to save your changes!';
-
-                manageMenus.prepend(msg);
-            }
             
 
             if (menuSelect) {
@@ -542,25 +534,34 @@ function nlsa_clean_menu_ui_for_editors() {
     echo '<style>
 
         /* ===============================
-           CUSTOM MESSAGE (no flicker)
+          CUSTOM MESSAGE (NO FLICKER)
         =============================== */
+
         .manage-menus .add-edit-menu-action {
             display: none !important;
         }
 
         .manage-menus {
-          border-left: 4px solid #0073aa;
+            border-left: 4px solid #0073aa;
+            padding-left: 12px;
+            margin-bottom: 10px;
+        }
+
+        .manage-menus::before {
+            content: "Edit your menu below and do not forget to save your changes!";
+            display: block;
+            font-weight: 500;
         }
 
         /* ===============================
-           HIDE MENU SETTINGS
+          HIDE MENU SETTINGS
         =============================== */
         .menu-settings {
             display: none !important;
         }
 
         /* ===============================
-           HIDE MANAGE LOCATIONS (ALL VARIANTS)
+          HIDE MANAGE LOCATIONS
         =============================== */
         #nav-menu-theme-locations,
         .nav-menu-locations,
@@ -569,7 +570,7 @@ function nlsa_clean_menu_ui_for_editors() {
         }
 
         /* ===============================
-           HIDE DELETE MENU (ONLY MENU, NOT ITEMS)
+          HIDE DELETE MENU (ONLY MENU, NOT ITEMS)
         =============================== */
         #delete-action,
         #delete-menu-action,
@@ -578,7 +579,7 @@ function nlsa_clean_menu_ui_for_editors() {
         }
 
         /* ===============================
-           HIDE MENU SWITCHING TABS
+          HIDE MENU SWITCHING TABS
         =============================== */
         .nav-tab-wrapper a:not(.nav-tab-active) {
             display: none !important;
