@@ -800,6 +800,7 @@ function nlsa_lock_auto_add_pages($value) {
 }
 add_filter('pre_set_theme_mod_nav_menu_options', 'nlsa_lock_auto_add_pages');
 
+// add Google Analytics script only for non-admins and in production environment
 function nlsa_add_google_analytics() {
 
     // 1. Skip admins
@@ -811,17 +812,135 @@ function nlsa_add_google_analytics() {
     if (wp_get_environment_type() !== 'production') {
         return;
     }
-
     ?>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CGVTZVK02"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    (function() {
+        const consent = localStorage.getItem('nlsa_cookie_consent');
 
-      gtag('config', 'G-5CGVTZVK02');
+        if (consent === 'accepted') {
+
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = "https://www.googletagmanager.com/gtag/js?id=G-5CGVTZVK02";
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+
+            gtag('js', new Date());
+            gtag('config', 'G-5CGVTZVK02');
+        }
+    })();
     </script>
     <?php
 }
 add_action('wp_head', 'nlsa_add_google_analytics');
+
+
+// add a cookie consent banner for analytics cookies, only for non-admins and in production environment
+function nlsa_cookie_consent_banner() {
+
+    if (current_user_can('manage_options')) {
+        return;
+    }
+
+    if (wp_get_environment_type() !== 'production') {
+        return;
+    }
+    ?>
+    <div id="nlsa-cookie-banner">
+        <p>
+            This site uses cookies for analytics. By clicking "Accept", you agree.
+        </p>
+        <button id="nlsa-accept">Accept</button>
+        <button id="nlsa-decline">Decline</button>
+    </div>
+
+    <style>
+        #nlsa-cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #222;
+            color: #fff;
+            padding: 15px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #nlsa-cookie-banner .nlsa-buttons {
+            display: flex;
+            gap: 6px; /* tighten or increase as needed */
+        }
+
+        #nlsa-cookie-banner button {
+            margin-left: 10px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+      (function() {
+
+          function createCookieBanner() {
+              const banner = document.createElement('div');
+              banner.id = 'nlsa-cookie-banner';
+
+              const message = document.createElement('p');
+              message.textContent = 'This site uses cookies for analytics. By clicking "Accept", you agree.';
+
+              const buttonWrapper = document.createElement('div');
+              buttonWrapper.className = 'nlsa-buttons';
+
+              const acceptBtn = document.createElement('button');
+              acceptBtn.id = 'nlsa-accept';
+              acceptBtn.textContent = 'Accept';
+
+              const declineBtn = document.createElement('button');
+              declineBtn.id = 'nlsa-decline';
+              declineBtn.textContent = 'Decline';
+
+              buttonWrapper.appendChild(acceptBtn);
+              buttonWrapper.appendChild(declineBtn);
+
+              banner.appendChild(message);
+              banner.appendChild(buttonWrapper);
+
+              document.body.appendChild(banner);
+
+              // show it (important — you're not setting display anymore)
+              banner.style.display = 'flex';
+
+              acceptBtn.addEventListener('click', function () {
+                  localStorage.setItem('nlsa_cookie_consent', 'accepted');
+                  banner.remove();
+                  location.reload();
+              });
+
+              declineBtn.addEventListener('click', function () {
+                  localStorage.setItem('nlsa_cookie_consent', 'declined');
+                  banner.remove();
+              });
+          }
+
+          // Show only if no consent stored
+          const consent = localStorage.getItem('nlsa_cookie_consent');
+
+          if (!consent) {
+              if (document.body) {
+                  createCookieBanner();
+              } else {
+                  document.addEventListener('DOMContentLoaded', createCookieBanner);
+              }
+          }
+
+      })();
+      </script>
+    <?php
+}
+add_action('wp_footer', 'nlsa_cookie_consent_banner');
