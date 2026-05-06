@@ -799,3 +799,29 @@ function nlsa_lock_auto_add_pages($value) {
     return $value;
 }
 add_filter('pre_set_theme_mod_nav_menu_options', 'nlsa_lock_auto_add_pages');
+
+function nlsa_add_google_analytics() {
+
+    // 1. Skip admins
+    if (current_user_can('manage_options')) {
+        return;
+    }
+
+    // 2. Only run on production
+    if (wp_get_environment_type() !== 'production') {
+        return;
+    }
+
+    ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CGVTZVK02"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5CGVTZVK02');
+    </script>
+    <?php
+}
+add_action('wp_head', 'nlsa_add_google_analytics');
