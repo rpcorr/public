@@ -651,3 +651,36 @@ function nlsa_disable_menu_name_for_editors( $args ) {
 
     return $args;
 }
+
+// Block saving menu location changes for editors
+function nlsa_lock_menu_locations_save($value) {
+
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        return get_theme_mod('nav_menu_locations'); // keep existing
+    }
+
+    return $value;
+}
+add_filter('pre_set_theme_mod_nav_menu_locations', 'nlsa_lock_menu_locations_save');
+
+// Hide menu location settings from editors in the Customizer
+function nlsa_disable_menu_locations_customizer($wp_customize) {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+
+        // Remove the whole section
+        $wp_customize->remove_section('menu_locations');
+    }
+}
+add_action('customize_register', 'nlsa_disable_menu_locations_customizer', 100);
+
+// Additional CSS fallback to hide menu location settings in case the section is still rendered
+function nlsa_hide_menu_locations_customizer_ui() {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        echo '<style>
+            #accordion-section-menu_locations {
+                display: none !important;
+            }
+        </style>';
+    }
+}
+add_action('customize_controls_print_styles', 'nlsa_hide_menu_locations_customizer_ui');
