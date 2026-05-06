@@ -944,3 +944,129 @@ function nlsa_cookie_consent_banner() {
     <?php
 }
 add_action('wp_footer', 'nlsa_cookie_consent_banner');
+
+// Check for presence of GA script and dataLayer, and send alert if missing (only in production for non-admins)
+function nlsa_ga_presence_check() {
+
+    if (wp_get_environment_type() !== 'production') {
+        return;
+    }
+    ?>
+    <script>
+    (function () {
+
+        const ALERT_KEY = 'nlsa_ga_alert_sent';
+
+        function sendAlert() {
+
+            if (sessionStorage.getItem(ALERT_KEY)) return;
+            sessionStorage.setItem(ALERT_KEY, '1');
+
+            fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: new URLSearchParams({
+                    action: 'nlsa_ga_missing_alert',
+                    url: window.location.href
+                })
+            });
+        }
+
+        function checkGA() {
+
+            const consent = localStorage.getItem('nlsa_cookie_consent');
+
+            // only check when GA SHOULD be active
+            if (consent !== 'accepted') return;
+
+            setTimeout(() => {
+
+                const gtagExists = typeof window.gtag === 'function';
+
+                const dataLayerExists = Array.isArray(window.dataLayer);
+
+                if (!gtagExists || !dataLayerExists) {
+                    sendAlert();
+                }
+
+            }, 5000);
+        }
+
+        if (document.readyState === 'complete') {
+            checkGA();
+        } else {
+            window.addEventListener('load', checkGA);
+        }
+
+    })();
+    </script>
+    <?php
+}
+add_action('wp_footer', 'nlsa_ga_presence_check');
+
+add_action('wp_ajax_nlsa_ga_missing_alert', function () {
+
+    if (!wp_get_environment_type() === 'production') {
+        wp_die();
+    }
+
+    if (!current_user_can('manage_options')) {
+        wp_die();
+    }
+
+    $url = esc_url_raw($_POST['url'] ?? '');
+
+    // store failure timestamp + last URL
+    update_option('nlsa_ga_status', [
+        'status' => 'missing',
+        'time'   => time(),
+        'url'    => $url
+    ]);
+
+    wp_send_json_success();
+});
+
+
+add_action('wp_dashboard_setup', function () {
+
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    wp_add_dashboard_widget(
+        'nlsa_ga_dashboard_widget',
+        'Google Analytics Status',
+        'nlsa_render_ga_dashboard_widget'
+    );
+});
+
+function nlsa_render_ga_dashboard_widget() {
+
+    $data = get_option('nlsa_ga_status');
+
+    $status = $data['status'] ?? 'ok';
+    $time   = $data['time'] ?? null;
+    $url    = $data['url'] ?? '';
+
+    $is_recent_issue = $time && (time() - $time < 86400); // last 24h
+
+    if ($status === 'missing' && $is_recent_issue) {
+        echo '<p style="color:#b32d2e;"><strong>🔴 GA Not Detected</strong></p>';
+        echo '<p>Google Analytics was not detected on the site.</p>';
+        echo '<p><strong>Last seen:</strong> ' . date('Y-m-d H:i:s', $time) . '</p>';
+        echo '<p><strong>Page:</strong> ' . esc_html($url) . '</p>';
+    }
+
+    elseif ($status === 'missing') {
+        echo '<p style="color:#dba617;"><strong>🟠 Previous GA issue detected (older than 24h)</strong></p>';
+        echo '<p>Check if issue is still ongoing.</p>';
+    }
+
+    else {
+        echo '<p style="color:#00a32a;"><strong>🟢 Google Analytics appears OK</strong></p>';
+        echo '<p>No issues detected.</p>';
+    }
+
+    echo '<hr>';
+    echo '<p><small>This check is based on frontend detection of gtag + dataLayer presence.</small></p>';
+}
