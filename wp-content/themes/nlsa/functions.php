@@ -483,7 +483,18 @@ function nlsa_lock_editor_to_primary_menu() {
     ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            const manageMenus = document.querySelector('.manage-menus');
             const menuSelect = document.querySelector('#menu');
+
+            if (manageMenus && !document.querySelector('.nlsa-menu-message')) {
+                const msg = document.createElement('div');
+                msg.className = 'nlsa-menu-message';
+                msg.textContent = 'Edit your menu below and do not forget to save your changes!';
+
+                manageMenus.prepend(msg);
+            }
+            
 
             if (menuSelect) {
                 menuSelect.value = "<?php echo $allowed_menu_id; ?>";
@@ -539,17 +550,6 @@ function nlsa_clean_menu_ui_for_editors() {
 
         .manage-menus {
           border-left: 4px solid #0073aa;
-        }
-
-        .manage-menus:before {
-            content: "Edit your menu below and do not forget to save your changes!";
-            display: block;
-
-            /* padding: 10px 12px; */
-            /* margin: 10px 0; */ 
-
-            font-weight: 500;
-        
         }
 
         /* ===============================
