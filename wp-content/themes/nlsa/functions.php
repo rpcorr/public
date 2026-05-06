@@ -460,3 +460,155 @@ add_filter('login_headerurl', function () {
 add_filter('login_headertext', function () {
     return 'Go to our Website';
 });
+
+
+// Allow editors to manage menus
+function nlsa_allow_editors_manage_menus() {
+    $role = get_role('editor');
+
+    if ($role && !$role->has_cap('edit_theme_options')) {
+        $role->add_cap('edit_theme_options');
+    }
+}
+add_action('init', 'nlsa_allow_editors_manage_menus');
+
+
+// Lock editors to only edit the Primary Menu (ID = 3)
+function nlsa_lock_editor_to_primary_menu() {
+    if (!current_user_can('editor') || current_user_can('administrator')) {
+        return;
+    }
+
+    $allowed_menu_id = 3;
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuSelect = document.querySelector('#menu');
+
+            if (menuSelect) {
+                menuSelect.value = "<?php echo $allowed_menu_id; ?>";
+                menuSelect.style.pointerEvents = 'none';
+                menuSelect.style.backgroundColor = '#eee';
+            }
+
+            const form = document.querySelector('#update-nav-menu');
+
+            if (form) {
+                form.addEventListener('submit', function () {
+                    let menuInput = document.querySelector('input[name="menu"]');
+
+                    if (!menuInput) {
+                        menuInput = document.createElement('input');
+                        menuInput.type = 'hidden';
+                        menuInput.name = 'menu';
+                        form.appendChild(menuInput);
+                    }
+
+                    menuInput.value = "<?php echo $allowed_menu_id; ?>";
+                });
+            }
+        });
+    </script>
+    <?php
+}
+add_action('admin_footer-nav-menus.php', 'nlsa_lock_editor_to_primary_menu');
+
+
+// Prevent editors from deleting menus
+function nlsa_prevent_menu_deletion($menu_id) {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        wp_die('You are not allowed to delete menus.');
+    }
+}
+add_action('wp_delete_nav_menu', 'nlsa_prevent_menu_deletion');
+
+// Clean up the menu editor UI for editors (hide delete button, switching menus, and settings)
+function nlsa_clean_menu_ui_for_editors() {
+    if (!current_user_can('editor') || current_user_can('administrator')) {
+        return;
+    }
+
+    echo '<style>
+
+        /* ===============================
+           CUSTOM MESSAGE (no flicker)
+        =============================== */
+        .manage-menus .add-edit-menu-action {
+            display: none !important;
+        }
+
+        .manage-menus {
+          border-left: 4px solid #0073aa;
+        }
+
+        .manage-menus:before {
+            content: "Edit your menu below and do not forget to save your changes!";
+            display: block;
+
+            /* padding: 10px 12px; */
+            /* margin: 10px 0; */ 
+
+            font-weight: 500;
+        
+        }
+
+        /* ===============================
+           HIDE MENU SETTINGS
+        =============================== */
+        .menu-settings {
+            display: none !important;
+        }
+
+        /* ===============================
+           HIDE MANAGE LOCATIONS (ALL VARIANTS)
+        =============================== */
+        #nav-menu-theme-locations,
+        .nav-menu-locations,
+        .menu-locations {
+            display: none !important;
+        }
+
+        /* ===============================
+           HIDE DELETE MENU (ONLY MENU, NOT ITEMS)
+        =============================== */
+        #delete-action,
+        #delete-menu-action,
+        .delete-action {
+            display: none !important;
+        }
+
+        /* ===============================
+           HIDE MENU SWITCHING TABS
+        =============================== */
+        .nav-tab-wrapper a:not(.nav-tab-active) {
+            display: none !important;
+        }
+
+    </style>';
+}
+add_action('admin_head-nav-menus.php', 'nlsa_clean_menu_ui_for_editors');
+
+// Force editors to always edit the Primary Menu (ID = 3) on the backend
+function nlsa_force_primary_menu_backend($menu_id) {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        return 3; // always force Primary Menu
+    }
+    return $menu_id;
+}
+
+add_filter('wp_edit_nav_menu_walker', function($walker, $menu_id) {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        return $walker;
+    }
+    return $walker;
+}, 10, 2);
+
+// Hide "Add Menu" button for editors to prevent creating new menus
+function nlsa_hide_add_menu_button() {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        echo '<style>
+            .page-title-action { display: none !important; }
+        </style>';
+    }
+}
+add_action('admin_head-nav-menus.php', 'nlsa_hide_add_menu_button');
