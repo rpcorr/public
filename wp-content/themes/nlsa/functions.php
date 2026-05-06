@@ -756,3 +756,46 @@ function nlsa_remove_create_menu_button_customizer_js() {
     }
 }
 add_action('customize_controls_print_footer_scripts', 'nlsa_remove_create_menu_button_customizer_js');
+
+// Hide menu location settings and "Automatically add new pages" option inside the menu editor for editors in the Customizer
+function nlsa_hide_menu_controls_inside_menu_customizer() {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        echo '<style>
+
+            /* Menu location */
+            .menu-location-settings,
+            .customize-control-nav_menu_locations {
+                display: none !important;
+            }
+
+            /* Auto-add pages */
+            .customize-control-nav_menu_auto_add,
+            .nav-menu-auto-add,
+            .auto-add-pages {
+                display: none !important;
+            }
+
+            /* DELETE MENU (REAL FIX) */
+            .customize-control-nav_menu_delete,
+            .menu-delete,
+            .menu-delete-item,
+            .delete-menu,
+            button[name="remove-menu"],
+            button[data-action="remove-menu"],
+            .customize-section .menu-delete {
+                display: none !important;
+            }
+
+        </style>';
+    }
+}
+add_action('customize_controls_print_styles', 'nlsa_hide_menu_controls_inside_menu_customizer');
+
+// Prevent editors from changing the "Automatically add new pages" setting
+function nlsa_lock_auto_add_pages($value) {
+    if (current_user_can('editor') && !current_user_can('administrator')) {
+        return get_theme_mod('nav_menu_options'); // keep existing
+    }
+    return $value;
+}
+add_filter('pre_set_theme_mod_nav_menu_options', 'nlsa_lock_auto_add_pages');
