@@ -3,9 +3,12 @@
 /**
  * Admin Dashboard Customizations
  *
- * - Adds a dashboard widget to monitor Google Analytics status.
- * - Displays recent detection issues with timestamps and URLs.
- * - Only visible to administrators.
+ * - Adds a custom dashboard widget to display Google Analytics status.
+ * - Removes the default WordPress "Events and News" dashboard widget.
+ *
+ * Features:
+ * - GA monitoring widget for site administrators
+ * - Cleaned-up dashboard UI for improved admin experience
  *
  * @package NLSA_Theme
  * @since 1.0.0
@@ -54,3 +57,8 @@ function nlsa_render_ga_dashboard_widget() {
     echo '<hr>';
     echo '<p><small>This check is based on frontend detection of gtag + dataLayer presence.</small></p>';
 }
+
+function nlsa_remove_dashboard_widgets() {
+    remove_meta_box('dashboard_primary', 'dashboard', 'side');
+}
+add_action('wp_dashboard_setup', 'nlsa_remove_dashboard_widgets');
