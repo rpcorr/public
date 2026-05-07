@@ -216,7 +216,7 @@ add_action('wp_footer', 'nlsa_ga_presence_check');
 
 add_action('wp_ajax_nlsa_ga_missing_alert', function () {
 
-    if (!wp_get_environment_type() === 'production') {
+    if (wp_get_environment_type() !== 'production') {
         wp_die();
     }
 
