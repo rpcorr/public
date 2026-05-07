@@ -12,10 +12,39 @@
  * - Reusable helper functions (e.g. SVG icon system, safe ACF access)
  * - Admin notices for required plugins
  * - Security enhancements (e.g. generic login error messages)
- * - Login page customization:
- *     - Branding (logo styling and appearance)
- *     - Login logo URL override (redirects to site/blog instead of wordpress.org)
- *     - Accessibility text for login branding
+ *
+ * Login Page Customization:
+ * - Branding (logo styling and appearance)
+ * - Login logo URL override (redirects to site/blog instead of wordpress.org)
+ * - Accessibility text for login branding
+ *
+ * Navigation & Editor Restrictions:
+ * - Allow editors limited access to Appearance > Menus
+ * - Restrict editors to editing only the Primary Menu
+ * - Prevent editors from:
+ *     - Creating menus
+ *     - Deleting menus
+ *     - Changing menu locations
+ *     - Renaming menus
+ *     - Modifying menu auto-add settings
+ * - Remove unnecessary menu UI elements in wp-admin and Customizer
+ * - Hide menu location controls and delete actions from editors
+ *
+ * Analytics & Cookie Consent:
+ * - Google Analytics 4 (GA4) integration using gtag.js
+ * - Analytics loaded only:
+ *     - In production environment
+ *     - For non-admin users
+ *     - After cookie consent acceptance
+ * - Lightweight cookie consent banner using localStorage
+ * - Consent-based conditional GA initialization
+ * - Frontend GA presence monitoring (gtag + dataLayer detection)
+ * - Admin dashboard widget for GA status monitoring
+ * - Silent logging of GA detection failures
+ *
+ * ACF Integration:
+ * - Local JSON save/load support via /acf-json
+ * - Safe wrapper helper for get_field()
  *
  * Notes:
  * - Keep this file focused on theme-level functionality only.
@@ -23,6 +52,7 @@
  * - All assets are loaded via wp_enqueue_scripts or appropriate hooks.
  * - Avoid direct output where possible; prefer hooks and filters.
  * - Ensure accessibility (ARIA, semantics) is preserved when customizing UI.
+ * - Production-only features should use wp_get_environment_type().
  *
  * @package NLSA_Theme
  * @since 1.0.0
