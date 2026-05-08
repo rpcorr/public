@@ -5,10 +5,12 @@
  *
  * - Adds a custom dashboard widget to display Google Analytics status.
  * - Removes the default WordPress "Events and News" dashboard widget.
+ * - Removes the WordPress logo/menu from the admin toolbar.
  *
  * Features:
  * - GA monitoring widget for site administrators
  * - Cleaned-up dashboard UI for improved admin experience
+ * - Simplified admin toolbar using nlsa_remove_wp_logo()
  *
  * @package NLSA_Theme
  * @since 1.0.0
@@ -62,3 +64,11 @@ function nlsa_remove_dashboard_widgets() {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
 }
 add_action('wp_dashboard_setup', 'nlsa_remove_dashboard_widgets');
+
+/**
+ * Remove WordPress logo from admin toolbar
+ */
+function nlsa_remove_wp_logo($wp_admin_bar) {
+    $wp_admin_bar->remove_node('wp-logo');
+}
+add_action('admin_bar_menu', 'nlsa_remove_wp_logo', 999);
