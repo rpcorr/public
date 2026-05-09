@@ -762,14 +762,61 @@
             "append": ""
         },
         {
+            "key": "field_69ff38dbe3a7d",
+            "label": "Message",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Enable this section to display the featured event on the homepage.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_69ff363bd0f92",
+            "label": "Display Event Section",
+            "name": "show_event",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_69f204386b82d",
-            "label": "Conference Heading",
-            "name": "conference_heading",
+            "label": "Event Heading",
+            "name": "event_heading",
             "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ff363bd0f92",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -784,13 +831,21 @@
         },
         {
             "key": "field_69f204a46b82e",
-            "label": "Conference Date",
-            "name": "conference_date",
+            "label": "Event Date",
+            "name": "event_date",
             "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ff363bd0f92",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -805,13 +860,21 @@
         },
         {
             "key": "field_69f205006b82f",
-            "label": "Conference Link",
-            "name": "conference_link",
+            "label": "Event Link",
+            "name": "event_link",
             "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ff363bd0f92",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -822,13 +885,21 @@
         },
         {
             "key": "field_69f2053db5fd0",
-            "label": "Conference Image",
-            "name": "conference_image",
+            "label": "Event Image",
+            "name": "event_image",
             "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ff363bd0f92",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -868,5 +939,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777944868
+    "modified": 1778334347
 }

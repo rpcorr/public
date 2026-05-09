@@ -9,7 +9,7 @@
  * - Renders the homepage hero section (headline, text, image, CTA)
  * - Displays announcement banner content
  * - Outputs programs/initiatives grid (dynamic ACF repeater-style fields)
- * - Shows featured conference/event highlight section
+ * - Shows featured event highlight section
  *
  * Data Source:
  * - Advanced Custom Fields (ACF) for all dynamic content
@@ -218,68 +218,75 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
         </div>
     </section>
 
-    <!-- ===== Conference Highlight Section ===== -->
+    <!-- ===== Event Highlight Section ===== -->
     <?php
-    $conf_heading = nlsa_get_field('conference_heading');
-    $conf_date    = nlsa_get_field('conference_date');
-    $conf_link    = nlsa_get_field('conference_link');
-    $conf_image   = nlsa_get_field('conference_image');
-    ?>
+      $show_event    = nlsa_get_field('show_event');
 
-    <section class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first"
-      <?php echo $conf_heading ? 'aria-labelledby="conference-heading"' : ''; ?>>
+      if ($show_event):
 
-      <!-- Text -->
-      <div>
+          $event_heading = nlsa_get_field('event_heading');
+          $event_date    = nlsa_get_field('event_date');
+          $event_link    = nlsa_get_field('event_link');
+          $event_image   = nlsa_get_field('event_image');
+      ?>
 
-        <?php if ($conf_heading): ?>
-          <h2 id="conference-heading">
-            <?php echo esc_html($conf_heading); ?>
-          </h2>
-        <?php endif; ?>
+      <!-- ===== Event Highlight Section ===== -->
+      <section class="split-panel split-panel--center split-panel--ratio-67-33 split-panel--stack-image-first"
+        <?php echo $event_heading ? 'aria-labelledby="event-heading"' : ''; ?>>
 
-        <?php if ($conf_date): ?>
-          <p class="font-weight-medium">
-            <?php echo esc_html($conf_date); ?>
-          </p>
-        <?php endif; ?>
+        <!-- Text -->
+        <div>
 
-        <?php if ($conf_link): 
-          $url = is_array($conf_link) ? $conf_link['url'] : $conf_link;
-          $target = is_array($conf_link) ? ($conf_link['target'] ?: '_self') : '_self';
-          $link_title = is_array($conf_link) ? $conf_link['title'] : '';
-        ?>
-
-          <div class="btn btn--primary u-lift">
-            <a href="<?php echo esc_url($url); ?>"
-              target="<?php echo esc_attr($target); ?>"
-              <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
-
-              <?php echo esc_html($link_title ?: 'Learn More'); ?>
-
-            </a>
-          </div>
-
-        <?php endif; ?>
-
-      </div>
-
-      <!-- Image -->
-      <div class="split-panel__media">
-        <?php if ($conf_image):
-          $img_url = is_array($conf_image) ? $conf_image['url'] : wp_get_attachment_image_url($conf_image, 'full');
-          $img_alt = is_array($conf_image) ? $conf_image['alt'] : get_post_meta($conf_image, '_wp_attachment_image_alt', true);
-          $img_alt = $img_alt ?: 'Conference image';
-        ?>
-          <?php if (!empty($img_url)): ?>
-            <img loading="lazy"
-                src="<?php echo esc_url($img_url); ?>"
-                alt="<?php echo esc_attr($img_alt); ?>">
+          <?php if ($event_heading): ?>
+            <h2 id="event-heading">
+              <?php echo esc_html($event_heading); ?>
+            </h2>
           <?php endif; ?>
-        <?php endif; ?>
-      </div>
 
-    </section>
+          <?php if ($event_date): ?>
+            <p class="font-weight-medium">
+              <?php echo esc_html($event_date); ?>
+            </p>
+          <?php endif; ?>
+
+          <?php if ($event_link):
+            $url = is_array($event_link) ? $event_link['url'] : $event_link;
+            $target = is_array($event_link) ? ($event_link['target'] ?: '_self') : '_self';
+            $link_title = is_array($event_link) ? $event_link['title'] : '';
+          ?>
+
+            <div class="btn btn--primary u-lift">
+              <a href="<?php echo esc_url($url); ?>"
+                target="<?php echo esc_attr($target); ?>"
+                <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+
+                <?php echo esc_html($link_title ?: 'Learn More'); ?>
+
+              </a>
+            </div>
+
+          <?php endif; ?>
+
+        </div>
+
+        <!-- Image -->
+        <div class="split-panel__media">
+          <?php if ($event_image):
+            $img_url = is_array($event_image) ? $event_image['url'] : wp_get_attachment_image_url($event_image, 'full');
+            $img_alt = is_array($event_image) ? $event_image['alt'] : get_post_meta($event_image, '_wp_attachment_image_alt', true);
+            $img_alt = $img_alt ?: 'Event image';
+          ?>
+            <?php if (!empty($img_url)): ?>
+              <img loading="lazy"
+                  src="<?php echo esc_url($img_url); ?>"
+                  alt="<?php echo esc_attr($img_alt); ?>">
+            <?php endif; ?>
+          <?php endif; ?>
+        </div>
+
+      </section>
+
+      <?php endif; ?>
   </main>
 
 <?php get_footer(); ?>
