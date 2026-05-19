@@ -35,8 +35,10 @@ function nlsa_add_google_analytics() {
             document.head.appendChild(script);
 
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
+
+            window.gtag = function() {
+                dataLayer.push(arguments);
+            };
 
             gtag('js', new Date());
             gtag('config', 'G-5CGVTZVK02');
