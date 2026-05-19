@@ -120,8 +120,8 @@
   border: 0;
 }
 
-/* Skip link:
-   Allows keyboard users to jump directly to main content */
+/* Skip link (accessibility enhancement)
+   Hidden off-screen until focused via keyboard navigation */
 .skip-link {
   position: fixed;
   top: 0;
@@ -191,4 +191,10 @@
 /* Muted text for secondary content (e.g., captions, metadata) */
 .text-muted {
   color: rgba(0, 0, 0, 0.7);
+}
+
+/* ================== WordPress Overrides ================== */
+/* Overrides default block editor flex spacing behavior */
+.is-layout-flex > * {
+  margin: revert !important;
 }
