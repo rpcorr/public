@@ -115,7 +115,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   /* Reduce spacing and hide icon for very small screens */
   .announcement {
     gap: var(--space-sm);
@@ -364,7 +364,7 @@ figcaption {
   margin-top: var(--space-sm);
 }
 
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   .wrapper .footer__text {
     max-width: 290px;
     text-align: center;
@@ -551,7 +551,7 @@ figcaption {
   max-width: 100%;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   .wp-block-image img {
     max-width: 100%;
     width: 100%;

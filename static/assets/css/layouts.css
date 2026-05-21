@@ -135,7 +135,7 @@ main {
 /* --- mobile breakpoint ---
    Single-column stacked layout for narrow screens.
 */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   .layout-grid {
     grid-template-columns: 1fr;
   }

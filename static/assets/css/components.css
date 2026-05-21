@@ -115,7 +115,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   /* Reduce spacing and hide icon for very small screens */
   .announcement {
     gap: var(--space-sm);
@@ -317,7 +317,7 @@ button,
   margin-top: var(--space-sm);
 }
 
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   .footer__text {
     max-width: 290px;
   }
