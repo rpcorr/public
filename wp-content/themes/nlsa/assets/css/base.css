@@ -136,3 +136,38 @@ a {
   background: var(--accent);
   color: var(--white);
 }
+
+/* ================== WordPress / Gutenberg layout fixes ================== */
+/* Prevent flex children and buttons from overflowing on small screens */
+
+/* Prevent layout overflow from flex children */
+* {
+  min-width: 0;
+}
+
+.wp-block-group.is-layout-flex,
+.wp-block-buttons {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.wp-block-group.is-layout-flex > *,
+.wp-block-buttons > * {
+  min-width: 0;
+}
+
+/* Prevent text overflow in WordPress content area (mobile safety) */
+/* Gutenberg frequently wraps inline text in <span>, requiring overflow protection */
+.page-content p,
+.page-content strong,
+.page-content span {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Ensure Gutenberg group containers respect page width constraints */
+.page-content .wp-block-group__inner-container {
+  max-width: 100%;
+  min-width: 0;
+}
