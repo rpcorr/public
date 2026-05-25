@@ -4,7 +4,8 @@
  * Analytics Integration
  *
  * - Adds Google Analytics script with user consent handling.
- * - Provides a dashboard widget to monitor GA status based on frontend detection.
+ * - Monitors frontend GA initialization status and reports results to the dashboard.
+ * - Tracks both successful and failed GA detection states.
  * - Only loads GA for non-admins and in production environment.
  *
  * @package NLSA_Theme
@@ -167,39 +168,35 @@ function nlsa_ga_presence_check() {
     <script>
     (function () {
 
-        const ALERT_KEY = 'nlsa_ga_alert_sent';
-
-        function sendAlert() {
-
-            if (sessionStorage.getItem(ALERT_KEY)) return;
-            sessionStorage.setItem(ALERT_KEY, '1');
-
-            fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: new URLSearchParams({
-                    action: 'nlsa_ga_missing_alert',
-                    url: window.location.href
-                })
-            });
-        }
-
         function checkGA() {
 
             const consent = localStorage.getItem('nlsa_cookie_consent');
 
-            // only check when GA SHOULD be active
-            if (consent !== 'accepted') return;
+            // Only check when GA SHOULD be active
+            if (consent !== 'accepted') {
+                return;
+            }
 
             setTimeout(() => {
 
                 const gtagExists = typeof window.gtag === 'function';
-
                 const dataLayerExists = Array.isArray(window.dataLayer);
 
-                if (!gtagExists || !dataLayerExists) {
-                    sendAlert();
-                }
+                const status = (gtagExists && dataLayerExists)
+                    ? 'ok'
+                    : 'missing';
+
+                fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        action: 'nlsa_update_ga_status',
+                        status: status,
+                        url: window.location.href
+                    })
+                });
 
             }, 5000);
         }
@@ -216,24 +213,30 @@ function nlsa_ga_presence_check() {
 }
 add_action('wp_footer', 'nlsa_ga_presence_check');
 
-add_action('wp_ajax_nlsa_ga_missing_alert', function () {
+function nlsa_update_ga_status() {
 
-    if (wp_get_environment_type() !== 'production') {
+    if ( wp_get_environment_type() !== 'production' ) {
         wp_die();
     }
 
-    if (!current_user_can('manage_options')) {
+    $status = sanitize_text_field( $_POST['status'] ?? 'missing' );
+
+    $allowed = [ 'ok', 'missing' ];
+
+    if ( ! in_array( $status, $allowed, true ) ) {
         wp_die();
     }
 
-    $url = esc_url_raw($_POST['url'] ?? '');
+    $url = esc_url_raw( $_POST['url'] ?? '' );
 
-    // store failure timestamp + last URL
-    update_option('nlsa_ga_status', [
-        'status' => 'missing',
+    update_option( 'nlsa_ga_status', [
+        'status' => $status,
         'time'   => time(),
-        'url'    => $url
-    ]);
+        'url'    => $url,
+    ] );
 
     wp_send_json_success();
-});
+}
+
+add_action( 'wp_ajax_nlsa_update_ga_status', 'nlsa_update_ga_status' );
+add_action( 'wp_ajax_nopriv_nlsa_update_ga_status', 'nlsa_update_ga_status' );
