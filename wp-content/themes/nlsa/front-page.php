@@ -25,17 +25,23 @@
  */
 ?>
 
-<?php get_header(); ?>
+<?php get_header(); 
+
+$fields = function_exists('get_fields')
+  ? (get_fields() ?: [])
+  : [];
+
+?>
 
   <!-- ================== MAIN CONTENT ================== -->
   <main id="primary" class="wrapper">
     <!-- ===== Hero Section ===== -->
     <?php
-$hero_heading = nlsa_get_field('hero_heading');
-$hero_text    = nlsa_get_field('hero_text');
-$hero_image   = nlsa_get_field('hero_image');
-$hero_link    = nlsa_get_field('hero_button_link');
-$hero_btn_txt = nlsa_get_field('hero_button_text');
+$hero_heading = $fields['hero_heading'] ?? null;
+$hero_text    = $fields['hero_text'] ?? null;
+$hero_image   = $fields['hero_image'] ?? null;
+$hero_link    = $fields['hero_button_link'] ?? null;
+$hero_btn_txt = $fields['hero_button_text'] ?? null;
 ?>
 
 <section class="split-panel split-panel--50-50 split-panel--hero" aria-labelledby="hero-heading">
@@ -43,7 +49,7 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
   <!-- Image -->
   <div class="split-panel__media">
       <?php if ($hero_image):
-        $img_url = is_array($hero_image) ? $hero_image['url'] : wp_get_attachment_image_url($hero_image, 'full');
+        $img_url = is_array($hero_image) ? $hero_image['url'] : wp_get_attachment_image_url($hero_image, 'large');
         $img_alt = is_array($hero_image) ? $hero_image['alt'] : get_post_meta($hero_image, '_wp_attachment_image_alt', true);
         $img_alt = $img_alt ?: 'Hero image';
       ?>
@@ -70,7 +76,7 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
 
       <?php if ($hero_link): 
         $url = is_array($hero_link) ? $hero_link['url'] : $hero_link;
-        $target = is_array($hero_link) ? ($hero_link['target'] ?: '_self') : '_self';
+        $target = $hero_link['target'] ?? '_self';
         $link_title = is_array($hero_link) ? $hero_link['title'] : '';
       ?>
         <div class="btn btn--primary u-lift">
@@ -89,11 +95,11 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
   </section>
 
     <?php
-    $ann_heading = nlsa_get_field('announcement_heading');
-    $ann_icon    = nlsa_get_field('announcement_icon');
-    $ann_text    = nlsa_get_field('announcement_text');
-    $ann_link    = nlsa_get_field('announcement_button_link');
-    $ann_btn_txt = nlsa_get_field('announcement_button_text');
+    $ann_heading = $fields['announcement_heading'] ?? null;
+    $ann_icon    = $fields['announcement_icon'] ?? null;
+    $ann_text    = $fields['announcement_text'] ?? null;
+    $ann_link    = $fields['announcement_button_link'] ?? null;
+    $ann_btn_txt = $fields['announcement_button_text'] ?? null;
   ?>
 
   <section class="announcement announcement--primary" aria-labelledby="announcement-heading">
@@ -127,7 +133,7 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
     <!-- CTA -->
     <?php if ($ann_link): 
       $url    = is_array($ann_link) ? $ann_link['url'] : $ann_link;
-      $target = is_array($ann_link) ? ($ann_link['target'] ?: '_self') : '_self';
+      $target = is_array($ann_link) ? ($ann_link['target'] ?? '_self') : '_self';
       $title  = is_array($ann_link) ? $ann_link['title'] : '';
     ?>
 
@@ -159,16 +165,16 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
       <div class="layout-grid">
           <?php for ($i = 1; $i <= 4; $i++) :
 
-            $layout = nlsa_get_field("program_{$i}_layout");
-            $image  = nlsa_get_field("program_{$i}_image");
-            $title  = nlsa_get_field("program_{$i}_title");
-            $desc   = nlsa_get_field("program_{$i}_description");
-            $link   = nlsa_get_field("program_{$i}_link");
-            $text   = nlsa_get_field("program_{$i}_link_text");
+            $layout = $fields["program_{$i}_layout"] ?? null;
+            $image  = $fields["program_{$i}_image"] ?? null;
+            $title  = $fields["program_{$i}_title"] ?? null;
+            $desc   = $fields["program_{$i}_description"] ?? null;
+            $link   = $fields["program_{$i}_link"] ?? null;
+            $text   = $fields["program_{$i}_link_text"] ?? null;
 
             if (!$title && !$image && !$desc && !$link) continue;
 
-            $col_class = $layout === '40' ? 'col-5' : 'col-7';
+            $col_class = ((string)$layout === '40') ? 'col-5' : 'col-7';
 
             $id = 'program-' . $i . '-' . get_the_ID();
           ?>
@@ -176,17 +182,22 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
             <div class="layout-grid__item <?php echo esc_attr($col_class); ?>"
                 aria-labelledby="<?php echo esc_attr($id); ?>">
 
-              <?php if ($image):
-                $img_url = is_array($image) ? $image['url'] : wp_get_attachment_image_url($image, 'full');
-                $img_alt = is_array($image) ? $image['alt'] : get_post_meta($image, '_wp_attachment_image_alt', true);
-                $img_alt = $img_alt ?: $title;
+              <?php
+              $image_id = is_array($image) ? $image['ID'] : $image;
+
+              if ($image_id) {
+
+                echo wp_get_attachment_image(
+                  $image_id,
+                  'large',
+                  false,
+                  [
+                    'loading' => 'lazy',
+                    'alt' => nlsa_get_image_alt($image, $title)
+                  ]
+                );
+              }
               ?>
-                <?php if (!empty($img_url)): ?>
-                  <img loading="lazy"
-                      src="<?php echo esc_url($img_url); ?>"
-                      alt="<?php echo esc_attr($img_alt); ?>">
-                <?php endif; ?>
-              <?php endif; ?>
 
               <h3 id="<?php echo esc_attr($id); ?>">
                 <?php echo esc_html($title); ?>
@@ -199,7 +210,7 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
               <?php if ($link): 
                 $url = $link['url'];
                 $link_title = $link['title'];
-                $target = $link['target'] ?: '_self';
+                $target = is_array($link) ? ($link['target'] ?? '_self') : '_self';
               ?>
 
                 <div class="btn btn--primary u-lift">
@@ -220,14 +231,14 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
 
     <!-- ===== Event Highlight Section ===== -->
     <?php
-      $show_event    = nlsa_get_field('show_event');
+      $show_event = $fields['show_event'] ?? null;
 
       if ($show_event):
 
-          $event_heading = nlsa_get_field('event_heading');
-          $event_date    = nlsa_get_field('event_date');
-          $event_link    = nlsa_get_field('event_link');
-          $event_image   = nlsa_get_field('event_image');
+          $event_heading = $fields['event_heading'] ?? null;
+          $event_date    = $fields['event_date'] ?? null;
+          $event_link    = $fields['event_link'] ?? null;
+          $event_image   = $fields['event_image'] ?? null;
       ?>
 
       <!-- ===== Event Highlight Section ===== -->
@@ -272,7 +283,7 @@ $hero_btn_txt = nlsa_get_field('hero_button_text');
         <!-- Image -->
         <div class="split-panel__media">
           <?php if ($event_image):
-            $img_url = is_array($event_image) ? $event_image['url'] : wp_get_attachment_image_url($event_image, 'full');
+            $img_url = is_array($event_image) ? $event_image['url'] : wp_get_attachment_image_url($event_image, 'large');
             $img_alt = is_array($event_image) ? $event_image['alt'] : get_post_meta($event_image, '_wp_attachment_image_alt', true);
             $img_alt = $img_alt ?: 'Event image';
           ?>
