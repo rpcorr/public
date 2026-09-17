@@ -64,7 +64,7 @@ function nlsa_cookie_consent_banner() {
     ?>
     <div id="nlsa-cookie-banner">
         <p>
-            This site uses cookies for analytics. By clicking "Accept", you agree.
+            We use Google Analytics to understand how visitors use our website and improve our content and services. Analytics information is shared with Google and is used for statistical purposes. You can accept or decline optional analytics cookies.
         </p>
         <button id="nlsa-accept">Accept</button>
         <button id="nlsa-decline">Decline</button>
@@ -105,7 +105,7 @@ function nlsa_cookie_consent_banner() {
               banner.id = 'nlsa-cookie-banner';
 
               const message = document.createElement('p');
-              message.textContent = 'This site uses cookies for analytics. By clicking "Accept", you agree.';
+              message.textContent = 'We use Google Analytics to understand how visitors use our website and improve our content and services. Analytics information is shared with Google and is used for statistical purposes. You can accept or decline optional analytics cookies.';
 
               const buttonWrapper = document.createElement('div');
               buttonWrapper.className = 'nlsa-buttons';
