@@ -146,6 +146,32 @@ blockquote {
   box-shadow: var(--shadow-quote);
 }
 
+.wp-block-column.highlight {
+  padding: var(--space-md);
+  border: var(--border-dotted);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-quote);
+}
+
+.wp-block-column.highlight.accent {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.wp-block-column.highlight.light {
+  background-color: var(--bg-light);
+}
+
+.wp-block-column.highlight > p {
+  margin-bottom: 0;
+}
+
+.wp-block-column.highlight.accent p > strong,
+.wp-block-column.highlight.accent h2,
+.wp-block-column.highlight.accent h3 {
+  color: var(--white);
+}
+
 /* Citation styling inside blockquote */
 blockquote cite {
   display: inline-block;
