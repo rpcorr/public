@@ -94,6 +94,77 @@ $hero_btn_txt = $fields['hero_button_text'] ?? null;
 
   </section>
 
+  <!-- ===== Fundraising ===== -->
+
+  <?php
+    $fundraising_heading = $fields['fundraising_heading'] ?? null;
+    $fundraising_icon    = $fields['fundraising_icon'] ?? null;
+    $fundraising_text    = $fields['fundraising_text'] ?? null;
+    $fundraising_link    = $fields['fundraising_button_link'] ?? null;
+    $fundraising_btn_txt = $fields['fundraising_button_text'] ?? null;
+  ?>
+
+  <?php if ($fundraising_heading !== "" && $fundraising_icon !== "" && $fundraising_text !== "" && $fundraising_link !== "" && $fundraising_btn_txt !== "") { ?>
+
+  <section class="announcement announcement--accent" aria-labelledby="fundraising-events-heading">
+
+    <!-- Icon -->
+    <div class="announcement__icon">
+
+      <?php if ($fundraising_icon && $fundraising_icon !== 'none'): ?>
+        <?php echo nlsa_get_icon($fundraising_icon); ?>
+      <?php endif; ?>
+
+    </div>
+
+     <!-- Content -->
+    <div class="announcement__content">
+
+      <?php if ($fundraising_heading): ?>
+        <h2 id="announcement-heading">
+          <?php echo esc_html($fundraising_heading); ?>
+        </h2>
+      <?php endif; ?>
+
+      <?php if ($fundraising_text): ?>
+        <p class="font-weight-medium"><strong>
+          <?php echo esc_html($fundraising_text); ?>
+          </strong>
+        </p>
+      <?php endif; ?>
+
+    </div>
+
+    
+
+    <!-- CTA -->
+    <?php if ($fundraising_link): 
+      $url    = is_array($fundraising_link) ? $fundraising_link['url'] : $fundraising_link;
+      $target = is_array($fundraising_link) ? ($fundraising_link['target'] ?? '_self') : '_self';
+      $title  = is_array($fundraising_link) ? $fundraising_link['title'] : '';
+    ?>
+
+      <div class="announcement__actions">
+
+       <div class="btn btn--secondary u-lift">
+          <a href="<?php echo esc_url($url); ?>"
+            target="<?php echo esc_attr($target); ?>"
+            <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+
+            <?php echo esc_html($fundraising_btn_txt ?: $title ?: 'Learn More'); ?>
+
+          </a>
+        </div>
+
+      </div>
+
+    <?php endif; ?>
+
+  </section>
+  <?php } ?>
+
+  <!-- ===== Announcements ===== -->
+
     <?php
     $ann_heading = $fields['announcement_heading'] ?? null;
     $ann_icon    = $fields['announcement_icon'] ?? null;
