@@ -81,36 +81,40 @@
 }
 
 @media (max-width: 768px) {
-  /* Switch to grid for better alignment on small screens */
+  /* Stack announcement content and center everything */
   .announcement {
-    display: grid;
-    grid-template-columns: auto 1fr;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     gap: var(--space-md);
-
-    justify-content: center;
-    align-items: center;
-
     padding: var(--space-lg);
   }
 
-  /* Icon and content aligned side-by-side */
+  /* Center icon */
   .announcement__icon {
-    grid-column: 1;
-    grid-row: 1;
-    align-self: center;
+    flex-shrink: 0;
   }
 
+  /* Content spans the available width */
   .announcement__content {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: center;
+    width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
-  /* CTA spans full width below */
+  /* Center heading */
+  .announcement__content > h2 {
+    text-align: center;
+  }
+
+  /* Center date */
+  .announcement .announcement__content .font-weight-medium {
+    text-align: center;
+  }
+
+  /* Center CTA */
   .announcement__actions {
-    grid-column: 1 / -1;
     text-align: center;
   }
 }
