@@ -20,7 +20,7 @@ if (!function_exists('nlsa_get_icon')) {
 
       'heart' => '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg>',
 
-      'calendar' => '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>',
+      'calendar' => '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="8" y1="2" x2="8" y2="6"></line><line x1="16" y1="2" x2="16" y2="6"></line><line x1="3" y1="9" x2="21" y2="9"></line><rect x="6" y="11" width="2" height="2"></rect><rect x="11" y="11" width="2" height="2"></rect><rect x="16" y="11" width="2" height="2"></rect><rect x="6" y="15" width="2" height="2"></rect><rect x="11" y="15" width="2" height="2"></rect><rect x="16" y="15" width="2" height="2"></rect><rect x="6" y="19" width="2" height="2"></rect><rect x="11" y="19" width="2" height="2"></rect><rect x="16" y="19" width="2" height="2"></rect></svg>',
 
       'info' => '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
     ];
