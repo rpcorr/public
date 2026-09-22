@@ -156,7 +156,6 @@
 [class^='font-weight-'] {
   font-size: var(--text-base);
   line-height: var(--lh-base);
-  color: var(--primary);
   margin-bottom: var(--space-md);
 }
 

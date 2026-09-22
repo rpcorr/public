@@ -115,7 +115,7 @@ p {
 
 /* Emphasis text */
 strong {
-  color: var(--primary); /* aligns emphasis with brand color */
+  color: inherit; /* aligns emphasis with brand color */
 }
 
 /* Base link reset */
