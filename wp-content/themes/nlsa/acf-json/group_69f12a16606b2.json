@@ -993,6 +993,31 @@
             "allow_in_bindings": 0
         },
         {
+            "key": "field_6ab3fdc38f555",
+            "label": "Event Alternative Link",
+            "name": "event_alternative_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ff363bd0f92",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_69f2053db5fd0",
             "label": "Event Image",
             "name": "event_image",
@@ -1048,5 +1073,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1790008636
+    "modified": 1790183667
 }

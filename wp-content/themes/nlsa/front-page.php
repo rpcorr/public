@@ -310,6 +310,7 @@ $hero_btn_txt = $fields['hero_button_text'] ?? null;
           $event_date    = $fields['event_date'] ?? null;
           $event_link    = $fields['event_link'] ?? null;
           $event_image   = $fields['event_image'] ?? null;
+          $event_alternative_link = $fields['event_alternative_link'] ?? null;
       ?>
 
       <!-- ===== Event Highlight Section ===== -->
@@ -348,6 +349,26 @@ $hero_btn_txt = $fields['hero_button_text'] ?? null;
             </div>
 
           <?php endif; ?>
+
+
+          <?php if ($event_alternative_link):
+            $url_alternative = is_array($event_alternative_link) ? $event_alternative_link['url'] : $event_alternative_link;
+            $target_alternative = is_array($event_alternative_link) ? ($event_alternative_link['target'] ?: '_self') : '_self';
+            $link_alternative_title = is_array($event_alternative_link) ? $event_alternative_link['title'] : '';
+          ?>
+
+            <div class="btn btn--primary u-lift">
+              <a href="<?php echo esc_url($url_alternative); ?>"
+                target="<?php echo esc_attr($target_alternative); ?>"
+                <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>>
+
+                <?php echo esc_html($link_alternative_title ?: 'Learn More'); ?>
+
+              </a>
+            </div>
+
+          <?php endif; ?>
+
 
         </div>
 
